@@ -20,7 +20,9 @@
  * SOFTWARE.
  */
 
-package org.opendc.experiments.greenifier.model
+package org.opendc.experiments.metamodel.model
+
+import org.opendc.experiments.metamodel.model.OperationalPhenomena
 
 /**
  * A single scenario of a portfolio.

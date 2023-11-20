@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AtLarge Research
+ * Copyright (c) 2021 AtLarge Research
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,23 +20,9 @@
  * SOFTWARE.
  */
 
-package org.opendc.experiments.greenifier.model
+package org.opendc.experiments.metamodel.model
 
 /**
- * A single scenario of a portfolio.
- *
- * @property topology The topology to test.
- * @property energyModel The energy model to use.
- * @property workload The workload to test.
- * @property operationalPhenomena The [OperationalPhenomena] to model.
- * @property allocationPolicy The allocation policy of the scheduler.
- * @property partitions The partition of the scenario.
+ * The topology on which we simulate the workload.
  */
-public data class Scenario(
-    val topology: Topology,
-    val energyModel: String,
-    val workload: Workload,
-    val operationalPhenomena: OperationalPhenomena,
-    val allocationPolicy: String,
-    val partitions: Map<String, String> = emptyMap()
-)
+public data class Topology(val name: String)

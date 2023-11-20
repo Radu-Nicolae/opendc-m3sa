@@ -20,19 +20,19 @@
  * SOFTWARE.
  */
 
-package org.opendc.experiments.greenifier.portfolio
+package org.opendc.experiments.metamodel.portfolio
 
-import org.opendc.experiments.greenifier.model.OperationalPhenomena
-import org.opendc.experiments.greenifier.model.Scenario
-import org.opendc.experiments.greenifier.model.Topology
-import org.opendc.experiments.greenifier.model.Workload
+import org.opendc.experiments.metamodel.model.OperationalPhenomena
+import org.opendc.experiments.metamodel.model.Scenario
+import org.opendc.experiments.metamodel.model.Topology
+import org.opendc.experiments.metamodel.model.Workload
 import org.opendc.experiments.compute.sampleByLoad
 import org.opendc.experiments.compute.trace
 
 /**
  * A [Portfolio] that explores the difference between horizontal and vertical scaling.
  */
-public class GreenifierPortfolio : Portfolio {
+public class MetamodelPortfolio : Portfolio {
     private val topologies = listOf(
         Topology("single"),
         Topology("multi"),

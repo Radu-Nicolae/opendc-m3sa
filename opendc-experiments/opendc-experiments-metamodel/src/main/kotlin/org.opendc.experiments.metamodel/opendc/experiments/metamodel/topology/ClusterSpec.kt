@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 AtLarge Research
+ * Copyright (c) 2021 AtLarge Research
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,23 +20,27 @@
  * SOFTWARE.
  */
 
-package org.opendc.experiments.greenifier.model
+package org.opendc.experiments.metamodel.topology
 
 /**
- * A single scenario of a portfolio.
+ * Definition of a compute cluster modeled in the simulation.
  *
- * @property topology The topology to test.
- * @property energyModel The energy model to use.
- * @property workload The workload to test.
- * @property operationalPhenomena The [OperationalPhenomena] to model.
- * @property allocationPolicy The allocation policy of the scheduler.
- * @property partitions The partition of the scenario.
+ * @param id A unique identifier representing the compute cluster.
+ * @param name The name of the cluster.
+ * @param cpuCount The total number of CPUs in the cluster.
+ * @param cpuSpeed The speed of a CPU in the cluster in MHz.
+ * @param memCapacity The total memory capacity of the cluster (in MiB).
+ * @param hostCount The number of hosts in the cluster.
+ * @param memCapacityPerHost The memory capacity per host in the cluster (MiB).
+ * @param cpuCountPerHost The number of CPUs per host in the cluster.
  */
-public data class Scenario(
-    val topology: Topology,
-    val energyModel: String,
-    val workload: Workload,
-    val operationalPhenomena: OperationalPhenomena,
-    val allocationPolicy: String,
-    val partitions: Map<String, String> = emptyMap()
+public data class ClusterSpec(
+    val id: String,
+    val name: String,
+    val cpuCount: Int,
+    val cpuSpeed: Double,
+    val memCapacity: Double,
+    val hostCount: Int,
+    val memCapacityPerHost: Double,
+    val cpuCountPerHost: Int
 )
