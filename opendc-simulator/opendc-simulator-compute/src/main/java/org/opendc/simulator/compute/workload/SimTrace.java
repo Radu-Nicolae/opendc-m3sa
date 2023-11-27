@@ -41,6 +41,27 @@ public final class SimTrace {
     private final int size;
 
     /**
+     * Getter for the usage column, used for multi-core simulation, with the first use case in opendc-experiments-metamodel.
+     */
+    public double[] getUsageCol() {
+        return usageCol;
+    }
+
+    /**
+     * Getter for the deadline column, used for multi-core simulation, with the first use case in opendc-experiments-metamodel.
+     */
+    public long[] getDeadlineCol() {
+        return deadlineCol;
+    }
+
+    /**
+     * Getter for the core column, used for multi-core simulation, with the first use case in opendc-experiments-metamodel.
+     */
+    public int[] getCoresCol() {
+        return coresCol;
+    }
+
+    /**
      * Construct a {@link SimTrace} instance.
      *
      * @param usageCol The column containing the CPU usage of each fragment (in MHz).
