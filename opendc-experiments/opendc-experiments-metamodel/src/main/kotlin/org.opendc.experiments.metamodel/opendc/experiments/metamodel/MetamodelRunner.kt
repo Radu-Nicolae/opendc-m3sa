@@ -96,6 +96,30 @@ public class MetamodelRunner(
                     null
                 }
 
+            val vm1 = vms.first()
+
+            println("ID: " + vm1.uid)
+            println("Name: " + vm1.name)
+            println("CPU Count: " + vm1.cpuCount)
+            println("CPU Capacity: " + vm1.cpuCapacity)
+            println("Memory Capacity: " + vm1.memCapacity)
+            println("Total Load: " + vm1.totalLoad)
+            println("Start Time: " + vm1.startTime)
+            println("Stop Time: " + vm1.stopTime)
+            println("Trace: " + vm1.trace)
+            println("Interference Profile: " + (vm1.interferenceProfile ?: "None"))
+
+            val usageCol = vm1.trace.usageCol
+            val deadlineCol = vm1.trace.deadlineCol
+            val coresCol = vm1.trace.coresCol
+
+            val file = File("output/trace.csv").bufferedWriter()
+            file.write("Usage,Deadline,Cores\n")
+            for (i in usageCol.indices) {
+                file.write("${usageCol[i]}, ${deadlineCol[i]}, ${coresCol[i]}\n")
+            }
+            file.close()
+
             service.replay(timeSource, vms, seed, failureModel = failureModel, interference = operationalPhenomena.hasInterference)
         }
     }
