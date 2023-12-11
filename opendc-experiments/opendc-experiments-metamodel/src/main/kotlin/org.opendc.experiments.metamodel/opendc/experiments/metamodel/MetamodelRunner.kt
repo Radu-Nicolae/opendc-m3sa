@@ -100,7 +100,7 @@ public class MetamodelRunner(
 
             println("ID: " + vm1.uid)
             println("Name: " + vm1.name)
-            println("CPU Count: " + vm1.cpuCount)
+            println("ID: " + vm1.uid + "CPU Count: " + vm1.cpuCount)
             println("CPU Capacity: " + vm1.cpuCapacity)
             println("Memory Capacity: " + vm1.memCapacity)
             println("Total Load: " + vm1.totalLoad)
@@ -109,9 +109,9 @@ public class MetamodelRunner(
             println("Trace: " + vm1.trace)
             println("Interference Profile: " + (vm1.interferenceProfile ?: "None"))
 
-            val usageCol = vm1.trace.usageCol
-            val deadlineCol = vm1.trace.deadlineCol
-            val coresCol = vm1.trace.coresCol
+            val usageCol = vm1.trace.usageCol // todo: review!
+            val deadlineCol = vm1.trace.deadlineCol // when does the experiment end
+            val coresCol = vm1.trace.coresCol // how many cores are used at a given time
 
             val file = File("output/trace.csv").bufferedWriter()
             file.write("Usage,Deadline,Cores\n")
