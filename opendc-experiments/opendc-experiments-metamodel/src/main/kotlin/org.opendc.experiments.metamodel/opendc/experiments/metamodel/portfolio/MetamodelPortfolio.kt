@@ -46,7 +46,7 @@ public class MetamodelPortfolio : Portfolio {
 
     private val energyModel = "linear"
     private val energyModel1 = "quadratic"
-    private val idleEnergy = 150;  // should be actually gotton from "somewhere reliable"
+    private val idleEnergy = 150;  // should be actually gotten from "somewhere reliable"
     private val maxEnergy = 250; //ish
 
 
@@ -69,7 +69,7 @@ public class MetamodelPortfolio : Portfolio {
     // each of them is a model that lead to a big hierarchical model
 
     // todo: find the "big" model, that merges all of these models together
-    // 1. Identify which would be these OpenDC models (the big models) and idenfitfy / explain what it is comprised of (the sub-models)
+    // 1. Identify which would be these OpenDC models (the big models) and identify / explain what it is comprised of (the sub-models)
     // 2. During 1 - look at topologies (keep the scenarios and workload as "given data"), keep the operationalPhenomena and allocationPolicy as
     // experimental data (which might set with different values from experiment to experiment)
 

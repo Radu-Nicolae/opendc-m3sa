@@ -56,37 +56,54 @@ public class MetamodelRunner(
      * The [ComputeWorkloadLoader] to use for loading the traces.
      */
     private val workloadLoader = ComputeWorkloadLoader(tracePath)
+    private val SERVICE_DOMAIN = "compute.opendc.org"
 
     /**
      * Run a single [scenario] with the specified seed.
      */
     fun runScenario(scenario: Scenario, seed: Long) = runSimulation {
-        val serviceDomain = "compute.opendc.org"
-        val topology = clusterTopology(File(envPath, "${scenario.topology.name}.txt"))
+        val childName = "${scenario.topology.name}.txt"
+        val fileTopology = File(envPath, childName)
+
+        /*
+        Here, we ===CONFIGURE THE TOPOLOGY===, we are basically setting up the experiment
+        in this case, our topology has (by default) 8 CPUs, with frequency 3200,
+        one memory with 128000 size and no storage/net (is net = network?)
+         */
+        val topology = clusterTopology(fileTopology)
+        val allocationPolicy = scenario.allocationPolicy
 
         Provisioner(dispatcher, seed).use { provisioner ->
-            provisioner.runSteps(
-                setupComputeService(serviceDomain, { createComputeScheduler(scenario.allocationPolicy, Random(it.seeder.nextLong())) }),
-                setupHosts(serviceDomain, topology, optimize = true)
+
+            val computeService = setupComputeService(
+                SERVICE_DOMAIN,
+                {
+                    createComputeScheduler(
+                    allocationPolicy,
+                    Random(it.seeder.nextLong())
+                )}
             )
+            val hosts = setupHosts(SERVICE_DOMAIN, topology, optimize = true)
+            provisioner.runSteps(computeService, hosts)
 
             if (outputPath != null) {
                 val partitions = scenario.partitions + ("seed" to seed.toString())
                 val partition = partitions.map { (k, v) -> "$k=$v" }.joinToString("/")
 
-                provisioner.runStep(
-                    registerComputeMonitor(
-                        serviceDomain,
-                        ParquetComputeMonitor(
-                            outputPath,
-                            partition,
-                            bufferSize = 4096
-                        )
-                    )
+                val parquetComputeMonitor = ParquetComputeMonitor(
+                    outputPath,
+                    partition,
+                    bufferSize = 4096
                 )
+
+                val registerComputeMonitor = registerComputeMonitor(
+                    SERVICE_DOMAIN,
+                    parquetComputeMonitor
+                )
+                provisioner.runStep(registerComputeMonitor)
             }
 
-            val service = provisioner.registry.resolve(serviceDomain, ComputeService::class.java)!!
+            val service = provisioner.registry.resolve(SERVICE_DOMAIN, ComputeService::class.java)!!
             val vms = scenario.workload.source.resolve(workloadLoader, Random(seed))
             val operationalPhenomena = scenario.operationalPhenomena
             val failureModel =
@@ -98,8 +115,6 @@ public class MetamodelRunner(
 
             val vm1 = vms.first()
 
-            println("ID: " + vm1.uid)
-            println("Name: " + vm1.name)
             println("ID: " + vm1.uid + "CPU Count: " + vm1.cpuCount)
             println("CPU Capacity: " + vm1.cpuCapacity)
             println("Memory Capacity: " + vm1.memCapacity)
@@ -113,6 +128,7 @@ public class MetamodelRunner(
             val deadlineCol = vm1.trace.deadlineCol // when does the experiment end
             val coresCol = vm1.trace.coresCol // how many cores are used at a given time
 
+            //val file = File("output/trace-${Math.random().toString()}-${vm1.uid}.csv").bufferedWriter()
             val file = File("output/trace.csv").bufferedWriter()
             file.write("Usage,Deadline,Cores\n")
             for (i in usageCol.indices) {
