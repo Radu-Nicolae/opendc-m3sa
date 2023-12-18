@@ -33,7 +33,9 @@ import org.opendc.experiments.compute.registerComputeMonitor
 import org.opendc.experiments.compute.replay
 import org.opendc.experiments.compute.setupComputeService
 import org.opendc.experiments.compute.setupHosts
+import org.opendc.experiments.compute.topology.HostSpec
 import org.opendc.experiments.provisioner.Provisioner
+import org.opendc.experiments.provisioner.ProvisioningStep
 import org.opendc.simulator.kotlin.runSimulation
 import java.io.File
 import java.time.Duration
@@ -62,28 +64,28 @@ public class MetamodelRunner(
      * Run a single [scenario] with the specified seed.
      */
     fun runScenario(scenario: Scenario, seed: Long) = runSimulation {
-        val childName = "${scenario.topology.name}.txt"
-        val fileTopology = File(envPath, childName)
+        val childName = "${scenario.topology.name}.txt" // name of the file with experiment config
+        val fileTopology = File(
+            envPath,
+            childName
+        ) // from name to path - for now, just single.txt and multi.txt, with configuration in the file
 
         /*
-        Here, we ===CONFIGURE THE TOPOLOGY===, we are basically setting up the experiment
-        in this case, our topology has (by default) 8 CPUs, with frequency 3200,
-        one memory with 128000 size and no storage/net (is net = network?)
+        Here, we ===CONFIGURE THE TOPOLOGY===, we are basically setting up the experiment in this case, our topology
+        has (by default) 8 CPUs, with frequency 3200, one memory with 128000 size and no storage/net (is net = network?)
+        all of these, we take from the configuration file, aforementioned
          */
-        val topology = clusterTopology(fileTopology)
-        val allocationPolicy = scenario.allocationPolicy
+        val topology = clusterTopology(fileTopology) // using the data from the file, we create the topology
+        val allocationPolicy = scenario.allocationPolicy // the policy used to allocate resources e.g., active-servers
 
+        /*
+        a provisioner is a helper class to set up the experimental environment, using a simulation dispatcher (i.e. a scheduler),
+        a seeder, and a service registry (i.e. a map of services)
+         */
         Provisioner(dispatcher, seed).use { provisioner ->
-
-            val computeService = setupComputeService(
-                SERVICE_DOMAIN,
-                {
-                    createComputeScheduler(
-                    allocationPolicy,
-                    Random(it.seeder.nextLong())
-                )}
-            )
-            val hosts = setupHosts(SERVICE_DOMAIN, topology, optimize = true)
+            val experimentSetup = setupExperiment(allocationPolicy, topology)
+            val computeService = experimentSetup.first
+            val hosts = experimentSetup.second
             provisioner.runSteps(computeService, hosts)
 
             if (outputPath != null) {
@@ -136,7 +138,50 @@ public class MetamodelRunner(
             }
             file.close()
 
-            service.replay(timeSource, vms, seed, failureModel = failureModel, interference = operationalPhenomena.hasInterference)
+            service.replay(
+                timeSource,
+                vms,
+                seed,
+                failureModel = failureModel,
+                interference = operationalPhenomena.hasInterference
+            )
         }
+    }
+
+    fun setupExperiment(allocationPolicy: String, topology: List<HostSpec>): Pair<ProvisioningStep, ProvisioningStep> {
+        /*
+            after executing compute service will have
+            - the service domain (compute.opendc.org)
+            - the scheduler (configured with the allocation policy)
+            - the scheduling quantum (i.e. the time interval / quantum / granularity of the scheduler) (e.g., PT5M = 300s)
+             */
+        val computeService = setupComputeService(
+            SERVICE_DOMAIN,
+            {
+                createComputeScheduler( // this function configures the scheduler,
+                    allocationPolicy, //taking the allocation policy as filters,
+                    Random(it.seeder.nextLong()) // and the random as weighers
+                    // we do not give any placement policy, so it is empty (placement = where to put the VMs?)
+                )
+            }
+        )
+        println("Compute Service: $computeService")
+
+        /*
+        after executing setupHosts will have:
+        - a service domain (same as above - "compute.opendc.org")
+        - specs (a list of HostSpec - with only one element??) containing:
+            - uid (a unique identifier for the host)
+            - name (e.g., node-A01-0)
+            - meta (a map of key-values, e.g., "cluster" -> "A01")
+            - model (basically what we setted up earlier, with direct linking to a files like "single.txt")
+            - a "psuFactory" (psu = power supply unit?) - with the idlePower, the maxPower, and the factor (factor depends on model type? linear/quadratic/sqrt/etc??)
+            - a "multiplexerFactory" (but the class has no field? why do we need it?)
+         */
+
+        val hosts = setupHosts(SERVICE_DOMAIN, topology, optimize = true)
+
+        // return both the compute service and hosts
+        return Pair(computeService, hosts)
     }
 }
