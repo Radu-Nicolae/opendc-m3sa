@@ -86,10 +86,19 @@ public class MetamodelRunner(
             val experimentSetup = setupExperiment(allocationPolicy, topology)
             val computeService = experimentSetup.first
             val hosts = experimentSetup.second
-            provisioner.runSteps(computeService, hosts)
 
+            // this is the place where we actually run the experiment
+            val provisionerCopy = provisioner
+            provisioner.runSteps(computeService, hosts)
+            println("=======================\nIs privisioner the same: ${provisioner == provisionerCopy}\n=======================")
+
+
+            // this chunk of code is used for outputting the results of the experiment
             if (outputPath != null) {
+                // we append to the partition map, we set the topology, the workload, and the seed
                 val partitions = scenario.partitions + ("seed" to seed.toString())
+
+                // we create a path for the partition (e.g., "topology=single/workload=bitbrains-small/seed=0")
                 val partition = partitions.map { (k, v) -> "$k=$v" }.joinToString("/")
 
                 val parquetComputeMonitor = ParquetComputeMonitor(
