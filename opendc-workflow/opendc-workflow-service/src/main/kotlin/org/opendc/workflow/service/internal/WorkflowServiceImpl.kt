@@ -302,7 +302,7 @@ public class WorkflowServiceImpl(
                 instance.server = server
                 taskByServer[server] = instance
 
-                server.watch(this@WorkflowServiceImpl)
+                server.addWatcher(this@WorkflowServiceImpl)
                 server.start()
             }
 

@@ -124,7 +124,9 @@ public suspend fun ComputeService.replay(
                     meta["interference-profile"] = interferenceProfile
                 }
 
-                launch {
+                launch { // specific co-route (specific to kotlin)
+                    // at this point we are making a server to be run, but not linked to a hosted, and not scheduled either
+                    // create a server and add to a list of servers, waiting to be scheduled
                     val server = client.newServer(
                         entry.name,
                         image,
@@ -137,9 +139,9 @@ public suspend fun ComputeService.replay(
                         meta = meta
                     )
 
-                    val serverWatcher = RunningServerWatcher()
+                    val serverWatcher = RunningServerWatcher() // connected to the server we use, and checks if the server changed its state
                     serverWatcher.lock()
-                    server.watch(serverWatcher)
+                    server.addWatcher(serverWatcher) // serve is observed by the "serverWatcher"
 
                     // Wait until the server is terminated
                     serverWatcher.wait()

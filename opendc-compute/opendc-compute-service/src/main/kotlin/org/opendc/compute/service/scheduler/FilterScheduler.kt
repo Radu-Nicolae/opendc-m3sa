@@ -67,9 +67,11 @@ public class FilterScheduler(
 
     override fun select(server: Server): HostView? {
         val hosts = hosts
+
+        // filter has "do we have enough resources" and "is the host in the right state"
         val filteredHosts = hosts.filter { host -> filters.all { filter -> filter.test(host, server) } }
 
-        val subset = if (weighers.isNotEmpty()) {
+        val weightedHosts = if (weighers.isNotEmpty()) {
             val results = weighers.map { it.getWeights(filteredHosts, server) }
             val weights = DoubleArray(filteredHosts.size)
 
@@ -100,10 +102,11 @@ public class FilterScheduler(
             filteredHosts
         }
 
-        return when (val maxSize = min(subsetSize, subset.size)) {
+        // we return the best host, or null if there are no hosts
+        return when (val maxSize = min(subsetSize, weightedHosts.size)) {
             0 -> null
-            1 -> subset[0]
-            else -> subset[random.nextInt(maxSize)]
+            1 -> weightedHosts[0]
+            else -> weightedHosts[random.nextInt(maxSize)]
         }
     }
 }

@@ -79,21 +79,23 @@ public class MetamodelRunner(
         val allocationPolicy = scenario.allocationPolicy // the policy used to allocate resources e.g., active-servers
 
         /*
-        a provisioner is a helper class to set up the experimental environment, using a simulation dispatcher (i.e. a scheduler),
+        a provisioner is a helper class to set up the experimental environment, using a simulation dispatcher (see below),
         a seeder, and a service registry (i.e. a map of services)
+
+        A {@link Dispatcher} is used in OpenDC to schedule the execution of future tasks over potentially multiple threads.
          */
         Provisioner(dispatcher, seed).use { provisioner ->
             val experimentSetup = setupExperiment(allocationPolicy, topology)
             val computeService = experimentSetup.first
             val hosts = experimentSetup.second
 
-            // this is the place where we actually run the experiment
+            // this is the place where we run the steps to configure the experiment
             val provisionerCopy = provisioner
             provisioner.runSteps(computeService, hosts)
             println("=======================\nIs privisioner the same: ${provisioner == provisionerCopy}\n=======================")
 
 
-            // this chunk of code is used for outputting the results of the experiment
+            // configuring the model
             if (outputPath != null) {
                 // we append to the partition map, we set the topology, the workload, and the seed
                 val partitions = scenario.partitions + ("seed" to seed.toString())
@@ -115,6 +117,8 @@ public class MetamodelRunner(
             }
 
             val service = provisioner.registry.resolve(SERVICE_DOMAIN, ComputeService::class.java)!!
+
+            // we are still configuring here
             val vms = scenario.workload.source.resolve(workloadLoader, Random(seed))
             val operationalPhenomena = scenario.operationalPhenomena
             val failureModel =
@@ -124,6 +128,12 @@ public class MetamodelRunner(
                     null
                 }
 
+
+            /*
+            the following chunk of code was written for debugging purposes and understanding the code
+             */
+
+            // CODE CHUNK START
             val vm1 = vms.first()
 
             println("ID: " + vm1.uid + "CPU Count: " + vm1.cpuCount)
@@ -139,19 +149,23 @@ public class MetamodelRunner(
             val deadlineCol = vm1.trace.deadlineCol // when does the experiment end
             val coresCol = vm1.trace.coresCol // how many cores are used at a given time
 
-            //val file = File("output/trace-${Math.random().toString()}-${vm1.uid}.csv").bufferedWriter()
+            //val file = File("output/trace-${Math.random().toString()}-${vm1.uid}.csv").bufferedWriter() // prevents writing on the same file
             val file = File("output/trace.csv").bufferedWriter()
             file.write("Usage,Deadline,Cores\n")
             for (i in usageCol.indices) {
                 file.write("${usageCol[i]}, ${deadlineCol[i]}, ${coresCol[i]}\n")
             }
             file.close()
+            // CODE CHUNK END
 
-            service.replay(
-                timeSource,
-                vms,
-                seed,
-                failureModel = failureModel,
+
+
+            // up until now, all we did was configuration, now we are actually running the experiment
+            service.replay( // replay launches the servers
+                timeSource, // used to align the running jobs~, we use this to make sure everything stars at the same time, and we can compare (we use the same clock - like the CPU)
+                vms, // all the jobs that need to be run
+                seed, // a seed
+                failureModel = failureModel, //
                 interference = operationalPhenomena.hasInterference
             )
         }

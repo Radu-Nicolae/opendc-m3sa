@@ -38,10 +38,12 @@ public class MetamodelPortfolio : Portfolio {
         Topology("multi"),
     )
 
-    private val workloads = listOf( // bitbrains small is a short trace collected from bitbrains (now Solvinity)
+    private val workloads = listOf(
+        // bitbrains small is a short trace collected from bitbrains (now Solvinity)
         Workload("bitbrains-small", trace("trace").sampleByLoad(1.0)),
     )
-    private val operationalPhenomena = OperationalPhenomena(0.0, false)
+    private val operationalPhenomena =
+        OperationalPhenomena(0.0, false) // this model predicts how often do we have failures
     private val allocationPolicy = "active-servers"
 
     private val energyModel = "linear"
@@ -54,11 +56,11 @@ public class MetamodelPortfolio : Portfolio {
     override val scenarios: Iterable<Scenario> = topologies.flatMap { topology ->
         workloads.map { workload ->
             Scenario(
-                topology,
-                energyModel,
+                topology, // we don't need to change the topology if we run for the same datacenter
+                energyModel, // we can provide different models here, for the metamodel
                 workload,
                 operationalPhenomena,
-                allocationPolicy,
+                allocationPolicy, // also different allocation policies
                 mapOf("topology" to topology.name, "workload" to workload.name)
             )
         }
@@ -97,6 +99,26 @@ public class MetamodelPortfolio : Portfolio {
     // Topology
     // Level 1 hierarchy: will describe this (understand better and provide a background), but not change it
 
+
+    /**
+     * Meeting with Dante notes
+     *
+     * [1] Start by changing the allocation policy
+     * [2] Then run the model with different allocation policies, but on the same experiment setup and configuration
+     *
+     * HOW TO
+     * [1] In the output folder we have experiment predictions
+     *  - host (in this folder, in data.parquet, we have all the prediction data)
+     *  - server (for each server, what is the current status - down? up? running?)
+     *  - service (this is the overview - how many servers are running, how many are idle, etc.)
+     *
+     *  [2] Analyze the CPU usage (in host folder, in topology=single, in data.parquet, we have the CPU usage)
+     *  - at each time stamp, how much CPU is used?
+     *  - e.g., we have n hosts, each host has x CPUs => the CPU usage is the aggregation of all the CPUs (in data.parquet is a
+     *  summation of all the CPUs - aka how much is used from the whole capacity)
+     *
+     *  [3] Make a Bash script that runs the OpenDC first, then runs the Python file, then get the results
+     */
 
 
 }

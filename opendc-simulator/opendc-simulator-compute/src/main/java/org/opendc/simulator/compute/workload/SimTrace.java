@@ -24,6 +24,7 @@ package org.opendc.simulator.compute.workload;
 
 import java.util.Arrays;
 import java.util.List;
+
 import org.opendc.simulator.compute.SimMachineContext;
 import org.opendc.simulator.compute.SimProcessingUnit;
 import org.opendc.simulator.flow2.FlowGraph;
@@ -64,10 +65,10 @@ public final class SimTrace {
     /**
      * Construct a {@link SimTrace} instance.
      *
-     * @param usageCol The column containing the CPU usage of each fragment (in MHz).
+     * @param usageCol    The column containing the CPU usage of each fragment (in MHz).
      * @param deadlineCol The column containing the ending timestamp for each fragment (in epoch millis).
-     * @param coresCol The column containing the utilized cores.
-     * @param size The number of fragments in the trace.
+     * @param coresCol    The column containing the utilized cores.
+     * @param size        The number of fragments in the trace.
      */
     private SimTrace(double[] usageCol, long[] deadlineCol, int[] coresCol, int size) {
         if (size < 0) {
@@ -88,8 +89,8 @@ public final class SimTrace {
 
     /**
      * Construct a {@link SimWorkload} for this trace.
-     *
-//     * @param offset The offset for the timestamps.
+     * <p>
+     * //     * @param offset The offset for the timestamps.
      */
     public SimWorkload createWorkload(long start) {
         return new Workload(start, usageCol, deadlineCol, coresCol, size, 0);
@@ -163,8 +164,8 @@ public final class SimTrace {
          * Add a fragment to the trace.
          *
          * @param deadline The timestamp at which the fragment ends (in epoch millis).
-         * @param usage The CPU usage at this fragment.
-         * @param cores The number of cores used during this fragment.
+         * @param usage    The CPU usage at this fragment.
+         * @param cores    The number of cores used during this fragment.
          */
         public void add(long deadline, double usage, int cores) {
             if (isBuilt) {
@@ -315,7 +316,7 @@ public final class SimTrace {
         private final SimMachineContext ctx;
 
         private SingleWorkloadLogic(
-                SimMachineContext ctx, long offset, double[] usageCol, long[] deadlineCol, int size, int index) {
+            SimMachineContext ctx, long offset, double[] usageCol, long[] deadlineCol, int size, int index) {
             this.ctx = ctx;
             this.workloadOffset = offset;
             this.cpuUsages = usageCol;
@@ -338,18 +339,22 @@ public final class SimTrace {
         @Override
         public long onUpdate(FlowStage ctx, long now) {
             // Shift the current time to align with the starting time of the workload
-            long nowOffset = now - this.workloadOffset;
-            long deadline = this.deadlines[this.index];
+            long nowOffset = now - this.workloadOffset; // determines how long the server has been running
+            long deadline = this.deadlines[this.index]; // deadline = when the next sample is available (when is it scheduled to run)
 
             // Loop through the deadlines until the next deadline is reached.
             while (deadline <= nowOffset) {
+                // if we get at the end of the trace, stop the simulation
                 if (++this.index >= this.traceSize) {
                     return doStop(ctx);
                 }
                 deadline = this.deadlines[this.index];
             }
 
+            // save the CPU usage on the output
             this.output.push((float) this.cpuUsages[this.index]);
+
+            // return the deadline of when do call "do update" again (e.g., next deadline will be in 5 min, call this in 5 min)
             return deadline + this.workloadOffset;
         }
 
@@ -394,13 +399,13 @@ public final class SimTrace {
         private final SimMachineContext ctx;
 
         private MultiWorkloadLogic(
-                SimMachineContext ctx,
-                long offset,
-                double[] usageCol,
-                long[] deadlineCol,
-                int[] coresCol,
-                int traceSize,
-                int index) {
+            SimMachineContext ctx,
+            long offset,
+            double[] usageCol,
+            long[] deadlineCol,
+            int[] coresCol,
+            int traceSize,
+            int index) {
             this.ctx = ctx;
             this.offset = offset;
             this.usageCol = usageCol;
