@@ -31,9 +31,9 @@ Update the workload class such that it takes also the allocation policy, update 
 [//]: # (5.2 Handle a dynamic number of files)
 
 ### 5. Linking of the multi model
-5.1 Add in the input file multiple lines
-5.2 Handle dynamically, in KT, the number of lines, and generate the needed number of output files
-5.3 Dynamically adjust the notebook to handle the number of output files
-5.4 In python, count how many experiments do we have, based on the size of the array
-5.5 In python, create a loop that goes through all the experiments and creates a dataframe for each experiment, then plot
+5.1 Add in the input file multiple lines<br>
+5.2 Handle dynamically, in KT, the number of lines, and generate the needed number of output files<br>
+5.3 Dynamically adjust the notebook to handle the number of output files<br>
+5.4 In python, count how many experiments do we have, based on the size of the array<br>
+5.5 In python, create a loop that goes through all the experiments and creates a dataframe for each experiment, then plot<br>
 
