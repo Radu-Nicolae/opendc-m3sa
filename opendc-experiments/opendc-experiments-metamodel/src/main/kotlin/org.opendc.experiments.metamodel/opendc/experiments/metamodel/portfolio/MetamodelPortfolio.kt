@@ -28,42 +28,65 @@ import org.opendc.experiments.metamodel.model.Topology
 import org.opendc.experiments.metamodel.model.Workload
 import org.opendc.experiments.compute.sampleByLoad
 import org.opendc.experiments.compute.trace
+import java.nio.file.Files
+import java.nio.file.Paths
+
+fun readCsvIntoArray(fileName: String): List<Array<String>> {
+    return Files.readAllLines(Paths.get(fileName)).map { it.split(",").toTypedArray() }
+}
 
 /**
  * A [Portfolio] that explores the difference between horizontal and vertical scaling.
  */
 public class MetamodelPortfolio : Portfolio {
     private val topologies = listOf(
-        Topology("single"),
-        Topology("multi"),
+        Topology("multi")
     )
 
-    private val workloads = listOf(
-        // bitbrains small is a short trace collected from bitbrains (now Solvinity)
-        Workload("bitbrains-small", trace("trace").sampleByLoad(1.0)),
+    private val allocationPolicies = listOf(
+        "mem",
+        "mem-inv",
+        "core-mem",
+        "core-mem-inv",
+        "active-servers",
+        "active-servers-inv",
+        "random"
     )
-    private val operationalPhenomena =
-        OperationalPhenomena(0.0, false) // this model predicts how often do we have failures
-    private val allocationPolicy = "active-servers"
-
-    private val energyModel = "linear"
-    private val energyModel1 = "quadratic"
-    private val idleEnergy = 150;  // should be actually gotten from "somewhere reliable"
-    private val maxEnergy = 250; //ish
 
 
     // sub-sub model here
-    override val scenarios: Iterable<Scenario> = topologies.flatMap { topology ->
-        workloads.map { workload ->
+    override val scenarios: Iterable<Scenario> = parseInput()
+
+
+    /**
+     * Parses input from input-single.csv, which configures the scenario in a non-code manner.
+     * lateTODO: add proper error handling
+     */
+    private fun parseInput(): Iterable<Scenario> {
+        var index = 0;
+        val csvArray = readCsvIntoArray(fileName = "input/input-single.csv")
+        val topologyCount =
+            csvArray[1][index].toInt(); index += 1 // bitbrains small is a short trace collected from bitbrains (now Solvinity)
+
+        val topologies = listOf(*Array(topologyCount) { Topology(csvArray[1][index++]) })
+        val energyModel: String = csvArray[1][index]; index += 1;
+        val failureFrequency: Double = csvArray[1][index].toDouble(); index += 1;
+        val allocationPolicy: String = csvArray[1][index]; index += 1;
+        val workload = Workload("bitbrains-small", trace("trace").sampleByLoad(1.0))
+        val operationalPhenomena = OperationalPhenomena(failureFrequency, false)
+
+        val parsedScenarios: Iterable<Scenario> = topologies.map { topology ->
             Scenario(
-                topology, // we don't need to change the topology if we run for the same datacenter
-                energyModel, // we can provide different models here, for the metamodel
-                workload,
-                operationalPhenomena,
-                allocationPolicy, // also different allocation policies
+                topology = topology, // we don't need to change the topology if we run for the same datacenter
+                energyModel = energyModel, // we can provide different models here, for the metamodel
+                workload = workload,
+                operationalPhenomena = operationalPhenomena, // this model predicts how often do we have failures
+                allocationPolicy = allocationPolicy, // also different allocation policies
                 mapOf("topology" to topology.name, "workload" to workload.name)
             )
         }
+
+        return parsedScenarios
     }
 
     // a model in OpenDC is composed of multiple of these models
@@ -108,7 +131,7 @@ public class MetamodelPortfolio : Portfolio {
      *
      * HOW TO
      * [1] In the output folder we have experiment predictions
-     *  - host (in this folder, in data.parquet, we have all the prediction data)
+     *  - host (in e folder, in data.parquet, we have all the prediction data)
      *  - server (for each server, what is the current status - down? up? running?)
      *  - service (this is the overview - how many servers are running, how many are idle, etc.)
      *
@@ -119,6 +142,4 @@ public class MetamodelPortfolio : Portfolio {
      *
      *  [3] Make a Bash script that runs the OpenDC first, then runs the Python file, then get the results
      */
-
-
 }

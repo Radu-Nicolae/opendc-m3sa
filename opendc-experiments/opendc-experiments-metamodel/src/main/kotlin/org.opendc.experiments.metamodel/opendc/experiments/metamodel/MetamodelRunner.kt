@@ -90,10 +90,7 @@ public class MetamodelRunner(
             val hosts = experimentSetup.second
 
             // this is the place where we run the steps to configure the experiment
-            val provisionerCopy = provisioner
             provisioner.runSteps(computeService, hosts)
-            println("=======================\nIs privisioner the same: ${provisioner == provisionerCopy}\n=======================")
-
 
             // configuring the model
             if (outputPath != null) {
