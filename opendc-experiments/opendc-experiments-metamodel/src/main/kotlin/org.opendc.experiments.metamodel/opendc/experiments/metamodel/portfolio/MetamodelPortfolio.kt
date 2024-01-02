@@ -39,6 +39,7 @@ fun readCsvIntoArray(fileName: String): List<Array<String>> {
  * A [Portfolio] that explores the difference between horizontal and vertical scaling.
  */
 public class MetamodelPortfolio : Portfolio {
+    private val inputFile = readCsvIntoArray(fileName = "input/configuration-input.csv")
     private val topologies = listOf(
         Topology("multi")
     )
@@ -53,25 +54,23 @@ public class MetamodelPortfolio : Portfolio {
         "random"
     )
 
-
     // sub-sub model here
-    override val scenarios: Iterable<Scenario> = parseInput()
-
+    override val scenarios: Iterable<Scenario> = parseInput(inputFile)
+    val outputFileName: String = getOutputName()
 
     /**
-     * Parses input from input-single.csv, which configures the scenario in a non-code manner.
+     * Parses input from configuration-input.csv, which configures the scenario in a non-code manner.
      * lateTODO: add proper error handling
      */
-    private fun parseInput(): Iterable<Scenario> {
+    private fun parseInput(input: List<Array<String>>): Iterable<Scenario> {
         var index = 0;
-        val csvArray = readCsvIntoArray(fileName = "input/input-single.csv")
         val topologyCount =
-            csvArray[1][index].toInt(); index += 1 // bitbrains small is a short trace collected from bitbrains (now Solvinity)
+            input[1][index].toInt(); index += 1 // bitbrains small is a short trace collected from bitbrains (now Solvinity)
 
-        val topologies = listOf(*Array(topologyCount) { Topology(csvArray[1][index++]) })
-        val energyModel: String = csvArray[1][index]; index += 1;
-        val failureFrequency: Double = csvArray[1][index].toDouble(); index += 1;
-        val allocationPolicy: String = csvArray[1][index]; index += 1;
+        val topologies = listOf(*Array(topologyCount) { Topology(input[1][index++]) })
+        val energyModel: String = input[1][index]; index += 1;
+        val failureFrequency: Double = input[1][index].toDouble(); index += 1;
+        val allocationPolicy: String = input[1][index]; index += 1;
         val workload = Workload("bitbrains-small", trace("trace").sampleByLoad(1.0))
         val operationalPhenomena = OperationalPhenomena(failureFrequency, false)
 
@@ -87,6 +86,12 @@ public class MetamodelPortfolio : Portfolio {
         }
 
         return parsedScenarios
+    }
+
+    private fun getOutputName(): String {
+        return readCsvIntoArray(
+            fileName = "input/configuration-input.csv"
+        )[1][readCsvIntoArray(fileName = "input/configuration-input.csv")[1].size - 1]
     }
 
     // a model in OpenDC is composed of multiple of these models

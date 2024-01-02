@@ -34,6 +34,7 @@ import org.opendc.experiments.compute.replay
 import org.opendc.experiments.compute.setupComputeService
 import org.opendc.experiments.compute.setupHosts
 import org.opendc.experiments.compute.topology.HostSpec
+import org.opendc.experiments.metamodel.portfolio.MetamodelPortfolio
 import org.opendc.experiments.provisioner.Provisioner
 import org.opendc.experiments.provisioner.ProvisioningStep
 import org.opendc.simulator.kotlin.runSimulation
@@ -103,7 +104,8 @@ public class MetamodelRunner(
                 val parquetComputeMonitor = ParquetComputeMonitor(
                     outputPath,
                     partition,
-                    bufferSize = 4096
+                    bufferSize = 4096,
+                    outputName = MetamodelPortfolio().outputFileName
                 )
 
                 val registerComputeMonitor = registerComputeMonitor(
