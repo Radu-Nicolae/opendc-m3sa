@@ -1,2 +1,2 @@
 TopologyCount,Topology,EnergyModel,FailureFrequency,AllocationPolicy,OutputName
-3,multi,multi,multi,linear,0.0,active-servers-inv,3-multis-mem
+3,multi,multi,multi,linear,0.0,core-mem-inv,3-multis-core-mem-inv
