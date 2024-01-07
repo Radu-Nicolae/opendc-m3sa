@@ -1,2 +1,4 @@
-TopologyCount,Topology,EnergyModel,FailureFrequency,AllocationPolicy,OutputName
-3,multi,multi,multi,linear,0.0,core-mem-inv,3-multis-core-mem-inv
+Topology,EnergyModel,FailureFrequency,AllocationPolicy,MetricsCount,MetricsFolderOutputName
+multi,square,0.0,core-mem-inv,2,cpu_usage,cpu_utilization,
+single-weak,linear,0.1,core-mem,2,cpu_utilization,cpu_usage,
+single-powerful,linear,0.1,core-mem,2,cpu_utilization,cpu_usage,
