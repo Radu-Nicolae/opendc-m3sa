@@ -1,9 +1,5 @@
 # Documentation for the configuration input file
 
-| Section | Possible values | Description |
-| --- | --- | --- |
-| Topology count | > 0 | This represents how many topologies will we have in the simulator, we will
-
 ## Topology count
 - Possible values: any integer greater than 0
 - Description: This represents how many topologies / configuration will we have in the simulator. The number of topologies, represents how many columns will we further read.
