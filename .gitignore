@@ -115,3 +115,6 @@ gradle-app.setting
 
 # Cache of project
 .gradletasknamecache
+
+# Useless simulation results
+/opendc-experiments/opendc-experiments-metamodel/src/main/output/host/workload=bitbrains-small/seed=0/*
