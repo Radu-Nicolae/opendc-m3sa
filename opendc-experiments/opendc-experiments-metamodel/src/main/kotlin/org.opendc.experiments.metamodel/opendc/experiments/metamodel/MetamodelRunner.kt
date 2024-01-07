@@ -35,11 +35,15 @@ import org.opendc.experiments.compute.setupComputeService
 import org.opendc.experiments.compute.setupHosts
 import org.opendc.experiments.compute.topology.HostSpec
 import org.opendc.experiments.metamodel.portfolio.MetamodelPortfolio
+import org.opendc.experiments.metamodel.portfolio.readCsvIntoArray
 import org.opendc.experiments.provisioner.Provisioner
 import org.opendc.experiments.provisioner.ProvisioningStep
+import org.opendc.simulator.compute.power.CpuPowerModels
 import org.opendc.simulator.kotlin.runSimulation
 import java.io.File
 import java.time.Duration
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Random
 import kotlin.math.roundToLong
 
@@ -60,6 +64,7 @@ public class MetamodelRunner(
      */
     private val workloadLoader = ComputeWorkloadLoader(tracePath)
     private val SERVICE_DOMAIN = "compute.opendc.org"
+    private val _outputFolderName: String = getOutputFolderName()
 
     /**
      * Run a single [scenario] with the specified seed.
@@ -76,7 +81,11 @@ public class MetamodelRunner(
         has (by default) 8 CPUs, with frequency 3200, one memory with 128000 size and no storage/net (is net = network?)
         all of these, we take from the configuration file, aforementioned
          */
-        val topology = clusterTopology(fileTopology) // using the data from the file, we create the topology
+        val topology = clusterTopology(
+            fileTopology,
+            CpuPowerModels.square(350.0, 200.0)
+        ) // using the data from the file, we create the topology
+        // todo: look here - up to this point we select the power model (line 79)
         val allocationPolicy = scenario.allocationPolicy // the policy used to allocate resources e.g., active-servers
 
         /*
@@ -96,16 +105,19 @@ public class MetamodelRunner(
             // configuring the model
             if (outputPath != null) {
                 // we append to the partition map, we set the topology, the workload, and the seed
-                val partitions = scenario.partitions + ("seed" to seed.toString())
+                val partitions =
+                    scenario.partitions + ("seed" to seed.toString()) + ("simulation" to _outputFolderName)
 
-                // we create a path for the partition (e.g., "topology=single/workload=bitbrains-small/seed=0")
-                val partition = partitions.map { (k, v) -> "$k=$v" }.joinToString("/")
+                // we create a path for the partition (e.g., "topology=single/workload=bitbrains-small/seed=0/simulation=...")
+                // the following 2 lines skip the first element form partitions when reading
+                val filteredPartitions = partitions.entries.drop(1).associate { it.toPair() }
+                val partition = filteredPartitions.map { (k, v) -> "$k=$v" }.joinToString("/")
 
                 val parquetComputeMonitor = ParquetComputeMonitor(
                     outputPath,
                     partition,
                     bufferSize = 4096,
-                    outputName = MetamodelPortfolio().outputFileName
+                    outputName =  "${scenario.topology.name}-${scenario.energyModel}-${scenario.allocationPolicy}"
                 )
 
                 val registerComputeMonitor = registerComputeMonitor(
@@ -158,7 +170,6 @@ public class MetamodelRunner(
             // CODE CHUNK END
 
 
-
             // up until now, all we did was configuration, now we are actually running the experiment
             service.replay( // replay launches the servers
                 timeSource, // used to align the running jobs~, we use this to make sure everything stars at the same time, and we can compare (we use the same clock - like the CPU)
@@ -205,5 +216,17 @@ public class MetamodelRunner(
 
         // return both the compute service and hosts
         return Pair(computeService, hosts)
+    }
+
+    private fun getOutputFolderName(): String {
+        // gets the last column
+        val folderName = MetamodelPortfolio().inputFile[1][readCsvIntoArray(fileName = "input/configuration-input.csv")[1].size - 1]
+
+        if (folderName == "") {
+            return (LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss"))
+                .toString())
+        }
+
+        return folderName
     }
 }
