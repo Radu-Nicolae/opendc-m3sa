@@ -38,6 +38,7 @@ import org.opendc.experiments.metamodel.portfolio.MetamodelPortfolio
 import org.opendc.experiments.metamodel.portfolio.readCsvIntoArray
 import org.opendc.experiments.provisioner.Provisioner
 import org.opendc.experiments.provisioner.ProvisioningStep
+import org.opendc.simulator.compute.power.CpuPowerModel
 import org.opendc.simulator.compute.power.CpuPowerModels
 import org.opendc.simulator.kotlin.runSimulation
 import java.io.File
@@ -83,7 +84,7 @@ public class MetamodelRunner(
          */
         val topology = clusterTopology(
             fileTopology,
-            CpuPowerModels.square(350.0, 200.0)
+            getCpuPowerModel(scenario.energyModel, 350.0, 200.0)
         ) // using the data from the file, we create the topology
         // todo: look here - up to this point we select the power model (line 79)
         val allocationPolicy = scenario.allocationPolicy // the policy used to allocate resources e.g., active-servers
@@ -117,7 +118,7 @@ public class MetamodelRunner(
                     outputPath,
                     partition,
                     bufferSize = 4096,
-                    outputName =  "${scenario.topology.name}-${scenario.energyModel}-${scenario.allocationPolicy}"
+                    outputName = "${scenario.topology.name}-${scenario.energyModel}-${scenario.allocationPolicy}"
                 )
 
                 val registerComputeMonitor = registerComputeMonitor(
@@ -220,7 +221,8 @@ public class MetamodelRunner(
 
     private fun getOutputFolderName(): String {
         // gets the last column
-        val folderName = MetamodelPortfolio().inputFile[1][readCsvIntoArray(fileName = "input/configuration-input.csv")[1].size - 1]
+        val folderName =
+            MetamodelPortfolio().inputFile[1][readCsvIntoArray(fileName = "input/configuration-input.csv")[1].size - 1]
 
         if (folderName == "") {
             return (LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss"))
@@ -228,5 +230,19 @@ public class MetamodelRunner(
         }
 
         return folderName
+    }
+
+    private fun getCpuPowerModel(model: String, maxPower: Double, idlePower: Double): CpuPowerModel {
+        return when (model) {
+            "constant" -> CpuPowerModels.constant(maxPower)
+            "sqrt" -> CpuPowerModels.sqrt(maxPower, idlePower)
+            "linear" -> CpuPowerModels.linear(maxPower, idlePower)
+            "square" -> CpuPowerModels.square(maxPower, idlePower)
+            "cubic" -> CpuPowerModels.cubic(maxPower, idlePower)
+            // "mse" -> CpuPowerModels.mse(maxPower, idlePower, 0.0) TOBEFIXED
+            // "asymptotic" -> CpuPowerModels.asymptotic(maxPower, idlePower, 0.0, false), TOBEFIXED
+            // "interpolate" -> CpuPowerModels.interpolate(maxPower, idlePower, 0.0, false), TOBEFIXED
+            else -> throw IllegalArgumentException("Unknown CPU power model: $model")
+        }
     }
 }

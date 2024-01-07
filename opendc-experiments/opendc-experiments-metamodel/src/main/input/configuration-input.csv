@@ -1,4 +1,6 @@
 Topology,EnergyModel,FailureFrequency,AllocationPolicy,MetricsCount,MetricsFolderOutputName
-multi,square,0.0,core-mem-inv,2,cpu_usage,cpu_utilization,
-single-weak,linear,0.1,core-mem,2,cpu_utilization,cpu_usage,
-single-powerful,linear,0.1,core-mem,2,cpu_utilization,cpu_usage,
+single-powerful,linear,0.0,core-mem,2,cpu_utilization,cpu_usage,
+single-powerful,square,0.0,core-mem,2,cpu_utilization,cpu_usage,
+single-powerful,sqrt,0.0,core-mem,2,cpu_utilization,cpu_usage,
+single-powerful,cubic,0.0,core-mem,2,cpu_utilization,cpu_usage,
+single-powerful,constant,0.0,core-mem,2,cpu_utilization,cpu_usage,
