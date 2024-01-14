@@ -320,7 +320,7 @@ internal class ComputeServiceTest {
         val slot = slot<Server>()
 
         val watcher = mockk<ServerWatcher>(relaxUnitFun = true)
-        server.watch(watcher)
+        server.addWatcher(watcher)
 
         // Start server
         server.start()

@@ -75,10 +75,11 @@ public class Provisioner(dispatcher: Dispatcher, seed: Long) : AutoCloseable {
     /**
      * Run multiple [ProvisioningStep]s for this environment.
      *
-     * @param steps The steps to apply to the environment.
+     * @param steps An array of steps to apply to the environment.
+     *  Each step contains a service domain, a scheduler, and a scheduling quantum/granularity
      */
     public fun runSteps(vararg steps: ProvisioningStep) {
-        val ctx = context
+        val ctx = context //
         val stack = stack
         for (step in steps) {
             val handle = step.apply(ctx)

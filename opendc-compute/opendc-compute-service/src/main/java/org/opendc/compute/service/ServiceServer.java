@@ -169,7 +169,7 @@ public final class ServiceServer implements Server {
     }
 
     @Override
-    public void watch(@NotNull ServerWatcher watcher) {
+    public void addWatcher(@NotNull ServerWatcher watcher) {
         watchers.add(watcher);
     }
 

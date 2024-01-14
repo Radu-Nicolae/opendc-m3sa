@@ -349,7 +349,7 @@ internal class SimHostTest {
 
         override fun delete() {}
 
-        override fun watch(watcher: ServerWatcher) {}
+        override fun addWatcher(watcher: ServerWatcher) {}
 
         override fun unwatch(watcher: ServerWatcher) {}
 

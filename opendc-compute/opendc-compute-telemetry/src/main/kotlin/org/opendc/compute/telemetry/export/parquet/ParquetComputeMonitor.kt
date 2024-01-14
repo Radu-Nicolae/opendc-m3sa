@@ -31,19 +31,19 @@ import java.io.File
 /**
  * A [ComputeMonitor] that logs the events to a Parquet file.
  */
-public class ParquetComputeMonitor(base: File, partition: String, bufferSize: Int) : ComputeMonitor, AutoCloseable {
+public class ParquetComputeMonitor(base: File, partition: String, bufferSize: Int, outputName: String = "data") : ComputeMonitor, AutoCloseable {
     private val serverWriter = ParquetServerDataWriter(
-        File(base, "server/$partition/data.parquet").also { it.parentFile.mkdirs() },
+        File(base, "server/$partition/$outputName.parquet").also { it.parentFile.mkdirs() },
         bufferSize
     )
 
     private val hostWriter = ParquetHostDataWriter(
-        File(base, "host/$partition/data.parquet").also { it.parentFile.mkdirs() },
+        File(base, "host/$partition/$outputName.parquet").also { it.parentFile.mkdirs() },
         bufferSize
     )
 
     private val serviceWriter = ParquetServiceDataWriter(
-        File(base, "service/$partition/data.parquet").also { it.parentFile.mkdirs() },
+        File(base, "service/$partition/$outputName.parquet").also { it.parentFile.mkdirs() },
         bufferSize
     )
 

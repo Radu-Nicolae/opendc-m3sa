@@ -45,10 +45,17 @@ public class GreenifierPortfolio : Portfolio {
     private val operationalPhenomena = OperationalPhenomena(0.0, false)
     private val allocationPolicy = "active-servers"
 
+    private val energyModel = "linear"
+    private val idleEnergy = 200;
+    private val maxEnergy = 350;
+
+
+
     override val scenarios: Iterable<Scenario> = topologies.flatMap { topology ->
         workloads.map { workload ->
             Scenario(
                 topology,
+                energyModel,
                 workload,
                 operationalPhenomena,
                 allocationPolicy,

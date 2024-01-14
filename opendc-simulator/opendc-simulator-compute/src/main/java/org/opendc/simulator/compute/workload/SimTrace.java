@@ -41,6 +41,27 @@ public final class SimTrace {
     private final int size;
 
     /**
+     * Getter for the usage column, used for multi-core simulation, with the first use case in opendc-experiments-metamodel.
+     */
+    public double[] getUsageCol() {
+        return usageCol;
+    }
+
+    /**
+     * Getter for the deadline column, used for multi-core simulation, with the first use case in opendc-experiments-metamodel.
+     */
+    public long[] getDeadlineCol() {
+        return deadlineCol;
+    }
+
+    /**
+     * Getter for the core column, used for multi-core simulation, with the first use case in opendc-experiments-metamodel.
+     */
+    public int[] getCoresCol() {
+        return coresCol;
+    }
+
+    /**
      * Construct a {@link SimTrace} instance.
      *
      * @param usageCol The column containing the CPU usage of each fragment (in MHz).
@@ -317,18 +338,22 @@ public final class SimTrace {
         @Override
         public long onUpdate(FlowStage ctx, long now) {
             // Shift the current time to align with the starting time of the workload
-            long nowOffset = now - this.workloadOffset;
-            long deadline = this.deadlines[this.index];
+            long nowOffset = now - this.workloadOffset; // determines how long the server has been running
+            long deadline = this.deadlines[this.index]; // deadline = when the next sample is available (when is it scheduled to run)
 
             // Loop through the deadlines until the next deadline is reached.
             while (deadline <= nowOffset) {
+                // if we get at the end of the trace, stop the simulation
                 if (++this.index >= this.traceSize) {
                     return doStop(ctx);
                 }
                 deadline = this.deadlines[this.index];
             }
 
+            // save the CPU usage on the output
             this.output.push((float) this.cpuUsages[this.index]);
+
+            // return the deadline of when do call "do update" again (e.g., next deadline will be in 5 min, call this in 5 min)
             return deadline + this.workloadOffset;
         }
 

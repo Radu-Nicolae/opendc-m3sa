@@ -47,7 +47,7 @@ public fun setupComputeService(
 
 /**
  * Return a [ProvisioningStep] that installs a [ComputeMetricReader] to periodically collect the metrics of a
- * [ComputeService] and report them to a [ComputeMonitor].
+ * [ComputeService] and report them to a [ComputeMonitor]. The monitor "monitors" the processes and collects data.
  *
  * @param serviceDomain The service domain at which the [ComputeService] is located.
  * @param monitor The [ComputeMonitor] to install.

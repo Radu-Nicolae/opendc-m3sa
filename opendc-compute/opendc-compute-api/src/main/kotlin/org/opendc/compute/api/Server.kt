@@ -60,10 +60,11 @@ public interface Server : Resource {
 
     /**
      * Register the specified [ServerWatcher] to watch the state of the server.
+     * This adds a watcher that get called when the server state changes.
      *
      * @param watcher The watcher to register for the server.
      */
-    public fun watch(watcher: ServerWatcher)
+    public fun addWatcher(watcher: ServerWatcher)
 
     /**
      * De-register the specified [ServerWatcher] from the server to stop it from receiving events.

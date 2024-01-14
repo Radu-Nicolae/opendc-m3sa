@@ -26,6 +26,7 @@ package org.opendc.experiments.base.portfolio.model
  * A single scenario of a portfolio.
  *
  * @property topology The topology to test.
+ * @property energyModel The energy model to use.
  * @property workload The workload to test.
  * @property operationalPhenomena The [OperationalPhenomena] to model.
  * @property allocationPolicy The allocation policy of the scheduler.
@@ -33,6 +34,7 @@ package org.opendc.experiments.base.portfolio.model
  */
 public data class Scenario(
     val topology: Topology,
+    val energyModel: String,
     val workload: Workload,
     val operationalPhenomena: OperationalPhenomena,
     val allocationPolicy: String,

@@ -364,7 +364,7 @@ public final class ComputeService implements AutoCloseable {
 
             final ServiceServer server = request.server;
             final ServiceFlavor flavor = server.getFlavor();
-            final HostView hv = scheduler.select(request.server);
+            final HostView hv = scheduler.select(request.server); // here we are linknig the server to the host
 
             if (hv == null || !hv.getHost().canFit(server)) {
                 LOGGER.trace(
