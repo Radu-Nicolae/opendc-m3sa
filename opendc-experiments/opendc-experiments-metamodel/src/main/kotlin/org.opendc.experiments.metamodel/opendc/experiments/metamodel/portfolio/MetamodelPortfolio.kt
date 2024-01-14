@@ -72,7 +72,7 @@ public class MetamodelPortfolio : Portfolio {
 
     private fun parseScenario(input: Array<String>): Scenario {
         var index = 0
-        val topology = input[0]; index += 1; // might become array[0]
+        val topology = input[0]; index += 1;
         val energyModel: String = input[index]; index += 1;
         val failureFrequency: Double = input[index].toDouble(); index += 1;
         val allocationPolicy: String = input[index]; index += 1;
