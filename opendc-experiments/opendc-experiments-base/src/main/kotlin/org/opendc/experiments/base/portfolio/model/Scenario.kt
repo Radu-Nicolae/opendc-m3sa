@@ -34,7 +34,7 @@ package org.opendc.experiments.base.portfolio.model
  */
 public data class Scenario(
     val topology: Topology,
-    val energyModel: String,
+    val energyModel: String = "",
     val workload: Workload,
     val operationalPhenomena: OperationalPhenomena,
     val allocationPolicy: String,
