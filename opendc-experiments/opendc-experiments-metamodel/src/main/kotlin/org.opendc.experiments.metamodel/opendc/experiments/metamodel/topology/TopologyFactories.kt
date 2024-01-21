@@ -24,7 +24,8 @@
 
 package org.opendc.experiments.metamodel.topology
 
-import org.opendc.experiments.compute.topology.HostSpec
+import org.apache.commons.math3.random.RandomGenerator
+import org.opendc.compute.topology.HostSpec
 import org.opendc.simulator.compute.SimPsuFactories
 import org.opendc.simulator.compute.model.MachineModel
 import org.opendc.simulator.compute.model.MemoryUnit
@@ -36,7 +37,6 @@ import java.io.File
 import java.io.InputStream
 import java.util.SplittableRandom
 import java.util.UUID
-import java.util.random.RandomGenerator
 import kotlin.math.roundToLong
 
 /**
@@ -50,7 +50,7 @@ private val reader = ClusterSpecReader()
 fun clusterTopology(
     file: File,
     powerModel: CpuPowerModel = CpuPowerModels.linear(350.0, 200.0),
-    random: RandomGenerator = SplittableRandom(0)
+    random: SplittableRandom = SplittableRandom(0)
 ): List<HostSpec> {
     return clusterTopology(reader.read(file), powerModel, random)
 }
@@ -61,7 +61,7 @@ fun clusterTopology(
 fun clusterTopology(
     input: InputStream,
     powerModel: CpuPowerModel = CpuPowerModels.linear(350.0, 200.0),
-    random: RandomGenerator = SplittableRandom(0)
+    random: SplittableRandom = SplittableRandom(0)
 ): List<HostSpec> {
     return clusterTopology(reader.read(input), powerModel, random)
 }
@@ -69,14 +69,14 @@ fun clusterTopology(
 /**
  * Construct a topology from the given list of [clusters].
  */
-fun clusterTopology(clusters: List<ClusterSpec>, powerModel: CpuPowerModel, random: RandomGenerator = SplittableRandom(0)): List<HostSpec> {
+fun clusterTopology(clusters: List<ClusterSpec>, powerModel: CpuPowerModel, random: SplittableRandom = SplittableRandom(0)): List<HostSpec> {
     return clusters.flatMap { it.toHostSpecs(random, powerModel) }
 }
 
 /**
  * Helper method to convert a [ClusterSpec] into a list of [HostSpec]s.
  */
-private fun ClusterSpec.toHostSpecs(random: RandomGenerator, powerModel: CpuPowerModel): List<HostSpec> {
+private fun ClusterSpec.toHostSpecs(random: SplittableRandom, powerModel: CpuPowerModel): List<HostSpec> {
     val cpuSpeed = cpuSpeed
     val memoryPerHost = memCapacityPerHost.roundToLong()
 

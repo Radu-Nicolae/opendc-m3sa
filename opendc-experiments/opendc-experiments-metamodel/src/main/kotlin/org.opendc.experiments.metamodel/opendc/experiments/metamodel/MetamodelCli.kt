@@ -38,7 +38,7 @@ import com.github.ajalt.clikt.parameters.types.int
 import com.github.ajalt.clikt.parameters.types.long
 import me.tongfei.progressbar.ProgressBarBuilder
 import me.tongfei.progressbar.ProgressBarStyle
-import org.opendc.experiments.metamodel.model.Scenario
+import org.opendc.experiments.base.portfolio.model.*
 import org.opendc.experiments.metamodel.portfolio.MetamodelPortfolio
 import java.io.File
 import java.util.concurrent.ForkJoinPool

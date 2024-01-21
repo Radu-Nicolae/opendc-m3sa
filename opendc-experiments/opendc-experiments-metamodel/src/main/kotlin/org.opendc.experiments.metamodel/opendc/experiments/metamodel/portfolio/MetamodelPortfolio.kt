@@ -22,16 +22,11 @@
 
 package org.opendc.experiments.metamodel.portfolio
 
-import org.opendc.experiments.metamodel.model.OperationalPhenomena
-import org.opendc.experiments.metamodel.model.Scenario
-import org.opendc.experiments.metamodel.model.Topology
-import org.opendc.experiments.metamodel.model.Workload
-import org.opendc.experiments.compute.sampleByLoad
-import org.opendc.experiments.compute.trace
+import org.opendc.compute.workload.sampleByLoad
+import org.opendc.compute.workload.trace
+import org.opendc.experiments.base.portfolio.model.*
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 fun readCsvIntoArray(fileName: String): List<Array<String>> {
     return Files.readAllLines(Paths.get(fileName)).map { it.split(",").toTypedArray() }

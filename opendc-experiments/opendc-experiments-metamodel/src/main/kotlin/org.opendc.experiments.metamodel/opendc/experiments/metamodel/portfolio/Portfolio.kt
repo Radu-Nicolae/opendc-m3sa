@@ -21,8 +21,7 @@
  */
 
 package org.opendc.experiments.metamodel.portfolio
-
-import org.opendc.experiments.metamodel.model.Scenario
+import org.opendc.experiments.base.portfolio.model.Scenario
 
 /**
  * A portfolio represents a collection of scenarios are tested for the work.

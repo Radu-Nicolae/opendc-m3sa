@@ -23,21 +23,13 @@
 package org.opendc.experiments.metamodel
 
 import org.opendc.compute.service.ComputeService
-import org.opendc.experiments.metamodel.model.Scenario
 import org.opendc.experiments.metamodel.topology.clusterTopology
-import org.opendc.experiments.compute.ComputeWorkloadLoader
-import org.opendc.experiments.compute.createComputeScheduler
-import org.opendc.experiments.compute.export.parquet.ParquetComputeMonitor
-import org.opendc.experiments.compute.grid5000
-import org.opendc.experiments.compute.registerComputeMonitor
-import org.opendc.experiments.compute.replay
-import org.opendc.experiments.compute.setupComputeService
-import org.opendc.experiments.compute.setupHosts
-import org.opendc.experiments.compute.topology.HostSpec
+import org.opendc.compute.workload.ComputeWorkloadLoader
+import org.opendc.compute.simulator.provisioner.setupComputeService
+import org.opendc.compute.simulator.provisioner.setupHosts
 import org.opendc.experiments.metamodel.portfolio.MetamodelPortfolio
 import org.opendc.experiments.metamodel.portfolio.readCsvIntoArray
-import org.opendc.experiments.provisioner.Provisioner
-import org.opendc.experiments.provisioner.ProvisioningStep
+import org.opendc.compute.simulator.provisioner.Provisioner
 import org.opendc.simulator.compute.power.CpuPowerModel
 import org.opendc.simulator.compute.power.CpuPowerModels
 import org.opendc.simulator.kotlin.runSimulation
@@ -47,6 +39,14 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Random
 import kotlin.math.roundToLong
+import org.opendc.compute.service.scheduler.createComputeScheduler
+import org.opendc.compute.simulator.failure.grid5000
+import org.opendc.compute.simulator.provisioner.ProvisioningStep
+import org.opendc.compute.simulator.provisioner.registerComputeMonitor
+import org.opendc.compute.telemetry.export.parquet.ParquetComputeMonitor
+import org.opendc.compute.topology.HostSpec
+import org.opendc.experiments.base.portfolio.model.Scenario
+import org.opendc.experiments.base.runner.replay
 
 /**
  * Helper class for running the Metamodel experiments.
@@ -85,16 +85,9 @@ public class MetamodelRunner(
         val topology = clusterTopology(
             fileTopology,
             getCpuPowerModel(scenario.energyModel, 350.0, 200.0)
-        ) // using the data from the file, we create the topology
-        // todo: look here - up to this point we select the power model (line 79)
+        )
         val allocationPolicy = scenario.allocationPolicy // the policy used to allocate resources e.g., active-servers
 
-        /*
-        a provisioner is a helper class to set up the experimental environment, using a simulation dispatcher (see below),
-        a seeder, and a service registry (i.e. a map of services)
-
-        A {@link Dispatcher} is used in OpenDC to schedule the execution of future tasks over potentially multiple threads.
-         */
         Provisioner(dispatcher, seed).use { provisioner ->
             val experimentSetup = setupExperiment(allocationPolicy, topology)
             val computeService = experimentSetup.first
@@ -145,32 +138,6 @@ public class MetamodelRunner(
             the following chunk of code was written for debugging purposes and understanding the code
              */
 
-            // CODE CHUNK START
-            val vm1 = vms.first()
-
-            println("ID: " + vm1.uid + "CPU Count: " + vm1.cpuCount)
-            println("CPU Capacity: " + vm1.cpuCapacity)
-            println("Memory Capacity: " + vm1.memCapacity)
-            println("Total Load: " + vm1.totalLoad)
-            println("Start Time: " + vm1.startTime)
-            println("Stop Time: " + vm1.stopTime)
-            println("Trace: " + vm1.trace)
-            println("Interference Profile: " + (vm1.interferenceProfile ?: "None"))
-
-            val usageCol = vm1.trace.usageCol // todo: review!
-            val deadlineCol = vm1.trace.deadlineCol // when does the experiment end
-            val coresCol = vm1.trace.coresCol // how many cores are used at a given time
-
-            //val file = File("output/trace-${Math.random().toString()}-${vm1.uid}.csv").bufferedWriter() // prevents writing on the same file
-            val file = File("output/trace.csv").bufferedWriter()
-            file.write("Usage,Deadline,Cores\n")
-            for (i in usageCol.indices) {
-                file.write("${usageCol[i]}, ${deadlineCol[i]}, ${coresCol[i]}\n")
-            }
-            file.close()
-            // CODE CHUNK END
-
-
             // up until now, all we did was configuration, now we are actually running the experiment
             service.replay( // replay launches the servers
                 timeSource, // used to align the running jobs~, we use this to make sure everything stars at the same time, and we can compare (we use the same clock - like the CPU)
@@ -183,12 +150,6 @@ public class MetamodelRunner(
     }
 
     fun setupExperiment(allocationPolicy: String, topology: List<HostSpec>): Pair<ProvisioningStep, ProvisioningStep> {
-        /*
-            after executing compute service will have
-            - the service domain (compute.opendc.org)
-            - the scheduler (configured with the allocation policy)
-            - the scheduling quantum (i.e. the time interval / quantum / granularity of the scheduler) (e.g., PT5M = 300s)
-             */
         val computeService = setupComputeService(
             SERVICE_DOMAIN,
             {
@@ -201,24 +162,21 @@ public class MetamodelRunner(
         )
         println("Compute Service: $computeService")
 
-        /*
-        after executing setupHosts will have:
-        - a service domain (same as above - "compute.opendc.org")
-        - specs (a list of HostSpec - with only one element??) containing:
-            - uid (a unique identifier for the host)
-            - name (e.g., node-A01-0)
-            - meta (a map of key-values, e.g., "cluster" -> "A01")
-            - model (basically what we setted up earlier, with direct linking to a files like "single.txt")
-            - a "psuFactory" (psu = power supply unit?) - with the idlePower, the maxPower, and the factor (factor depends on model type? linear/quadratic/sqrt/etc??)
-            - a "multiplexerFactory" (but the class has no field? why do we need it?)
-         */
-
         val hosts = setupHosts(SERVICE_DOMAIN, topology, optimize = true)
-
-        // return both the compute service and hosts
         return Pair(computeService, hosts)
     }
 
+
+
+
+
+
+
+
+
+
+
+    // DO NOT REMOVE
     private fun getOutputFolderName(): String {
         // gets the last column
         val folderName =

@@ -32,12 +32,13 @@ plugins {
 }
 
 dependencies {
-    api(projects.opendcExperiments.opendcExperimentsCompute)
-
     implementation(projects.opendcSimulator.opendcSimulatorCore)
     implementation(projects.opendcSimulator.opendcSimulatorCompute)
     implementation(projects.opendcCompute.opendcComputeSimulator)
-
+    implementation(projects.opendcCompute.opendcComputeWorkload)
+    implementation(projects.opendcCompute.opendcComputeTelemetry)
+    implementation(projects.opendcCompute.opendcComputeTopology)
+    implementation(projects.opendcExperiments.opendcExperimentsBase)
     implementation(libs.clikt)
     implementation(libs.progressbar)
     implementation(libs.kotlin.logging)

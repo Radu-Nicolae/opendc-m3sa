@@ -24,8 +24,6 @@ package org.opendc.experiments.metamodel
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
-import org.opendc.experiments.metamodel.model.OperationalPhenomena
-import org.opendc.experiments.metamodel.model.Scenario
 import org.opendc.experiments.metamodel.model.Topology
 import org.opendc.experiments.metamodel.model.Workload
 import org.opendc.experiments.compute.trace
