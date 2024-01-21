@@ -80,7 +80,7 @@ simulating...   0% [                                   ]   0/128 (0:00:00 / ?) E
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
 [...]
 ```
-#### 5.3 Configure the run configuration
+#### 5.3 Configure the 'run configuration'
 5.3.1 In top right, click on "GreenifierCli" or on the down-pointing arrow next to it.
 
 5.3.2 Click on the three dots near "GreenifierCli", then "Edit".
@@ -103,9 +103,9 @@ Replace _[YOUR ABSOLUTE PATH]_ with your actual absolute path, such as:
 
 5.3.6 Click "Apply", then "OK".
 
-### 6. Create your own folder
+### 6. Create your own directory
 
-Copy-paste the greenifier folder and rename it to your own name, following the same naming convention (e.g., "opendc-experiments-metamodel").
+Copy-paste the greenifier directory and rename it to your own name, following the same naming convention (e.g., "opendc-experiments-metamodel").
 Now, go through all the files and replace every word of "greenifier" with your own name (e.g., "metamodel").
 
 ### 7. Run your own experiment
@@ -129,3 +129,4 @@ stable commit.
 git checkout 616017b
 ```
 
+Authors: [Radu Nicolae](https://www.linkedin.com/in/rnicolae/), [Daniel Halasz](https://github.com/Stefan9110)
