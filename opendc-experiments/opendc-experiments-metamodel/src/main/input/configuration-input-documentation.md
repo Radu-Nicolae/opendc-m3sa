@@ -16,6 +16,11 @@
 
 ## Energy model
 - Possible values
+    - "constant"
+    - "sqrt"
+    - "linear"
+    - "square"
+    - "cubic"
 
 ## Failure frequency
 - Possible values: any integer between 0.0 - 1.0
