@@ -167,15 +167,6 @@ public class MetamodelRunner(
     }
 
 
-
-
-
-
-
-
-
-
-
     // DO NOT REMOVE
     private fun getOutputFolderName(): String {
         // gets the last column

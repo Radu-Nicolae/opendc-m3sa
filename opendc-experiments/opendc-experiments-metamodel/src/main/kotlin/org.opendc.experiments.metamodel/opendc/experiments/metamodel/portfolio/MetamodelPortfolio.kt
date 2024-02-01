@@ -84,6 +84,10 @@ public class MetamodelPortfolio : Portfolio {
         )
     }
 
+    /*
+    Might be good to add some logging that an error happened -> such that it will make sense when I will
+    get wrong bad outputs
+     */
     private fun getMetricsToAnalyze(): List<String> {
         var indexOfMetrics = inputFile[1].size - 2 // this is the second to last column, which contains the last metric
         var metrics: List<String> = listOf()
