@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
 class DataPlotter:
     def __init__(self, dfs):
@@ -9,7 +10,26 @@ class DataPlotter:
         self._plot_metric('cpu_usage', 'CPU usage (%)')
 
     def plot_power_total(self):
-        self._plot_metric('power_total', 'Power Total (W)')
+        total_power_values = []
+        for df in self.dfs:
+            total_power_summed = df['power_total'].sum() / 1000000000  # convert to TWh
+            total_power_values.append(total_power_summed)
+
+        models = ['sqrt', 'linear', 'square', 'cubic']  # Example model names
+
+        plt.figure(figsize=(10, 8))  # Adjusted for similarity to the example
+        colors = np.random.rand(len(models), 3)  # Generate random colors
+        bars = plt.barh(models, total_power_values, color=colors, edgecolor='black')
+
+        # Adding the text labels next to the bars
+        for bar in bars:
+            width = bar.get_width()
+            plt.text(width, bar.get_y() + bar.get_height() / 2, f'{width:.2f} TWh', va='center')
+
+        plt.xlabel('Total Energy Consumed [TWh]')  # Adjusted unit to TWh
+        plt.ylabel('Method')
+        plt.title('Total Power for each model')
+        plt.show()
 
     def plot_cpu_limit(self):
         self._plot_metric('cpu_limit', 'CPU Limit (%)')

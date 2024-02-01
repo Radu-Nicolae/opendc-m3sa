@@ -1,2 +1,2 @@
 Topology,Workload,Scheduler,FailureFrequency,MetricsCount,Metrics,FolderOutputName
-multi,bitbrains-small,active-servers,0.0,4,cpu_limit,cpu_usage,cpu_utilization,cpu_time_active,power_total,
+multi,bitbrains-small,active-servers-inv,0.0,4,cpu_time_steal,cpu_count,cpu_limit,power_total,
