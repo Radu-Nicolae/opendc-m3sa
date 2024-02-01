@@ -36,7 +36,7 @@ fun readCsvIntoArray(fileName: String): List<Array<String>> {
  * A [Portfolio] that explores the difference between horizontal and vertical scaling.
  */
 public class MetamodelPortfolio : Portfolio {
-    val inputFile = readCsvIntoArray(fileName = "input/configuration-input.csv")
+    val inputFile = readCsvIntoArray(fileName = "input/configuration-input-new.csv")
     private val topologies = listOf(
         Topology("multi")
     )
@@ -55,39 +55,46 @@ public class MetamodelPortfolio : Portfolio {
      * lateTODO: add proper error handling
      */
     private fun parseInput(input: List<Array<String>>): Iterable<Scenario> {
-        var index = 0;
         val parsedScenarios: MutableList<Scenario> = mutableListOf()
+        val energyModels: List<String> = listOf("sqrt", "linear", "square", "cubic")
 
-        for (i in 1 until input.size) {
-            parsedScenarios.add(parseScenario(input[i]))
+        for (i in 0 until energyModels.size) {
+            parseScenario(input[1], energyModels.get(i))?.let { parsedScenarios.add(it) }
         }
 
         return parsedScenarios // casting to iterable<scenario> is automatic
     }
 
-    private fun parseScenario(input: Array<String>): Scenario {
-        var index = 0
-        val topology = input[0]; index += 1;
-        val energyModel: String = input[index]; index += 1;
-        val failureFrequency: Double = input[index].toDouble(); index += 1;
-        val allocationPolicy: String = input[index]; index += 1;
-        val workload = Workload("bitbrains-small", trace("trace").sampleByLoad(1.0))
-        val operationalPhenomena = OperationalPhenomena(failureFrequency, false)
+    private fun parseScenario(input: Array<String>, energyModel: String): Scenario? {
+        return try {
+            var index = 0
+            val topology = input[0]; index += 1;
+            val workload = Workload(input[index], trace("trace").sampleByLoad(1.0)); index += 1;
+            val scheduler = input[index]; index += 1;
+            val failureFrequency: Double = input[index].toDouble(); index += 1;
+            val metricsCount = input[index].toInt(); index += 1;
+            val operationalPhenomena = OperationalPhenomena(failureFrequency, false)
 
-        return Scenario(
-            topology = Topology(topology), // we don't need to change the topology if we run for the same datacenter
-            energyModel = energyModel, // we can provide different models here, for the metamodel
-            workload = workload,
-            operationalPhenomena = operationalPhenomena, // this model predicts how often do we have failures
-            allocationPolicy = allocationPolicy, // also different allocation policies
-            mapOf("topology" to topologies[0].name, "workload" to workload.name)
-        )
+            Scenario(
+                topology = Topology(topology),
+                energyModel = energyModel,
+                workload = workload,
+                operationalPhenomena = operationalPhenomena,
+                allocationPolicy = scheduler,
+                mapOf("topology" to topologies[0].name, "workload" to workload.name)
+            )
+        } catch (e: ArrayIndexOutOfBoundsException) {
+            println("Error: Input array does not have enough elements.")
+            null
+        } catch (e: NumberFormatException) {
+            println("Error: Unable to convert input to the expected type.")
+            null
+        } catch (e: Exception) {
+            println("Error: ${e.message}")
+            null
+        }
     }
 
-    /*
-    Might be good to add some logging that an error happened -> such that it will make sense when I will
-    get wrong bad outputs
-     */
     private fun getMetricsToAnalyze(): List<String> {
         var indexOfMetrics = inputFile[1].size - 2 // this is the second to last column, which contains the last metric
         var metrics: List<String> = listOf()

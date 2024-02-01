@@ -183,7 +183,7 @@ public class MetamodelRunner(
 
     private fun getCpuPowerModel(model: String, maxPower: Double, idlePower: Double): CpuPowerModel {
         return when (model) {
-            "constant" -> CpuPowerModels.constant(maxPower)
+//            "constant" -> CpuPowerModels.constant(maxPower)
             "sqrt" -> CpuPowerModels.sqrt(maxPower, idlePower)
             "linear" -> CpuPowerModels.linear(maxPower, idlePower)
             "square" -> CpuPowerModels.square(maxPower, idlePower)
