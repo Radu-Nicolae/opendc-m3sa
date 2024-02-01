@@ -1,2 +1,0 @@
-TopologyCount,Topology,EnergyModel,FailureFrequency,AllocationPolicy,MetricsCount,MetricsFolderOutputName
-1,multi,square,0.0,core-mem-inv,3,cpu_usage,cpu_utilization,3-multis-core-mem-inv
