@@ -51,7 +51,7 @@ public fun runPortfolio(
     val pool = ForkJoinPool(parallelism)
 
     for (scenario in portfolio.scenarios) {
-        runScenario(scenario, pool)
+        runScenario(scenario[0], pool)
     }
 }
 
@@ -62,25 +62,23 @@ public fun runPortfolio(
  * @param parallelism The number of scenarios that can be run in parallel
  */
 public fun runScenario(
-    scenario: Scenario,
+    scenarios: List<Scenario>,
     parallelism: Int,
 ) {
-//    scenario.energyModel.forEach(energyModel ->
-//    for (name in scenario.energyModels.names) {
-//        val pool = ForkJoinPool(parallelism)
-//        val newScenario = scenario.copy(energyModels = PowerModelSpec(List(1) { name }))
-//        runScenario(
-//            newScenario,
-//            pool
-//        )
-//    }
-//
-    val pool = ForkJoinPool(parallelism)
-    runScenario(
-        scenario,
-        pool
-    )
-//    // )
+    for (scenario in scenarios) {
+        val pool = ForkJoinPool(parallelism)
+        println("\n\n" +
+        """
+            ================================================================================
+                      Running scenario: ${scenario.name}
+            ================================================================================
+        """.trimIndent()
+        )
+        runScenario(
+            scenario,
+            pool
+        )
+    }
 }
 
 /**
