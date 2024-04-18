@@ -137,22 +137,22 @@ public fun runScenario(
             val startTime = Duration.ofMillis(vms.minOf { it.startTime }.toEpochMilli())
 
             // saves in a seed folder
-            provisioner.runStep(
-                registerComputeMonitor(
-                    serviceDomain,
-                    ParquetComputeMonitor(
-                        File(scenario.outputFolder),
-                        partition,
-                        bufferSize = 4096,
-                    ),
-                    Duration.ofSeconds(scenario.exportModel.exportInterval),
-                    startTime,
-                ),
-            )
+//            provisioner.runStep(
+//                registerComputeMonitor(
+//                    serviceDomain,
+//                    ParquetComputeMonitor(
+//                        File(scenario.outputFolder),
+//                        partition,
+//                        bufferSize = 4096,
+//                    ),
+//                    Duration.ofSeconds(scenario.exportModel.exportInterval),
+//                    startTime,
+//                ),
+//            )
 
             // saves results in an output folder
-            val outputFolderPath = "output/simulation-results/"
-            if (File(outputFolderPath).exists()) File(outputFolderPath).deleteRecursively()
+            // val outputFolderPath = "output/simulation-results/"
+            // if (File(outputFolderPath).exists()) File(outputFolderPath).deleteRecursively()
             provisioner.runStep(
                 registerComputeMonitor(
                     serviceDomain,
@@ -160,7 +160,7 @@ public fun runScenario(
                         File("output/simulation-results/"),
                         scenario.name,
                         bufferSize = 4096,
-                        modelName = "someGoodFolderOrFileNameToBeAdded-"
+                        modelName = scenario.powerModel.type,
                         ),
                     Duration.ofSeconds(scenario.exportModel.exportInterval),
                     startTime,
