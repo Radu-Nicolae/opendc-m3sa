@@ -1,0 +1,83 @@
+{
+    "clusters":
+    [
+        {
+            "name": "C01",
+            "hosts" :
+            [
+                {
+                    "name": "H01",
+                    "cpus":
+                    [
+                        {
+                            "coreCount": 32,
+                            "coreSpeed": 3200
+                        }
+                    ],
+                    "memory": {
+                        "memorySize": 256000
+                    },
+                    "powerModel": {
+                        "modelType": "linear",
+                        "power": 350.0,
+                        "maxPower": 350.0,
+                        "idlePower": 200.0
+                    }
+                }
+            ]
+        },
+        {
+            "name": "C02",
+            "hosts" :
+            [
+                {
+                    "name": "H02",
+                    "count": 6,
+                    "cpus":
+                    [
+                        {
+                            "coreCount": 8,
+                            "coreSpeed": 2930
+                        }
+                    ],
+                    "memory": {
+                        "memorySize": 64000
+                    },
+                    "powerModel": {
+                        "modelType": "linear",
+                        "power": 350.0,
+                        "maxPower": 350.0,
+                        "idlePower": 200.0
+                    }
+                }
+            ]
+        },
+        {
+            "name": "C03",
+            "hosts" :
+            [
+                {
+                    "name": "H03",
+                    "count": 2,
+                    "cpus":
+                    [
+                        {
+                            "coreCount": 16,
+                            "coreSpeed": 3200
+                        }
+                    ],
+                    "memory": {
+                        "memorySize": 128000
+                    },
+                    "powerModel": {
+                        "modelType": "linear",
+                        "power": 350.0,
+                        "maxPower": 350.0,
+                        "idlePower": 200.0
+                    }
+                }
+            ]
+        }
+    ]
+}
+

@@ -1,0 +1,30 @@
+# EditorConfig helps developers define and maintain consistent
+# coding styles between different editors and IDEs
+# editorconfig.org
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+# Ensure YAML formatting adheres to standard
+[*.{yml,yaml}]
+indent_size = 2
+
+[*.java]
+ij_java_packages_to_use_import_on_demand = unset
+ij_java_class_count_to_use_import_on_demand = 2147483647
+
+# ktlint
+[*.{kt, kts}]
+ij_kotlin_name_count_to_use_star_import = 2147483647
+ij_kotlin_name_count_to_use_star_import_for_members = 2147483647
+ij_kotlin_packages_to_use_import_on_demand = unset

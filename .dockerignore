@@ -1,0 +1,12 @@
+.git
+.env
+.idea/
+**/out
+*.iml
+.idea_modules/
+
+.gradle
+**/build
+**/node_modules
+
+**/Dockerfile
