@@ -86,6 +86,7 @@ public fun getScenarioCombinations(scenarioSpec: ScenarioSpec): List<Scenario> {
     val exportModels = scenarioSpec.exportModels
     val scenarios = mutableListOf<Scenario>()
     var scenarioID = 0
+    var topologyID = 0
 
     for (topology in topologiesSpec) {
         for (workload in workloads) {
@@ -106,7 +107,7 @@ public fun getScenarioCombinations(scenarioSpec: ScenarioSpec): List<Scenario> {
                                     runs = scenarioSpec.runs,
                                     initialSeed = scenarioSpec.initialSeed,
                                 )
-                            trackScenario(scenarioSpec, scenario, scenarioID)
+                            trackScenario(scenarioSpec, scenario, scenarioID, topologyID)
                             scenarios.add(scenario)
                             scenarioID++
                         }
@@ -114,6 +115,7 @@ public fun getScenarioCombinations(scenarioSpec: ScenarioSpec): List<Scenario> {
                 }
             }
         }
+        topologyID++
     }
 
     return scenarios
@@ -155,11 +157,25 @@ public fun getOutputFolderName(
         "-scheduler=${allocationPolicy.name}"
 }
 
-public fun trackScenario(scenarioSpec: ScenarioSpec, scenario: Scenario, scenarioId: Int) {
+public fun trackScenario(scenarioSpec: ScenarioSpec, scenario: Scenario, scenarioId: Int, topologyId: Int) {
     val trackrPath = scenario.outputFolder + "/" + simulationFolder + "/trackr.json"
-    scenarioSpec.id = scenarioId
-    scenarioWriter.write(scenarioSpec, File(trackrPath))
+
+    scenarioWriter.write(
+        ScenarioSpec(
+            id = scenarioId,
+            name = scenarioSpec.name,
+            topologies = listOf(TopologySpec(scenarioSpec.topologies[topologyId].pathToFile)),
+            workloads = listOf(scenario.workload),
+            allocationPolicies = listOf(scenario.allocationPolicy),
+            // when implemented, add failure models here
+            carbonTracePaths = listOf(scenario.carbonTracePath),
+            exportModels = listOf(scenario.exportModel),
+            outputFolder = scenario.outputFolder,
+            initialSeed = scenario.initialSeed,
+            runs = scenario.runs,
+        ), File(trackrPath)
+    )
 
     // remove the last comma
-    File(trackrPath).writeText(File(trackrPath).readText().dropLast(3)+ "]")
+    File(trackrPath).writeText(File(trackrPath).readText().dropLast(3) + "]")
 }
