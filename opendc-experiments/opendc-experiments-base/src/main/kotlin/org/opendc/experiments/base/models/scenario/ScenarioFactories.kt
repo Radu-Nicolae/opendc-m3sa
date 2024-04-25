@@ -54,6 +54,10 @@ public fun getScenario(file: File): List<Scenario> {
     return getScenario(scenarioReader.read(file))
 }
 
+public fun getScenarioSpec(filePath: String): ScenarioSpec {
+    return scenarioReader.read(File(filePath))
+}
+
 /**
  * Returns a list of Scenarios from a given ScenarioSpec.
  *

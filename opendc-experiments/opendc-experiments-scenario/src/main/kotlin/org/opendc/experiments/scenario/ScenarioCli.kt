@@ -31,6 +31,7 @@ import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.file
 import com.github.ajalt.clikt.parameters.types.int
 import org.opendc.experiments.base.models.scenario.getScenario
+import org.opendc.experiments.base.models.scenario.getScenarioSpec
 import org.opendc.experiments.base.runner.runScenario
 import java.io.File
 
@@ -59,7 +60,16 @@ internal class ScenarioCommand : CliktCommand(name = "scenario") {
 
     override fun run() {
         // TODO: clean the simulation-results folder?
+
         val scenarios = getScenario(scenarioPath)
+
+        // create an output folder with the simulationName
+        File("output/simulation-${getScenarioSpec(scenarioPath.toString()).name}/").mkdir()
+        for (scenario in scenarios) {
+            scenario.outputFolder = "output/simulation-${getScenarioSpec(scenarioPath.toString()).name}/"
+        }
+
+//        val simulationName =
         runScenario(scenarios, parallelism)
         // TODO: implement outputResults(scenario) // this will take the results, from a folder, and output them visually
     }

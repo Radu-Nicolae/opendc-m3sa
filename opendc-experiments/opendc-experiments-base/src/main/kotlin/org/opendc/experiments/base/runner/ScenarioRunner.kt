@@ -53,11 +53,14 @@ import java.util.stream.LongStream
 public fun runScenario(
     scenarios: List<Scenario>,
     parallelism: Int,
+
 ) {
     val ansiReset = "\u001B[0m"
     val ansiGreen = "\u001B[32m"
     val ansiBlue = "\u001B[34m"
-    clearOutputFolder(scenarios[0].outputFolder)
+
+    // create a folder called "simulation-"+scenario.name
+    // clearOutputFolder(scenarios[0].outputFolder)
 
     for (scenario in scenarios) {
         val pool = ForkJoinPool(parallelism)

@@ -28,6 +28,7 @@ import FailureModelSpec
 import TopologySpec
 import WorkloadSpec
 import kotlinx.serialization.Serializable
+import java.util.UUID
 
 /**
  * specification describing a scenario
@@ -60,8 +61,8 @@ public data class ScenarioSpec(
         // generate name if not provided
         // TODO: improve this
         if (name == "") {
-            name =
-                "workload=${workloads[0].name}_topology=${topologies[0].name}_allocationPolicy=${allocationPolicies[0].name}"
+            name = "unnamed-simulation-${UUID.randomUUID().toString().substring(0, 4)}"
+//                "workload=${workloads[0].name}_topology=${topologies[0].name}_allocationPolicy=${allocationPolicies[0].name}"
         }
     }
 }
