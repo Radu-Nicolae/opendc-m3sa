@@ -63,7 +63,6 @@ internal class ScenarioCommand : CliktCommand(name = "scenario") {
         // TODO: clean the simulation-results folder?
 
         val scenarios = getScenario(scenarioPath)
-
         // create an output folder with the simulationName
 
         setupOutputFolder()
@@ -111,7 +110,5 @@ internal class ScenarioCommand : CliktCommand(name = "scenario") {
             println("Errors: $errors")
         }
     }
-
-
 
 }

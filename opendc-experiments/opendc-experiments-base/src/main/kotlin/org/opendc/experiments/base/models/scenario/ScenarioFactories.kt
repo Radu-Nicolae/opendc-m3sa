@@ -33,6 +33,8 @@ import org.opendc.experiments.base.models.scenario.specs.ScenarioSpec
 import java.io.File
 
 private val scenarioReader = ScenarioReader()
+private val scenarioWriter = ScenarioWriter()
+private var simulationFolder = ""
 
 /**
  * Returns a list of Scenarios from a given file path (input).
@@ -65,6 +67,7 @@ public fun getScenarioSpec(filePath: String): ScenarioSpec {
  * @return A list of Scenarios.
  */
 public fun getScenario(scenarioSpec: ScenarioSpec): List<Scenario> {
+    simulationFolder = scenarioSpec.name
     return getScenarioCombinations(scenarioSpec)
 }
 
@@ -103,8 +106,9 @@ public fun getScenarioCombinations(scenarioSpec: ScenarioSpec): List<Scenario> {
                                     runs = scenarioSpec.runs,
                                     initialSeed = scenarioSpec.initialSeed,
                                 )
-                            scenarioID++
+                            trackScenario(scenarioSpec, scenario, scenarioID)
                             scenarios.add(scenario)
+                            scenarioID++
                         }
                     }
                 }
@@ -151,5 +155,8 @@ public fun getOutputFolderName(
         "-scheduler=${allocationPolicy.name}"
 }
 
-//public fun trackID(scenario: Scenario): String {
-//}
+public fun trackScenario(scenarioSpec: ScenarioSpec, scenario: Scenario, scenarioId: Int) {
+    val trackrPath = scenario.outputFolder + "/" + simulationFolder + "/trackr.json"
+    scenarioSpec.id = scenarioId
+    scenarioWriter.write(scenarioSpec, File(trackrPath))
+}

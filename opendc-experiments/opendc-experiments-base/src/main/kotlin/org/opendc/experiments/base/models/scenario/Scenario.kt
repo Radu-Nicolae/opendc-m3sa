@@ -25,6 +25,7 @@ package org.opendc.experiments.base.models.scenario
 import AllocationPolicySpec
 import ExportModelSpec
 import WorkloadSpec
+import kotlinx.serialization.Serializable
 import org.opendc.compute.simulator.failure.FailureModel
 import org.opendc.compute.topology.specs.HostSpec
 
@@ -41,6 +42,7 @@ import org.opendc.compute.topology.specs.HostSpec
  * @property runs The Int representing the number of runs of the scenario. It defaults to 1.
  * @property initialSeed The Int representing the initial seed of the scenario. It defaults to 0.
  */
+
 public data class Scenario(
     val topology: List<HostSpec>,
     val workload: WorkloadSpec,

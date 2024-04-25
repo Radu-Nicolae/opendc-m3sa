@@ -44,6 +44,8 @@ import java.util.UUID
  */
 @Serializable
 public data class ScenarioSpec(
+    var id: Int = -1,
+    var name: String = "",
     val topologies: List<TopologySpec>,
     val workloads: List<WorkloadSpec>,
     val allocationPolicies: List<AllocationPolicySpec>,
@@ -53,7 +55,6 @@ public data class ScenarioSpec(
     val outputFolder: String = "output",
     val initialSeed: Int = 0,
     val runs: Int = 1,
-    var name: String = "",
 ) {
     init {
         require(runs > 0) { "The number of runs should always be positive" }
