@@ -25,6 +25,8 @@ package org.opendc.experiments.base.models.scenario
 import AllocationPolicySpec
 import TopologySpec
 import WorkloadSpec
+import net.minidev.json.JSONObject
+import org.gradle.internal.impldep.com.google.gson.Gson
 import org.opendc.compute.simulator.failure.getFailureModel
 import org.opendc.compute.topology.TopologyReader
 import org.opendc.compute.topology.clusterTopology
@@ -82,6 +84,7 @@ public fun getScenarioCombinations(scenarioSpec: ScenarioSpec): List<Scenario> {
     val failureModels = scenarioSpec.failureModels
     val exportModels = scenarioSpec.exportModels
     val scenarios = mutableListOf<Scenario>()
+    var scenarioID = 0
 
     for (topology in topologiesSpec) {
         for (workload in workloads) {
@@ -98,10 +101,11 @@ public fun getScenarioCombinations(scenarioSpec: ScenarioSpec): List<Scenario> {
                                     carbonTracePath = carbonTracePath,
                                     exportModel = exportModel,
                                     outputFolder = scenarioSpec.outputFolder,
-                                    name = getOutputFolderName(scenarioSpec, topology, workload, allocationPolicy),
+                                    name = scenarioID.toString(),
                                     runs = scenarioSpec.runs,
                                     initialSeed = scenarioSpec.initialSeed,
                                 )
+                            scenarioID++
                             scenarios.add(scenario)
                         }
                     }
@@ -148,3 +152,6 @@ public fun getOutputFolderName(
         "-workload=${workload.name}" +
         "-scheduler=${allocationPolicy.name}"
 }
+
+//public fun trackID(scenario: Scenario): String {
+//}
