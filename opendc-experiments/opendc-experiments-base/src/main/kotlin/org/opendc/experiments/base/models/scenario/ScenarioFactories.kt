@@ -159,4 +159,7 @@ public fun trackScenario(scenarioSpec: ScenarioSpec, scenario: Scenario, scenari
     val trackrPath = scenario.outputFolder + "/" + simulationFolder + "/trackr.json"
     scenarioSpec.id = scenarioId
     scenarioWriter.write(scenarioSpec, File(trackrPath))
+
+    // remove the last comma
+    File(trackrPath).writeText(File(trackrPath).readText().dropLast(3)+ "]")
 }
