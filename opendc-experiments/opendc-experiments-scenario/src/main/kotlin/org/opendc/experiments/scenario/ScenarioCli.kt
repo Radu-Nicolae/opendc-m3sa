@@ -64,13 +64,31 @@ internal class ScenarioCommand : CliktCommand(name = "scenario") {
         val scenarios = getScenario(scenarioPath)
 
         // create an output folder with the simulationName
-        File("output/simulation-${getScenarioSpec(scenarioPath.toString()).name}/").mkdir()
+
+        setupOutputFolder()
         for (scenario in scenarios) {
             scenario.outputFolder = "output/simulation-${getScenarioSpec(scenarioPath.toString()).name}/"
         }
 
-//        val simulationName =
         runScenario(scenarios, parallelism)
         // TODO: implement outputResults(scenario) // this will take the results, from a folder, and output them visually
+
+        val currentPath = System.getProperty("user.dir")
+        println(currentPath)
+    }
+
+    private fun setupOutputFolder(){
+        val scenarioSpecName = getScenarioSpec(scenarioPath.toString()).name
+        val folderPath = "output/simulation-${scenarioSpecName}"
+        val trackrPath = folderPath + "/trackr.json"
+        val simulationAnalysisPath = folderPath + "/simulation-analysis/"
+        val energyAnalysisPath = simulationAnalysisPath + "/energy-analysis/"
+        val emissionsAnalysisPath = simulationAnalysisPath + "/emissions-analysis/"
+
+        File(folderPath).mkdir()
+        File(trackrPath).createNewFile()
+        File(simulationAnalysisPath).mkdir()
+        File(energyAnalysisPath).mkdir()
+        File(emissionsAnalysisPath).mkdir()
     }
 }
