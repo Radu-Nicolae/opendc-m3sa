@@ -25,8 +25,6 @@ package org.opendc.experiments.base.models.scenario
 import AllocationPolicySpec
 import TopologySpec
 import WorkloadSpec
-import net.minidev.json.JSONObject
-import org.gradle.internal.impldep.com.google.gson.Gson
 import org.opendc.compute.simulator.failure.getFailureModel
 import org.opendc.compute.topology.TopologyReader
 import org.opendc.compute.topology.clusterTopology
