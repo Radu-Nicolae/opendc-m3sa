@@ -61,11 +61,9 @@ internal class ScenarioCommand : CliktCommand(name = "scenario") {
 
     override fun run() {
         // TODO: clean the simulation-results folder?
-
+        setupOutputFolder()
         val scenarios = getScenario(scenarioPath)
         // create an output folder with the simulationName
-
-        setupOutputFolder()
         for (scenario in scenarios) {
             scenario.outputFolder = "output/${getScenarioSpec(scenarioPath.toString()).name}/"
         }
