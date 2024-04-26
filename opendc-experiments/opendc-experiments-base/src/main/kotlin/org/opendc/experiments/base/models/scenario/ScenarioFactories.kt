@@ -79,7 +79,6 @@ public fun getScenarioCombinations(scenarioSpec: ScenarioSpec): List<Scenario> {
     val trackrPath = outputFolder + "/trackr.json"
     File(trackrPath).createNewFile()
 
-
     val topologiesSpec = scenarioSpec.topologies
     val workloads = scenarioSpec.workloads
     val allocationPolicies = scenarioSpec.allocationPolicies

@@ -70,7 +70,7 @@ public fun runScenarios(
         runScenario(
             scenario,
             pool,
-            i
+            i,
         )
     }
 }
@@ -134,7 +134,6 @@ public fun runScenario(
         }
     }
 
-
 /**
  * Saves the simulation results into a specific output folder received from the input.
  *
@@ -152,13 +151,13 @@ public fun addExportModel(
     seed: Long,
     startTime: Duration,
     carbonTrace: CarbonTrace,
-    index: Int
+    index: Int,
 ) {
     provisioner.runStep(
         registerComputeMonitor(
             serviceDomain,
             ParquetComputeMonitor(
-                File("${scenario.outputFolder}/raw-output/${index}"),
+                File("${scenario.outputFolder}/raw-output/$index"),
                 "seed=$seed",
                 bufferSize = 4096,
             ),

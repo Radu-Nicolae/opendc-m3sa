@@ -33,7 +33,6 @@ import com.github.ajalt.clikt.parameters.types.int
 import org.opendc.experiments.base.models.scenario.getScenarios
 import org.opendc.experiments.base.runner.runScenarios
 import java.io.File
-import kotlin.io.path.Path
 
 /**
  * Main entrypoint of the application.
@@ -63,4 +62,3 @@ internal class ScenarioCommand : CliktCommand(name = "scenario") {
         runScenarios(scenarios, parallelism)
     }
 }
-
