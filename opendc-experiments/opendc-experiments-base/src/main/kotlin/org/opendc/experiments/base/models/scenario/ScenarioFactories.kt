@@ -157,7 +157,12 @@ public fun getOutputFolderName(
         "-scheduler=${allocationPolicy.name}"
 }
 
-public fun trackScenario(scenarioSpec: ScenarioSpec, scenario: Scenario, scenarioId: Int, topologyId: Int) {
+public fun trackScenario(
+    scenarioSpec: ScenarioSpec,
+    scenario: Scenario,
+    scenarioId: Int,
+    topologyId: Int,
+) {
     val trackrPath = scenario.outputFolder + "/" + simulationFolder + "/trackr.json"
 
     scenarioWriter.write(
@@ -173,7 +178,8 @@ public fun trackScenario(scenarioSpec: ScenarioSpec, scenario: Scenario, scenari
             outputFolder = scenario.outputFolder,
             initialSeed = scenario.initialSeed,
             runs = scenario.runs,
-        ), File(trackrPath)
+        ),
+        File(trackrPath),
     )
 
     // remove the last comma

@@ -25,7 +25,6 @@ package org.opendc.experiments.base.models.scenario
 import AllocationPolicySpec
 import ExportModelSpec
 import WorkloadSpec
-import kotlinx.serialization.Serializable
 import org.opendc.compute.simulator.failure.FailureModel
 import org.opendc.compute.topology.specs.HostSpec
 

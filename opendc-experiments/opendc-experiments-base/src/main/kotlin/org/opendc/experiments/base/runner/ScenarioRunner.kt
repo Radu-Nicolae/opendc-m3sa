@@ -53,7 +53,6 @@ import java.util.stream.LongStream
 public fun runScenario(
     scenarios: List<Scenario>,
     parallelism: Int,
-
 ) {
     val ansiReset = "\u001B[0m"
     val ansiGreen = "\u001B[32m"

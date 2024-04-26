@@ -74,9 +74,9 @@ internal class ScenarioCommand : CliktCommand(name = "scenario") {
         analyzeResults()
     }
 
-    private fun setupOutputFolder(){
+    private fun setupOutputFolder() {
         val scenarioSpecName = getScenarioSpec(scenarioPath.toString()).name
-        val folderPath = "output/${scenarioSpecName}"
+        val folderPath = "output/$scenarioSpecName"
         val trackrPath = folderPath + "/trackr.json"
         val simulationAnalysisPath = folderPath + "/simulation-analysis/"
         val energyAnalysisPath = simulationAnalysisPath + "/energy-analysis/"
@@ -94,9 +94,10 @@ internal class ScenarioCommand : CliktCommand(name = "scenario") {
 
         val projectRootPath = pythonScriptPath.parent.parent.toFile()
 
-        val process = ProcessBuilder("python3", pythonScriptPath.toString())
-            .directory(projectRootPath)
-            .start()
+        val process =
+            ProcessBuilder("python3", pythonScriptPath.toString())
+                .directory(projectRootPath)
+                .start()
 
         val exitCode = process.waitFor()
         if (exitCode != 0) {
@@ -104,5 +105,4 @@ internal class ScenarioCommand : CliktCommand(name = "scenario") {
             println("Errors: $errors")
         }
     }
-
 }
