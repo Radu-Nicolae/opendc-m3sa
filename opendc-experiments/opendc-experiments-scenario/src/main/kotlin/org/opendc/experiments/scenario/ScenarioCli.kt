@@ -30,9 +30,8 @@ import com.github.ajalt.clikt.parameters.options.defaultLazy
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.file
 import com.github.ajalt.clikt.parameters.types.int
-import org.opendc.experiments.base.models.scenario.getScenario
-import org.opendc.experiments.base.models.scenario.getScenarioSpec
-import org.opendc.experiments.base.runner.runScenario
+import org.opendc.experiments.base.models.scenario.getScenarios
+import org.opendc.experiments.base.runner.runScenarios
 import java.io.File
 import kotlin.io.path.Path
 
@@ -60,49 +59,26 @@ internal class ScenarioCommand : CliktCommand(name = "scenario") {
         .default(Runtime.getRuntime().availableProcessors() - 1)
 
     override fun run() {
-        // TODO: clean the simulation-results folder?
-        setupOutputFolder()
-        val scenarios = getScenario(scenarioPath)
-        // create an output folder with the simulationName
-        for (scenario in scenarios) {
-            scenario.outputFolder = "output/${getScenarioSpec(scenarioPath.toString()).name}/"
-        }
-
-        runScenario(scenarios, parallelism)
-        // TODO: implement outputResults(scenario) // this will take the results, from a folder, and output them visually
-
+        val scenarios = getScenarios(scenarioPath)
+        runScenarios(scenarios, parallelism)
         analyzeResults()
     }
+}
 
-    private fun setupOutputFolder() {
-        val scenarioSpecName = getScenarioSpec(scenarioPath.toString()).name
-        val folderPath = "output/$scenarioSpecName"
-        val trackrPath = folderPath + "/trackr.json"
-        val simulationAnalysisPath = folderPath + "/simulation-analysis/"
-        val energyAnalysisPath = simulationAnalysisPath + "/energy-analysis/"
-        val emissionsAnalysisPath = simulationAnalysisPath + "/emissions-analysis/"
+// TO BE IMPLEMENTED
+private fun analyzeResults() {
+    val pythonScriptPath = Path("../opendc-analyzr/src/main.py").toAbsolutePath().normalize()
 
-        File(folderPath).mkdir()
-        File(trackrPath).createNewFile()
-        File(simulationAnalysisPath).mkdir()
-        File(energyAnalysisPath).mkdir()
-        File(emissionsAnalysisPath).mkdir()
-    }
+    val projectRootPath = pythonScriptPath.parent.parent.toFile()
 
-    private fun analyzeResults() {
-        val pythonScriptPath = Path("../opendc-analyzr/src/main.py").toAbsolutePath().normalize()
+    val process =
+        ProcessBuilder("python3", pythonScriptPath.toString())
+            .directory(projectRootPath)
+            .start()
 
-        val projectRootPath = pythonScriptPath.parent.parent.toFile()
-
-        val process =
-            ProcessBuilder("python3", pythonScriptPath.toString())
-                .directory(projectRootPath)
-                .start()
-
-        val exitCode = process.waitFor()
-        if (exitCode != 0) {
-            val errors = process.errorStream.bufferedReader().readText()
-            println("Errors: $errors")
-        }
+    val exitCode = process.waitFor()
+    if (exitCode != 0) {
+        val errors = process.errorStream.bufferedReader().readText()
+        println("Errors: $errors")
     }
 }

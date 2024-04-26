@@ -42,8 +42,8 @@ private var simulationFolder = ""
  * @param filePath The path to the file containing the scenario specifications.
  * @return A list of Scenarios.
  */
-public fun getScenario(filePath: String): List<Scenario> {
-    return getScenario(File(filePath))
+public fun getScenarios(filePath: String): List<Scenario> {
+    return getScenarios(File(filePath))
 }
 
 /**
@@ -52,12 +52,8 @@ public fun getScenario(filePath: String): List<Scenario> {
  * @param file The file containing the scenario specifications.
  * @return A list of Scenarios.
  */
-public fun getScenario(file: File): List<Scenario> {
-    return getScenario(scenarioReader.read(file))
-}
-
-public fun getScenarioSpec(filePath: String): ScenarioSpec {
-    return scenarioReader.read(File(filePath))
+public fun getScenarios(file: File): List<Scenario> {
+    return getScenarios(scenarioReader.read(file))
 }
 
 /**
@@ -66,7 +62,7 @@ public fun getScenarioSpec(filePath: String): ScenarioSpec {
  * @param scenarioSpec The ScenarioSpec containing the scenario specifications.
  * @return A list of Scenarios.
  */
-public fun getScenario(scenarioSpec: ScenarioSpec): List<Scenario> {
+public fun getScenarios(scenarioSpec: ScenarioSpec): List<Scenario> {
     simulationFolder = scenarioSpec.name
     return getScenarioCombinations(scenarioSpec)
 }
@@ -79,6 +75,13 @@ public fun getScenario(scenarioSpec: ScenarioSpec): List<Scenario> {
  * @return A list of Scenarios.
  */
 public fun getScenarioCombinations(scenarioSpec: ScenarioSpec): List<Scenario> {
+    val outputFolder = scenarioSpec.outputFolder + "/" + scenarioSpec.name
+    File(outputFolder).mkdirs()
+
+    val trackrPath = outputFolder + "/trackr.json"
+    File(trackrPath).createNewFile()
+
+
     val topologiesSpec = scenarioSpec.topologies
     val workloads = scenarioSpec.workloads
     val allocationPolicies = scenarioSpec.allocationPolicies
@@ -86,7 +89,6 @@ public fun getScenarioCombinations(scenarioSpec: ScenarioSpec): List<Scenario> {
     val exportModels = scenarioSpec.exportModels
     val scenarios = mutableListOf<Scenario>()
     var scenarioID = 0
-    var topologyID = 0
 
     for (topology in topologiesSpec) {
         for (workload in workloads) {
@@ -102,12 +104,12 @@ public fun getScenarioCombinations(scenarioSpec: ScenarioSpec): List<Scenario> {
                                     failureModel = getFailureModel(failureModel.failureInterval),
                                     carbonTracePath = carbonTracePath,
                                     exportModel = exportModel,
-                                    outputFolder = scenarioSpec.outputFolder,
+                                    outputFolder = outputFolder,
                                     name = scenarioID.toString(),
                                     runs = scenarioSpec.runs,
                                     initialSeed = scenarioSpec.initialSeed,
                                 )
-                            trackScenario(scenarioSpec, scenario, scenarioID, topologyID)
+                            trackScenario(scenarioSpec, outputFolder, scenario, topology)
                             scenarios.add(scenario)
                             scenarioID++
                         }
@@ -115,7 +117,6 @@ public fun getScenarioCombinations(scenarioSpec: ScenarioSpec): List<Scenario> {
                 }
             }
         }
-        topologyID++
     }
 
     return scenarios
@@ -159,17 +160,16 @@ public fun getOutputFolderName(
 
 public fun trackScenario(
     scenarioSpec: ScenarioSpec,
+    outputFolder: String,
     scenario: Scenario,
-    scenarioId: Int,
-    topologyId: Int,
+    topologySpec: TopologySpec,
 ) {
-    val trackrPath = scenario.outputFolder + "/" + simulationFolder + "/trackr.json"
-
+    val trackrPath = outputFolder + "/trackr.json"
     scenarioWriter.write(
         ScenarioSpec(
-            id = scenarioId,
+            id = scenarioSpec.id,
             name = scenarioSpec.name,
-            topologies = listOf(TopologySpec(scenarioSpec.topologies[topologyId].pathToFile)),
+            topologies = listOf(topologySpec),
             workloads = listOf(scenario.workload),
             allocationPolicies = listOf(scenario.allocationPolicy),
             // when implemented, add failure models here
