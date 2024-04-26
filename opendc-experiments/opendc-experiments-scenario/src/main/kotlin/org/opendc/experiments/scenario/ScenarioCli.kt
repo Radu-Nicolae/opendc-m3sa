@@ -61,24 +61,6 @@ internal class ScenarioCommand : CliktCommand(name = "scenario") {
     override fun run() {
         val scenarios = getScenarios(scenarioPath)
         runScenarios(scenarios, parallelism)
-        analyzeResults()
     }
 }
 
-// TO BE IMPLEMENTED
-private fun analyzeResults() {
-    val pythonScriptPath = Path("../opendc-analyzr/src/main.py").toAbsolutePath().normalize()
-
-    val projectRootPath = pythonScriptPath.parent.parent.toFile()
-
-    val process =
-        ProcessBuilder("python3", pythonScriptPath.toString())
-            .directory(projectRootPath)
-            .start()
-
-    val exitCode = process.waitFor()
-    if (exitCode != 0) {
-        val errors = process.errorStream.bufferedReader().readText()
-        println("Errors: $errors")
-    }
-}

@@ -43,7 +43,6 @@ import java.time.Duration
 import java.util.Random
 import java.util.concurrent.ForkJoinPool
 import java.util.stream.LongStream
-import kotlin.io.path.Path
 
 /**
  * Run scenario when no pool is available for parallel execution
@@ -58,9 +57,6 @@ public fun runScenarios(
     val ansiReset = "\u001B[0m"
     val ansiGreen = "\u001B[32m"
     val ansiBlue = "\u001B[34m"
-
-    // create a folder called "simulation-"+scenario.name
-    // clearOutputFolder(scenarios[0].outputFolder)
 
     setupOutputFolderStructure(scenarios[0].outputFolder)
 
@@ -181,12 +177,12 @@ public fun clearOutputFolder(outputFolderPath: String) {
     if (File(outputFolderPath).exists()) File(outputFolderPath).deleteRecursively()
 }
 
+/**
+ * Utility function to create the output folder structure for the simulation results.
+ * @param folderPath The path to the output folder
+ */
 private fun setupOutputFolderStructure(folderPath: String) {
-//    val scenarioSpecName = getScenarioSpec(scenarioPath.toString()).name
-    val scenarioSpecName = "scenario"
-//    val folderPath = "/$scenarioSpecName"
     val trackrPath = folderPath + "/trackr.json"
-    val rawOutputPath = folderPath + "/raw-output/"
     val simulationAnalysisPath = folderPath + "/simulation-analysis/"
     val energyAnalysisPath = simulationAnalysisPath + "/energy-analysis/"
     val emissionsAnalysisPath = simulationAnalysisPath + "/emissions-analysis/"
@@ -197,5 +193,3 @@ private fun setupOutputFolderStructure(folderPath: String) {
     File(energyAnalysisPath).mkdir()
     File(emissionsAnalysisPath).mkdir()
 }
-
-

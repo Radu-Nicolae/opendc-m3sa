@@ -34,7 +34,6 @@ import java.io.File
 
 private val scenarioReader = ScenarioReader()
 private val scenarioWriter = ScenarioWriter()
-private var simulationFolder = ""
 
 /**
  * Returns a list of Scenarios from a given file path (input).
@@ -63,7 +62,6 @@ public fun getScenarios(file: File): List<Scenario> {
  * @return A list of Scenarios.
  */
 public fun getScenarios(scenarioSpec: ScenarioSpec): List<Scenario> {
-    simulationFolder = scenarioSpec.name
     return getScenarioCombinations(scenarioSpec)
 }
 
@@ -158,6 +156,15 @@ public fun getOutputFolderName(
         "-scheduler=${allocationPolicy.name}"
 }
 
+/**
+ * Writes a ScenarioSpec to a file.
+ *
+ * @param scenarioSpec The ScenarioSpec.
+ * @param outputFolder The output folder path.
+ * @param scenario The Scenario.
+ * @param topologySpec The TopologySpec.
+
+ */
 public fun trackScenario(
     scenarioSpec: ScenarioSpec,
     outputFolder: String,
