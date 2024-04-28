@@ -23,7 +23,7 @@
 @file:JvmName("ScenarioCli")
 
 package org.opendc.experiments.scenario
-
+import analyzeResults
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.defaultLazy
@@ -60,5 +60,6 @@ internal class ScenarioCommand : CliktCommand(name = "scenario") {
     override fun run() {
         val scenarios = getScenarios(scenarioPath)
         runScenarios(scenarios, parallelism)
+        analyzeResults(outputFolderPath=scenarios[0].outputFolder)
     }
 }
