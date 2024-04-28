@@ -41,6 +41,7 @@ import org.opendc.compute.topology.specs.HostSpec
  * @property runs The Int representing the number of runs of the scenario. It defaults to 1.
  * @property initialSeed The Int representing the initial seed of the scenario. It defaults to 0.
  */
+
 public data class Scenario(
     val topology: List<HostSpec>,
     val workload: WorkloadSpec,
@@ -48,7 +49,7 @@ public data class Scenario(
     val failureModel: FailureModel?,
     val carbonTracePath: String? = null,
     val exportModel: ExportModelSpec = ExportModelSpec(),
-    val outputFolder: String = "output",
+    var outputFolder: String = "output",
     val name: String = "",
     val runs: Int = 1,
     val initialSeed: Int = 0,
