@@ -26,3 +26,15 @@ def plot_a_figure():
     plt.plot([1, 2, 3, 4])
     plt.savefig("testtt.png")
     plt.show()
+
+
+def clean_analysis_file(metric):
+    analysis_file_path = SIMULATION_ANALYSIS_FOLDER_NAME + "/"
+    if metric == "power_draw":
+        analysis_file_path += ENERGY_ANALYSIS_FOLDER_NAME
+    else:
+        analysis_file_path += EMISSIONS_ANALYSIS_FOLDER_NAME
+    analysis_file_path += "/analysis.txt"
+
+    with open(analysis_file_path, "w") as f:
+        f.write("")

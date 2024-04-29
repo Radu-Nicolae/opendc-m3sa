@@ -28,6 +28,6 @@
             "policyType": "Mem"
         }
     ],
-    "outputFolder": "outoutput",
+    "outputFolder": "output",
     "runs": 1
 }

@@ -24,8 +24,14 @@ class MultiModel:
     def set_output_folder(self):
         if self.metric == "power_draw":
             self.output_folder = utils.ENERGY_ANALYSIS_FOLDER_PATH
+            # create a new file called analysis.txt
+            with open(utils.SIMULATION_ANALYSIS_FOLDER_NAME + "/" + utils.ENERGY_ANALYSIS_FOLDER_NAME + "/analysis.txt", "a") as f:
+                f.write("")
         elif self.metric == "carbon_emission":
             self.output_folder = utils.EMISSIONS_ANALYSIS_FOLDER_PATH
+            with open(utils.SIMULATION_ANALYSIS_FOLDER_NAME + "/" + utils.EMISSIONS_ANALYSIS_FOLDER_NAME + "/analysis.txt","a") as f:
+                f.write("")
+
         else:
             raise ValueError("Invalid metric. Please choose from 'power_draw', 'emissions'")
 
@@ -73,10 +79,9 @@ class MultiModel:
         self.save_plot()
 
     def save_plot(self):
-        print("current path is " + os.getcwd())
-        newPath = "/" + utils.SIMULATION_ANALYSIS_FOLDER_NAME + "/" + self.metric + "/"
         os.chdir("./" + utils.SIMULATION_ANALYSIS_FOLDER_NAME + "/" + self.metric + "/")
-        plt.savefig("newplot.png")
+        plt.savefig("multimodel_metric=" + self.metric + "_window_size=" + str(self.window_size) + ".png")
+        os.chdir('../../')  # return to the original directory
 
     def setup_plot(self):
         plt.figure(figsize=(30, 10))
