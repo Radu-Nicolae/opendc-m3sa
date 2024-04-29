@@ -43,6 +43,7 @@ import org.opendc.compute.topology.specs.HostSpec
  */
 
 public data class Scenario(
+    var id: Int = -1,
     val topology: List<HostSpec>,
     val workload: WorkloadSpec,
     val allocationPolicy: AllocationPolicySpec,

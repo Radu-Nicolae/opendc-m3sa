@@ -95,6 +95,7 @@ public fun getScenarioCombinations(scenarioSpec: ScenarioSpec): List<Scenario> {
                         for (exportModel in exportModels) {
                             val scenario =
                                 Scenario(
+                                    id = scenarioID,
                                     topology = clusterTopology(File(topology.pathToFile)),
                                     workload = workload,
                                     allocationPolicy = allocationPolicy,
@@ -173,7 +174,7 @@ public fun trackScenario(
     val trackrPath = outputFolder + "/trackr.json"
     scenarioWriter.write(
         ScenarioSpec(
-            id = scenarioSpec.id,
+            id = scenario.id,
             name = scenarioSpec.name,
             topologies = listOf(topologySpec),
             workloads = listOf(scenario.workload),
