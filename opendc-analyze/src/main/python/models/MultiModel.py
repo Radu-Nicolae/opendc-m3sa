@@ -12,48 +12,51 @@ class MultiModel:
         # the following metrics are set in the latter functions
         self.measure_unit = None
         self.metric = None
-        self.models = None
+        self.raw_models = None
         self.output_folder = None
         self.computed_data = []
         self.input_folder = utils.RAW_OUTPUT_FOLDER_PATH
         self.window_size = window_size
+
         self.check_and_return_metric(input_metric)
         self.set_output_folder()
         self.init_models()
+        self.compute()
 
     def set_output_folder(self):
         if self.metric == "power_draw":
             self.output_folder = utils.ENERGY_ANALYSIS_FOLDER_PATH
             # create a new file called analysis.txt
-            with open(utils.SIMULATION_ANALYSIS_FOLDER_NAME + "/" + utils.ENERGY_ANALYSIS_FOLDER_NAME + "/analysis.txt", "a") as f:
+            with open(utils.SIMULATION_ANALYSIS_FOLDER_NAME + "/" + utils.ENERGY_ANALYSIS_FOLDER_NAME + "/analysis.txt",
+                      "a") as f:
                 f.write("")
         elif self.metric == "carbon_emission":
             self.output_folder = utils.EMISSIONS_ANALYSIS_FOLDER_PATH
-            with open(utils.SIMULATION_ANALYSIS_FOLDER_NAME + "/" + utils.EMISSIONS_ANALYSIS_FOLDER_NAME + "/analysis.txt","a") as f:
+            with open(
+                utils.SIMULATION_ANALYSIS_FOLDER_NAME + "/" + utils.EMISSIONS_ANALYSIS_FOLDER_NAME + "/analysis.txt",
+                "a") as f:
                 f.write("")
 
         else:
             raise ValueError("Invalid metric. Please choose from 'power_draw', 'emissions'")
 
     def init_models(self):
-        os.chdir("./raw-output")
-        simulation_count = len(os.listdir())
-        simulation_folders = os.listdir()
+        # os.chdir("./raw-output")
         models = []
 
-        for simulation_folder in range(simulation_count):
-            simulation_folder_contents = os.listdir(simulation_folders[simulation_folder])
-            for i in range(len(simulation_folder_contents)):
-                os.chdir(simulation_folders[simulation_folder] + "/seed=" + str(i) + "/")
-                models.append(Model(
-                    host=pd.read_parquet("host.parquet")[self.metric],
-                    server=pd.read_parquet("server.parquet"),
-                    service=pd.read_parquet("service.parquet")
-                ))
-                os.chdir('../../')  # return to the original directory
+        folder_prefix = "./raw-output"
 
-        os.chdir('../')  # return to the original directory
-        self.models = models
+        for simulation_folder in os.listdir(folder_prefix):
+            output_folder = f"{folder_prefix}/{simulation_folder}/seed=0"
+            models.append(Model(
+                host=pd.read_parquet(output_folder + "/host.parquet"),
+                server=pd.read_parquet(output_folder + "/server.parquet"),
+                service=pd.read_parquet(output_folder + "/service.parquet")
+            ))
+
+        self.raw_models = models
+
+
 
     def check_and_return_metric(self, input_metric):
         if input_metric not in ["power_draw", "carbon_emission"]:
@@ -64,8 +67,8 @@ class MultiModel:
     def mean_of_chunks(self, series):
         return series.groupby(np.arange(len(series)) // self.window_size).mean(numeric_only=True)
 
-    def compute(self):
-        for model in self.models:
+    def get_windowed_averages(self, metric, aggreagtion_function=np.mean):
+        for model in self.raw_models:
             self.computed_data.append(
                 self.mean_of_chunks(
                     model.host
@@ -75,7 +78,7 @@ class MultiModel:
     def generate(self):
         self.compute()
         self.setup_plot()
-        self.plot()
+        self.plot_windowed_average()
         self.save_plot()
 
     def save_plot(self):
@@ -87,9 +90,11 @@ class MultiModel:
         plt.figure(figsize=(30, 10))
         plt.title(self.metric)
         plt.xlabel("Time [s]")
+        plt.ylim(0, 400)
         plt.ylabel(self.metric + " [W]")
         plt.grid()
 
-    def plot(self):
+    def plot_windowed_average(self, metric):
+        data = self.get_windowed_averages(metric)
         for model in self.computed_data:
             plt.plot(model)

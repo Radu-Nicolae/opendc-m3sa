@@ -33,11 +33,6 @@ public const val PATH_TO_PYHON_MAIN_SCRIPT: String = "$PATH_TO_PYTHON_FOLDER/mai
 
 
 public fun analyzeResults(outputFolderPath: String) {
-    val pythonScriptPath = Path(PATH_TO_PYHON_MAIN_SCRIPT).toAbsolutePath().normalize()
-
-    // set the absolute path to /Users/raz/atlarge/opendc/opendc-analyze/src/main/python
-
-
     val process = ProcessBuilder(
         "python3",
         Path(PATH_TO_PYHON_MAIN_SCRIPT).toAbsolutePath().normalize().toString(),
