@@ -21,7 +21,7 @@ class MultiModel:
         self.window_size = window_size
 
         # run init functions
-        self.check_and_return_metric(input_metric)
+        self.check_and_set_metric(input_metric)
         self.set_output_folder()
         self.init_models()
 
@@ -69,9 +69,9 @@ class MultiModel:
             self.raw_models.append(raw_model)
 
             # aggregate and push the model
-            self.aggregated_models.append(
-                raw_model.host.select_dtypes(include=[np.number]).groupby("timestamp")[self.metric].aggregate("sum")
-            )
+            processed_raw_model = raw_model.host.select_dtypes(include=[np.number]).groupby("timestamp")
+            processed_raw_model = processed_raw_model[self.metric].aggregate("sum")
+            self.aggregated_models.append(processed_raw_model)
 
     """
     This function serves as an error prevention mechanism. It checks if the input metric is valid.
@@ -79,7 +79,7 @@ class MultiModel:
     @:return None, but sets the self.metric and self.measure_unit attributes. It can also raise an error.
     """
 
-    def check_and_return_metric(self, input_metric):
+    def check_and_set_metric(self, input_metric):
         if input_metric not in ["power_draw", "carbon_emission"]:
             raise ValueError("Invalid metric. Please choose from 'power_draw', 'carbon_emission'")
         self.metric = input_metric
@@ -95,11 +95,12 @@ class MultiModel:
 
     def compute_windowed_aggregation(self, aggregation_function="median"):
         print("Computing windowed aggregation for " + self.metric)
-        for model in self.raw_models:
+        for model in self.aggregated_models:
             # Select only numeric data for aggregation
-            numeric_data = model.host.select_dtypes(include=[np.number])
+            numeric_values = model.values
+
             # Calculate the median for each window
-            windowed_data = model.host.select_dtypes(include=[np.number]).groupby(np.divide(np.arange(len(numeric_data)), self.window_size)).mean(numeric_only=True)
+            windowed_data = self.mean_of_chunks(numeric_values, self.window_size)
             self.computed_data.append(windowed_data)
 
     def generate(self, aggregation_function="median"):
@@ -123,8 +124,13 @@ class MultiModel:
 
     def plot_windowed_aggregation(self):
         i = 0
-        for model in self.aggregated_models:
+        for model in self.computed_data:
             plt.plot(model, label=i)
             i = i + 1
 
         plt.legend()
+
+    def mean_of_chunks(self, np_array, chunk_size):
+        return [np.mean(np_array[i:i + chunk_size]) for i in range(0, len(np_array), chunk_size)]
+
+

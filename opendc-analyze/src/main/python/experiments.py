@@ -36,6 +36,7 @@ def exp1_window_sizes(window_sizes=[1, 10, 100, 1000, 10000], metrics=["power_dr
 
         for window_size in window_sizes:
             start = time.time()
-            MultiModel(metric, window_size).generate()
+            multimodel = MultiModel(metric, window_size)
+            multimodel.generate()
             with open(analysis_file_path, "a") as f:
                 f.write(f"Time taken for window size {window_size}: {round(time.time() - start, 3)} seconds\n")

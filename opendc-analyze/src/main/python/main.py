@@ -14,8 +14,8 @@ def main():
         window_sizes=[1, 10, 100, 1000, 5000]
     )
 
-    # Metamodel(multimodel=MultiModel(input_metric="carbon_emission", window_size=100)).generate()
-    # Metamodel(multimodel=MultiModel(input_metric="power_draw", window_size=100)).generate()
+    Metamodel(multimodel=MultiModel(input_metric="carbon_emission", window_size=100)).generate()
+    Metamodel(multimodel=MultiModel(input_metric="power_draw", window_size=100)).generate()
 
 
 main()
