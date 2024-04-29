@@ -47,6 +47,5 @@ class Metamodel:
         plt.plot(self.metamodel_data)
 
     def save_plot(self):
-        os.chdir("./" + utils.SIMULATION_ANALYSIS_FOLDER_NAME + "/" + self.metric + "/")
-        plt.savefig("metamodel_metric=" + self.metric + "_window_size=" + str(self.window_size) + ".png")
-        os.chdir('../../')  # return to the original directory
+        folder_prefix = "./" + utils.SIMULATION_ANALYSIS_FOLDER_NAME + "/" + self.metric + "/"
+        plt.savefig(folder_prefix + "metamodel_metric=" + self.metric + "_window_size=" + str(self.window_size) + ".png")

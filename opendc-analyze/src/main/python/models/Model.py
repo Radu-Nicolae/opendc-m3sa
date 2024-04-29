@@ -1,6 +1,3 @@
 class Model:
-    def __init__(self, host, server, service):
+    def __init__(self, host):
         self.host = host
-        self.server = server
-        self.service = service
-

@@ -3,7 +3,8 @@
 =====================
 | Exp1_window_sizes |
 =====================
-Time taken for window size 5: 0.837 seconds
-Time taken for window size 50: 0.579 seconds
-Time taken for window size 500: 0.5 seconds
-Time taken for window size 5000: 0.455 seconds
+Time taken for window size 1: 0.292 seconds
+Time taken for window size 10: 0.283 seconds
+Time taken for window size 100: 0.287 seconds
+Time taken for window size 1000: 0.276 seconds
+Time taken for window size 5000: 0.271 seconds

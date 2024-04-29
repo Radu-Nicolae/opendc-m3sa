@@ -2,26 +2,38 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import pyarrow.parquet as pq
 
 import utils
 from .Model import Model
 
 
 class MultiModel:
-    def __init__(self, input_metric, window_size=10):
+    def __init__(self, input_metric, window_size):
         # the following metrics are set in the latter functions
         self.measure_unit = None
         self.metric = None
-        self.raw_models = None
+        self.raw_models = []
+        self.aggregated_models = []
         self.output_folder = None
         self.computed_data = []
         self.input_folder = utils.RAW_OUTPUT_FOLDER_PATH
         self.window_size = window_size
 
+        # run init functions
         self.check_and_return_metric(input_metric)
         self.set_output_folder()
         self.init_models()
-        self.compute()
+
+    """
+    The set_output_folder function sets the output folder based on the metric chosen. If the metric is power_draw,
+    the output folder is set to the energy analysis folder. If the metric is carbon_emission, the output folder is set
+    to the emissions analysis folder.
+
+    In this folder, there is a file "analysis.txt" which saves data from the simulation analysis.
+
+    @return: None, but sets the self.output_folder attribute.
+    """
 
     def set_output_folder(self):
         if self.metric == "power_draw":
@@ -33,30 +45,39 @@ class MultiModel:
         elif self.metric == "carbon_emission":
             self.output_folder = utils.EMISSIONS_ANALYSIS_FOLDER_PATH
             with open(
-                utils.SIMULATION_ANALYSIS_FOLDER_NAME + "/" + utils.EMISSIONS_ANALYSIS_FOLDER_NAME + "/analysis.txt",
-                "a") as f:
+                    utils.SIMULATION_ANALYSIS_FOLDER_NAME + "/" + utils.EMISSIONS_ANALYSIS_FOLDER_NAME + "/analysis.txt",
+                    "a") as f:
                 f.write("")
 
         else:
             raise ValueError("Invalid metric. Please choose from 'power_draw', 'emissions'")
 
-    def init_models(self):
-        # os.chdir("./raw-output")
-        models = []
+    """
+    The init_models function takes the raw data from the simulation output and loads into the model attributes.
+    Further, it aggregates the models that have topologies with 2 or more hosts.
 
+    @return: None, but sets (initializes) the self.raw_models and self.aggregated_models attributes.
+    """
+
+    def init_models(self):
         folder_prefix = "./raw-output"
 
         for simulation_folder in os.listdir(folder_prefix):
-            output_folder = f"{folder_prefix}/{simulation_folder}/seed=0"
-            models.append(Model(
-                host=pd.read_parquet(output_folder + "/host.parquet"),
-                server=pd.read_parquet(output_folder + "/server.parquet"),
-                service=pd.read_parquet(output_folder + "/service.parquet")
-            ))
+            raw_model = Model(host=pd.read_parquet(f"{folder_prefix}/{simulation_folder}/seed=0/host.parquet"))
 
-        self.raw_models = models
+            # push simulation model raw, not aggregated
+            self.raw_models.append(raw_model)
 
+            # aggregate and push the model
+            self.aggregated_models.append(
+                raw_model.host.select_dtypes(include=[np.number]).groupby("timestamp")[self.metric].aggregate("sum")
+            )
 
+    """
+    This function serves as an error prevention mechanism. It checks if the input metric is valid.
+    If not, it raises a ValueError.
+    @:return None, but sets the self.metric and self.measure_unit attributes. It can also raise an error.
+    """
 
     def check_and_return_metric(self, input_metric):
         if input_metric not in ["power_draw", "carbon_emission"]:
@@ -64,37 +85,46 @@ class MultiModel:
         self.metric = input_metric
         self.measure_unit = "W" if self.metric == "power_draw" else "gCO2"
 
-    def mean_of_chunks(self, series):
-        return series.groupby(np.arange(len(series)) // self.window_size).mean(numeric_only=True)
+    """
+    This function takes each model and aggregates values inside the chunks of the host data. The chunk size is taken
+    from the window_size of the self. The aggregation function is taken as an argument.
 
-    def get_windowed_averages(self, metric, aggreagtion_function=np.mean):
+    @:param aggregation_function: the function to aggregate the data, default is np.median(numeric_only=True)
+
+    """
+
+    def compute_windowed_aggregation(self, aggregation_function="median"):
+        print("Computing windowed aggregation for " + self.metric)
         for model in self.raw_models:
-            self.computed_data.append(
-                self.mean_of_chunks(
-                    model.host
-                )
-            )
+            # Select only numeric data for aggregation
+            numeric_data = model.host.select_dtypes(include=[np.number])
+            # Calculate the median for each window
+            windowed_data = model.host.select_dtypes(include=[np.number]).groupby(np.divide(np.arange(len(numeric_data)), self.window_size)).mean(numeric_only=True)
+            self.computed_data.append(windowed_data)
 
-    def generate(self):
-        self.compute()
+    def generate(self, aggregation_function="median"):
         self.setup_plot()
-        self.plot_windowed_average()
+        self.compute_windowed_aggregation(aggregation_function=aggregation_function)
+        self.plot_windowed_aggregation()
         self.save_plot()
 
     def save_plot(self):
-        os.chdir("./" + utils.SIMULATION_ANALYSIS_FOLDER_NAME + "/" + self.metric + "/")
-        plt.savefig("multimodel_metric=" + self.metric + "_window_size=" + str(self.window_size) + ".png")
-        os.chdir('../../')  # return to the original directory
+        folder_prefix = "./" + utils.SIMULATION_ANALYSIS_FOLDER_NAME + "/" + self.metric + "/"
+        plt.savefig(
+            folder_prefix + "multimodel_metric=" + self.metric + "_window_size=" + str(self.window_size) + ".png")
 
     def setup_plot(self):
         plt.figure(figsize=(30, 10))
         plt.title(self.metric)
         plt.xlabel("Time [s]")
-        plt.ylim(0, 400)
+        plt.ylim(0, 1000)
         plt.ylabel(self.metric + " [W]")
         plt.grid()
 
-    def plot_windowed_average(self, metric):
-        data = self.get_windowed_averages(metric)
-        for model in self.computed_data:
-            plt.plot(model)
+    def plot_windowed_aggregation(self):
+        i = 0
+        for model in self.aggregated_models:
+            plt.plot(model, label=i)
+            i = i + 1
+
+        plt.legend()

@@ -1,4 +1,5 @@
 [{
+    "id": 0,
     "name": "topology-experiment",
     "topologies": [
         {
@@ -22,6 +23,7 @@
     "outputFolder": "output/topology-experiment"
 },
 {
+    "id": 1,
     "name": "topology-experiment",
     "topologies": [
         {
@@ -45,6 +47,7 @@
     "outputFolder": "output/topology-experiment"
 },
 {
+    "id": 2,
     "name": "topology-experiment",
     "topologies": [
         {
@@ -68,6 +71,7 @@
     "outputFolder": "output/topology-experiment"
 },
 {
+    "id": 3,
     "name": "topology-experiment",
     "topologies": [
         {
