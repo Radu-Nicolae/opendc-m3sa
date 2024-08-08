@@ -21,7 +21,6 @@
  */
 rootProject.name = "opendc"
 
-include(":opendc-analyze")
 include(":opendc-common")
 include(":opendc-compute:opendc-compute-api")
 include(":opendc-compute:opendc-compute-carbon")

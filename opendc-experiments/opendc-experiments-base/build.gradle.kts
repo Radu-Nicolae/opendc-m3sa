@@ -37,7 +37,6 @@ dependencies {
     api(projects.opendcCompute.opendcComputeSimulator)
 
     implementation(libs.clikt)
-    implementation(project(":opendc-analyze"))
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     implementation(libs.progressbar)

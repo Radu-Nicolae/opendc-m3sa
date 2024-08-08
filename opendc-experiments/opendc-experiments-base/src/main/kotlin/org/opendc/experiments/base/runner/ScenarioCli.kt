@@ -24,11 +24,9 @@
 
 package org.opendc.experiments.base.runner
 
-import analyzeResults
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.defaultLazy
-import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.file
 import com.github.ajalt.clikt.parameters.types.int
@@ -58,18 +56,10 @@ internal class ScenarioCommand : CliktCommand(name = "scenario") {
         .int()
         .default(Runtime.getRuntime().availableProcessors() - 1)
 
-    private val analyzeResults by option("-a", "--analyze-results", help = "analyze the results")
-        .flag(default = false)
-
     override fun run() {
         val scenarios = getScenarios(scenarioPath)
         runScenarios(scenarios, parallelism)
 
-        if (analyzeResults) {
-            analyzeResults(
-                outputFolderPath = scenarios[0].outputFolder,
-                m3saSetupPath = scenarios[0].m3saSetup,
-            )
-        }
+        // TODO: implement outputResults(scenario) // this will take the results, from a folder, and output them visually
     }
 }
