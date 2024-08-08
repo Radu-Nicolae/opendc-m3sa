@@ -24,6 +24,7 @@
 
 package org.opendc.experiments.base.runner
 
+import CheckpointModelSpec
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -35,7 +36,6 @@ import org.opendc.compute.api.ServerWatcher
 import org.opendc.compute.failure.models.FailureModel
 import org.opendc.compute.service.ComputeService
 import org.opendc.compute.workload.VirtualMachine
-import org.opendc.experiments.base.scenario.specs.CheckpointModelSpec
 import org.opendc.experiments.base.scenario.specs.FailureModelSpec
 import org.opendc.experiments.base.scenario.specs.createFailureModel
 import java.time.InstantSource

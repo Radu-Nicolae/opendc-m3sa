@@ -20,8 +20,6 @@
  * SOFTWARE.
  */
 
-package org.opendc.experiments.base.scenario.specs
-
 import kotlinx.serialization.Serializable
 import org.opendc.compute.service.scheduler.ComputeSchedulerEnum
 
@@ -34,7 +32,7 @@ import org.opendc.compute.service.scheduler.ComputeSchedulerEnum
  */
 @Serializable
 public data class AllocationPolicySpec(
-    val policyType: ComputeSchedulerEnum = ComputeSchedulerEnum.Mem,
+    val policyType: ComputeSchedulerEnum,
 ) {
     public val name: String = policyType.toString()
 }
