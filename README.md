@@ -1,43 +1,37 @@
-<a href="https://opendc.org/">
-    <img src="https://opendc.org/img/logo.png" alt="OpenDC logo" title="OpenDC" align="right" height="100" />
-</a>
+# M3SA
 
-# OpenDC
+Datacenters are vital for the digital society and represent a considerable fraction of global energy consumption,
+estimated between 1\% and 2\%, and are expected to rise to 8\% by 2030, further reducing already over-exploited
+resources. In the operations of every datacenter, simulators play a crucial role in predicting the capabilities of real
+or virtual infrastructure, under various workloads.
 
-Collaborative Datacenter Simulation and Exploration for Everybody
+We propose M3SA, a tool for ICT simulation analysis, using multi-model techniques. We argue that, albeit still valuable,
+the development of individual simulation models is insufficient to make accurate predictions. This concept has been
+implemented in other scientific fields and yielded impactful results, yet marks a pioneer in the realm of Computer
+Science.
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](/LICENSE.txt)
-[![Documentation](https://img.shields.io/badge/docs-master-green.svg)](https://atlarge-research.github.io/opendc)
-[![GitHub release](https://img.shields.io/github/v/release/atlarge-research/opendc?include_prereleases)](https://github.com/atlarge-research/opendc/releases)
-[![Build](https://github.com/atlarge-research/opendc/actions/workflows/build.yml/badge.svg)](https://github.com/atlarge-research/opendc/actions/workflows/build.yml)
+This can pioneer a new stage in the sub-field of cloud-infrastructure simulations, a significant simulation advancement,
+and hence a considerable improvement in datacenter infrastructure development, scaling, and _massivizing_.
 
------
+![m3sa-structure.png](documentation%2Ffigures%2Fm3sa-structure.png)
 
-This repository is the home of the OpenDC project, a free and open-source platform for cloud datacenter simulation.
+## Links
 
-## Latest Release
+#### Paper
 
-- General Availability (GA): [OpenDC v2.0](https://github.com/atlarge-research/opendc/releases/tag/v2.0) (May 10, 2021)
-- Preview (Release Candidate): [OpenDC v3.0-rc1](https://github.com/atlarge-research/opendc/releases/tag/v3.0-rc1) (Jan 27, 2023)
+- [M3SA: Exploring the Performance and Climate Impact of Datacenters by Multi-Model Simulation and Analysis](https://www.overleaf.com/read/rsjyzqxdzmbc#ce4e16)
 
-## Documentation
+#### Repositories
 
-You can find the OpenDC documentation [on the website](https://atlarge-research.github.io/opendc/).
-The documentation is divided into several sections:
+- [Integration with OpenDC simulator](https://github.com/Radu-Nicolae/opendc-m3sa)
+- [Reproducibility Capsule](https://github.com/Radu-Nicolae/m3sa-reproducibility-capsule)
 
-* [Getting Started](https://atlarge-research.github.io/opendc/docs/category/getting-started/)
-* [Tutorials](https://atlarge-research.github.io/opendc/docs/category/tutorials/)
-* [Advanced Guides](https://atlarge-research.github.io/opendc/docs/category/advanced-guides/)
-* [Where to Get Support](https://atlarge-research.github.io/opendc/community/support/)
-* [Contributing Guide](https://atlarge-research.github.io/opendc/community/contributing/)
+#### Documentation
 
-The source code for the documentation is located in [site](site).
+- [M3SA Integration Tutorial, with any simulator](documentation/M3SA-integration-tutorial.md)
+- [M3SA User Guide](documentation/M3SA.md)
+- [M3SA Schema Validator](documentation/M3SASchema.md)
 
-## Contributing
+## M3SA Architecture (§3.5, §4.4)
 
-Questions, suggestions and contributions are welcome and appreciated!
-Please refer to the [contributing guidelines](CONTRIBUTING.md) for more details.
-
-## License
-
-OpenDC is distributed under the MIT license. See [LICENSE.txt](/LICENSE.txt).
+![m3sa-architecture.png](documentation%2Ffigures%2Fm3sa-architecture.png)
