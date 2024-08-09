@@ -18,20 +18,16 @@ and hence a considerable improvement in datacenter infrastructure development, s
 ## Links
 
 #### Paper
-
 - [M3SA: Exploring the Performance and Climate Impact of Datacenters by Multi-Model Simulation and Analysis](https://www.overleaf.com/read/rsjyzqxdzmbc#ce4e16)
 
 #### Repositories
-
 - [Integration with OpenDC simulator](https://github.com/Radu-Nicolae/opendc-m3sa)
 - [Reproducibility Capsule](https://github.com/Radu-Nicolae/m3sa-reproducibility-capsule)
 
 #### Documentation
-
 - [M3SA Integration Tutorial, with any simulator](documentation/M3SA-integration-tutorial.md)
 - [M3SA User Guide](documentation/M3SA.md)
 - [M3SA Schema Validator](documentation/M3SASchema.md)
 
 ## M3SA Architecture (§3.5, §4.4)
-
 ![m3sa-architecture.png](documentation%2Ffigures%2Fm3sa-architecture.png)
