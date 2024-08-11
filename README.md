@@ -18,32 +18,32 @@ Collaborative Datacenter Simulation and Exploration for Everybody
 
 #### 1. Build the docker image
 ```shell
-docker build -t m3sa-experiments .
+docker build -t m3sa-image .
 ```
 
 #### 2. Run the container
 ```shell
-docker run -d --name m3sa-experiments-container m3sa-experiments
+docker run -d --name m3sa-container m3sa-image
 ```
 
 #### 3.1 Run hello_world
 ```shell
-docker exec -it m3sa-experiments-container python3 hello_world.py
+docker exec -it m3sa-container python3 hello_world.py
 ```
 
 #### 3.2 Access the container
 ```shell
-docker exec -it m3sa-experiments-container /bin/bash
+docker exec -it m3sa-container /bin/bash
 ```
 
 #### 3.3 Move test.txt outside the container, inside this folder
 ```shell
-docker cp m3sa-experiments-container:opendc/hello-world.txt ./experiments-output
-```
+docker cp m3sa-container:opendc/hello-world.txt ./experiments-output
+````
 
-#### 4. Run scenario.cli
+#### 5. Run all the experiments
 ```shell
-docker exec -it m3sa-experiments-container java -cp 'opendc-experiments-base.jar:lib/*' org.opendc.experiments.base.runner.ScenarioCli --scenario-path "/opendc/experiments/use-case-scenario/inputs/scenario-energy-usage-1-model.json" -p 4 -a
+docker exec -it m3sa-experiments-container python3 reproducibility-capsule-scripts/reproducer.py all
 ```
 
 #### Last Step. Remove the container and the image
@@ -51,6 +51,10 @@ docker exec -it m3sa-experiments-container java -cp 'opendc-experiments-base.jar
 docker rm -f m3sa-experiments-container && docker rmi m3sa-experiments && docker builder prune -f && clear
 ```
 
+#### 4. Run scenario.cli
+```shell
+docker exec -it m3sa-experiments-container java -cp 'opendc-experiments-base.jar:lib/*' org.opendc.experiments.base.runner.ScenarioCli --scenario-path "/opendc/experiments/use-case-scenario/inputs/scenario-energy-usage-1-model.json" -p 4 -a
+```
 
 This repository is the home of the OpenDC project, a free and open-source platform for cloud datacenter simulation.
 

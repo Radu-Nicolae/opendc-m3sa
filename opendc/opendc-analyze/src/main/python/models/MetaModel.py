@@ -30,7 +30,7 @@ class MetaModel:
         :raise ValueError: If metamodel functionality is not enabled in the configuration.
         """
         if not multimodel.user_input.get('metamodel', False):
-            raise ValueError("Metamodel is not enabled in the config file")
+            return
 
         self.function_map = {
             'mean': self.mean,

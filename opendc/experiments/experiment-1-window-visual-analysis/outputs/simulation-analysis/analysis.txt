@@ -1,0 +1,265 @@
+Analysis file created.
+
+
+========================================
+Simulation made at 2024-08-11 14:46:44
+Metric: power_draw
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2016
+Computing time 0.6s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:47:43
+Metric: power_draw
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2016
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:48:50
+Metric: power_draw
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2016
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:49:34
+Metric: power_draw
+Unit: 
+Window size: 10
+Sample count in raw sim data: 2016
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:52:42
+Metric: power_draw
+Unit: kWh
+Window size: 10
+Sample count in raw sim data: 2016
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:54:16
+Metric: power_draw
+Unit: kWh
+Window size: 10
+Sample count in raw sim data: 2016
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:55:05
+Metric: power_draw
+Unit: kWh
+Window size: 10
+Sample count in raw sim data: 2016
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:55:30
+Metric: power_draw
+Unit: kWh
+Window size: 10
+Sample count in raw sim data: 2016
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:55:57
+Metric: power_draw
+Unit: kWh
+Window size: 10
+Sample count in raw sim data: 2016
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:56:15
+Metric: power_draw
+Unit: kWh
+Window size: 10
+Sample count in raw sim data: 2016
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:56:32
+Metric: power_draw
+Unit: kWh
+Window size: 10
+Sample count in raw sim data: 4032
+Computing time 0.6s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:56:55
+Metric: power_draw
+Unit: kWh
+Window size: 10
+Sample count in raw sim data: 6048
+Computing time 0.8s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:57:14
+Metric: power_draw
+Unit: kWh
+Window size: 10
+Sample count in raw sim data: 4839
+Computing time 0.7s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:58:04
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 4839
+Computing time 0.7s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:58:19
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 4839
+Computing time 0.7s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:59:17
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 4480
+Computing time 0.7s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:59:36
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 4032
+Computing time 0.8s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 14:59:57
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 12096
+Computing time 1.5s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 15:00:36
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 4032
+Computing time 0.6s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 15:01:29
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 4172
+Computing time 0.7s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 15:02:32
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 4172
+Computing time 0.6s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 15:02:58
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 6048
+Computing time 0.9s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 15:03:37
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 6048
+Computing time 0.8s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-11 16:37:14
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 6048
+Computing time 0.9s
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/experiment-1-window-visual-analysis//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================

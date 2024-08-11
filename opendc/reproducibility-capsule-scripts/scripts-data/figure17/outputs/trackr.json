@@ -1,0 +1,11 @@
+[{
+    "name": "outputs/",
+    "outputFolder": "experiments/experiment-1-window-visual-analysis/",
+    "topology": {
+        "pathToFile": "experiments/experiment-1-window-visual-analysis/inputs/topologies/topology_sqrt.json"
+    },
+    "workload": {
+        "pathToFile": "experiments/experiment-1-window-visual-analysis/inputs/surf-sara",
+        "type": "ComputeWorkload"
+    }
+}]

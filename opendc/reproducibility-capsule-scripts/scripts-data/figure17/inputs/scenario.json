@@ -1,0 +1,22 @@
+{
+    "name": "outputs/",
+    "topologies": [
+        {
+            "pathToFile": "experiments/experiment-1-window-visual-analysis/inputs/topologies/topology_sqrt.json"
+        }
+    ],
+    "workloads": [
+        {
+            "pathToFile": "experiments/experiment-1-window-visual-analysis/inputs/surf-sara",
+            "type": "ComputeWorkload"
+        }
+    ],
+    "allocationPolicies": [
+        {
+            "policyType": "Mem"
+        }
+    ],
+    "outputFolder": "experiments/experiment-1-window-visual-analysis/",
+    "m3saSetup": "experiments/experiment-1-window-visual-analysis/inputs/m3sa-setup-window-1.json",
+    "runs": 1
+}

@@ -21,9 +21,9 @@
                     },
                     "powerModel": {
                         "modelType": "sqrt",
-                        "power": 350.0,
-                        "maxPower": 500.0,
-                        "idlePower": 200.0
+                        "power": 450.0,
+                        "maxPower": 490.0,
+                        "idlePower": 250.0
                     }
 
                 }

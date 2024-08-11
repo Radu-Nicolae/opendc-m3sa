@@ -1,24 +1,22 @@
 {
-    "name": "window_size_comparison_same_plot",
+    "name": "outputs/",
     "topologies": [
         {
-            "pathToFile": "experiments/use_case_1/inputs/topologies/topology_sqrt.json"
+            "pathToFile": "experiments/experiment-1-window-visual-analysis/inputs/topologies/topology_sqrt.json"
         }
     ],
     "workloads": [
         {
-            "pathToFile": "experiments/use_case_1/inputs/surf-sara",
+            "pathToFile": "experiments/experiment-1-window-visual-analysis/inputs/surf-sara",
             "type": "ComputeWorkload"
         }
-    ],
-    "carbonTracePaths": [
-        "experiments/use_case_1/inputs/carbon_intensity.parquet"
     ],
     "allocationPolicies": [
         {
             "policyType": "Mem"
         }
     ],
-    "outputFolder": "experiments/#1-more-windows-same-plot/outputs/",
+    "outputFolder": "experiments/experiment-1-window-visual-analysis/",
+    "m3saSetup": "experiments/experiment-1-window-visual-analysis/inputs/m3sa-setup-window-1.json",
     "runs": 1
 }
