@@ -34,14 +34,14 @@ public val SCRIPT_LANGUAGE: String = "python3"
 
 public fun analyzeResults(
     outputFolderPath: String,
-    m3saSetupPath: String,
+    m3saSetup: String,
 ) {
     val process =
         ProcessBuilder(
             SCRIPT_LANGUAGE,
             ABSOLUTE_SCRIPT_PATH,
             outputFolderPath,
-            m3saSetupPath,
+            m3saSetup,
         )
             .directory(Path(ANALYSIS_SCRIPTS_DIRECTORY).toFile())
             .start()

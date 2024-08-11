@@ -68,7 +68,7 @@ internal class ScenarioCommand : CliktCommand(name = "scenario") {
         if (analyzeResults) {
             analyzeResults(
                 outputFolderPath = scenarios[0].outputFolder,
-                m3saSetupPath = scenarios[0].m3saSetup,
+                m3saSetup = scenarios[0].m3saSetup,
             )
         }
     }
