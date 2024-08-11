@@ -910,3 +910,39 @@ Computing time 0.8s
 Workload time: 0.28 days
 Plot path/Users/raz/atlarge/opendc/experiments/use-case-scenario//outputs//simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
 ========================================
+
+
+========================================
+Simulation made at 2024-08-10 12:40:26
+Metric: power_draw
+Unit: kW
+Window size: 1
+Sample count in raw sim data: 2016
+Computing time 1.5s
+Workload time: 0.28 days
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/use-case-scenario//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-10 19:03:58
+Metric: power_draw
+Unit: kW
+Window size: 1
+Sample count in raw sim data: 2016
+Computing time 1.6s
+Workload time: 0.28 days
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/use-case-scenario//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-08-10 19:30:16
+Metric: power_draw
+Unit: kW
+Window size: 1
+Sample count in raw sim data: 2016
+Computing time 0.8s
+Workload time: 0.28 days
+Plot path/Users/raz/atlarge/opendc/opendc/experiments/use-case-scenario//outputs//simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=1.pdf
+========================================
