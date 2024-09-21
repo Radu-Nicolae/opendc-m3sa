@@ -1,0 +1,70 @@
+{
+    "name": "outputs/",
+    "topologies": [
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_sqrt_1.json"
+        },
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_sqrt_2.json"
+        },
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_sqrt_3.json"
+        },
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_sqrt_4.json"
+        },
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_linear_1.json"
+        },
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_linear_2.json"
+        },
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_linear_3.json"
+        },
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_linear_4.json"
+        },
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_square_1.json"
+        },
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_square_2.json"
+        },
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_square_3.json"
+        },
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_square_4.json"
+        },
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_cubic_1.json"
+        },
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_cubic_2.json"
+        },
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_cubic_3.json"
+        },
+        {
+            "pathToFile": "experiment-data/inputs/topologies/topology_truth_cubic_4.json"
+        }
+    ],
+    "workloads": [
+        {
+            "pathToFile": "experiment-data/inputs/bitbrains",
+            "type": "ComputeWorkload"
+        }
+    ],
+    "carbonTracePaths": [
+        "experiment-data/inputs/carbon_intensity.parquet"
+    ],
+    "allocationPolicies": [
+        {
+            "policyType": "Mem"
+        }
+    ],
+    "m3saSetup": "experiment-data/inputs/m3saSetup.json",
+    "outputFolder": "experiment-data/no-failures",
+    "runs": 1
+}
