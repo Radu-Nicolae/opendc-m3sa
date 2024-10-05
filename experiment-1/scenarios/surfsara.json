@@ -1,0 +1,17 @@
+{
+    "name": "surfsara",
+    "runs": 1,
+    "topologies": [{
+        "pathToFile": "topologies/surfsara.json"
+    }],
+    "workloads": [{
+        "pathToFile": "traces/surfsara",
+        "type": "ComputeWorkload"
+        }],
+    "allocationPolicies": [{
+        "policyType": "Mem"
+    }],
+    "carbonTracePaths": [
+        "carbonTraces/carbon_2022.parquet"
+    ]
+}
