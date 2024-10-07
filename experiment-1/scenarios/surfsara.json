@@ -1,17 +1,36 @@
 {
-    "name": "surfsara",
+    "name": "outputs/",
     "runs": 1,
-    "topologies": [{
-        "pathToFile": "topologies/surfsara.json"
-    }],
-    "workloads": [{
-        "pathToFile": "traces/surfsara",
-        "type": "ComputeWorkload"
-        }],
-    "allocationPolicies": [{
-        "policyType": "Mem"
-    }],
+    "topologies": [
+        {
+            "pathToFile": "experiment-1/topologies/surfsara.json"
+        },
+        {
+            "pathToFile": "experiment-1/topologies/surfsara-sqrt.json"
+        },
+        {
+            "pathToFile": "experiment-1/topologies/surfsara-linear.json"
+        },
+        {
+            "pathToFile": "experiment-1/topologies/surfsara-square.json"
+        },
+        {
+            "pathToFile": "experiment-1/topologies/surfsara-cubic.json"
+        }
+    ],
+    "workloads": [
+        {
+            "pathToFile": "experiment-1/traces/surfsara",
+            "type": "ComputeWorkload"
+        }
+    ],
+    "allocationPolicies": [
+        {
+            "policyType": "Mem"
+        }
+    ],
     "carbonTracePaths": [
-        "carbonTraces/carbon_2022.parquet"
-    ]
+        "experiment-1/carbonTraces/carbon_2022.parquet"
+    ],
+    "outputFolder": "experiment-1"
 }

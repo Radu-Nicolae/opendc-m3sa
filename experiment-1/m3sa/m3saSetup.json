@@ -1,0 +1,16 @@
+{
+    "multimodel": true,
+    "metamodel": false,
+    "metric": "carbon_emission",
+    "window_size": 1,
+    "window_function": "mean",
+    "meta_function": "mean",
+    "samples_per_minute": 2,
+    "plot_type": "time_series",
+    "x_label": "Sample count",
+    "y_label": "Carbon Emission [gCO2/h]",
+    "x_ticks_count": 3,
+    "plot_title": "Cumulative Time Series Plot",
+    "current_unit": "gCO2/h",
+    "unit_scaling_magnitude": 1
+}
