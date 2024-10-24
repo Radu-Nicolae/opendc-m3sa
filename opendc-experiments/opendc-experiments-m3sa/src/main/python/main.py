@@ -13,7 +13,7 @@ def main():
 
     multimodel.generate_plot()
 
-    MetaModel(multimodel)
+    # MetaModel(multimodel)
 
 
 if __name__ == "__main__":

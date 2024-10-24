@@ -249,7 +249,7 @@ class MultiModel:
             - Updates the plot attributes based on the generated plot.
             - Displays the plot on the matplotlib figure canvas.
         """
-        plt.figure(figsize=(12, 10))
+        plt.figure(figsize=(10, 10))
         plt.xticks(size=22)
         plt.yticks(size=22)
         plt.ylabel(self.y_label, size=26)

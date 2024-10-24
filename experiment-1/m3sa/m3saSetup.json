@@ -5,12 +5,13 @@
     "window_size": 1,
     "window_function": "mean",
     "meta_function": "mean",
-    "samples_per_minute": 2,
+    "samples_per_minute": 0.016,
     "plot_type": "time_series",
-    "x_label": "Sample count",
-    "y_label": "Carbon Emission [gCO2/h]",
-    "x_ticks_count": 3,
-    "plot_title": "Cumulative Time Series Plot",
+    "x_label": "Time [h]",
+    "y_label": "",
+    "x_ticks_count": 5,
+    "y_ticks_count": 3,
+    "plot_title": "Carbon Emission [gCO2/h]",
     "current_unit": "gCO2/h",
     "unit_scaling_magnitude": 1
 }
