@@ -1,0 +1,17 @@
+{
+    "multimodel": true,
+    "metamodel": false,
+    "metric": "power_draw",
+    "window_size": 20,
+    "window_function": "mean",
+    "meta_function": "mean",
+    "samples_per_minute": 2,
+    "plot_type": "time_series",
+    "y_min": 6,
+    "y_max": 8.5,
+    "y_ticks_count": 4,
+    "x_ticks_count": 4,
+    "plot_title": "Window size: 20",
+    "current_unit": "W",
+    "unit_scaling_magnitude": 3
+}

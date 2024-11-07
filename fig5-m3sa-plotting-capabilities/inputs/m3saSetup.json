@@ -1,0 +1,15 @@
+{
+    "multimodel": true,
+    "metamodel": false,
+    "metric": "power_draw",
+    "window_size": 100,
+    "window_function": "mean",
+    "meta_function": "mean",
+    "samples_per_minute": 2,
+    "plot_type": "cumulative_time_series",
+    "y_ticks_count": 4,
+    "x_ticks_count": 4,
+    "plot_title": "Time Series",
+    "current_unit": "MW",
+    "unit_scaling_magnitude": 6
+}

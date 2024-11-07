@@ -72,6 +72,7 @@ def parse_input(input_json):
         "x_label": "",
         "y_label": "",
         "seed": 0,
+        "figsize": None,
         "y_ticks_count": None,
         "x_ticks_count": None,
         "y_min": None,

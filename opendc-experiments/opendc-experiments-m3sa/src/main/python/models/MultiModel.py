@@ -103,6 +103,7 @@ class MultiModel:
         self.y_min = None
         self.y_max = None
         self.plot_path = None
+        self.figsize = None
 
         self.parse_user_input(window_size)
         self.set_paths()
@@ -138,6 +139,11 @@ class MultiModel:
         else:
             self.y_label = self.user_input["y_label"]
 
+        if self.user_input["figsize"] is not None:
+            self.figsize = self.user_input["figsize"]
+        else:
+            self.figsize = (10, 10)
+
         self.y_min = self.user_input["y_min"]
         self.y_max = self.user_input["y_max"]
         self.x_min = self.user_input["x_min"]
@@ -152,13 +158,12 @@ class MultiModel:
         :raise ValueError: If the unit scaling magnitude provided by the user is not within the accepted range of scaling factors.
         """
         prefixes = ['n', 'μ', 'm', '', 'k', 'M', 'G', 'T']
-        scaling_factors = [-9, -6, -3, 1, 3, 6, 9]
+        scaling_factors = [-9, -6, -3, -2, 1, 3, 6, 9]
         given_metric = self.user_input["current_unit"]
         self.unit_scaling = self.user_input["unit_scaling_magnitude"]
 
         if self.unit_scaling not in scaling_factors:
-            raise ValueError(
-                "Unit scaling factor not found. Please enter a valid unit from [-9, -6, -3, 1, 3, 6, 9].")
+            return given_metric
 
         if self.unit_scaling == 1:
             return given_metric
@@ -208,7 +213,7 @@ class MultiModel:
             if self.unit_scaling is None:
                 raise ValueError("Unit scaling factor is not set. Please ensure it is set correctly.")
 
-            raw = np.divide(raw, self.unit_scaling)
+            raw = np.divide(raw, self.unit_scaling) / 7
 
             if self.user_input["samples_per_minute"] > 0:
                 MINUTES_IN_DAY = 1440
@@ -249,9 +254,9 @@ class MultiModel:
             - Updates the plot attributes based on the generated plot.
             - Displays the plot on the matplotlib figure canvas.
         """
-        plt.figure(figsize=(12, 10))
-        plt.xticks(size=22)
-        plt.yticks(size=22)
+        plt.figure(figsize=self.figsize)
+        plt.xticks(size=32)
+        plt.yticks(size=32)
         plt.ylabel(self.y_label, size=26)
         plt.xlabel(self.x_label, size=26)
         plt.title(self.plot_title, size=26)

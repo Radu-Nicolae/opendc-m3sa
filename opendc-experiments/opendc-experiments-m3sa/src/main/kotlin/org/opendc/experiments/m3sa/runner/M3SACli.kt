@@ -65,7 +65,7 @@ internal class M3SACommand : CliktCommand(name = "experiment") {
     override fun run() {
         println("The provided m3saPath is $m3saPath")
 
-        val experiment = getExperiment(scenarioPath)
+        val experiment = getExperiment(scenarioPath).subList(0,1)
         runExperiment(experiment, parallelism)
 
         if (m3saPath.toString().isNotEmpty()) {

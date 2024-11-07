@@ -1,0 +1,18 @@
+{
+    "multimodel": true,
+    "metamodel": false,
+    "metric": "carbon_emission",
+    "window_size": 10,
+    "window_function": "mean",
+    "meta_function": "mean",
+    "samples_per_minute": 2,
+    "plot_type": "time_series",
+    "y_ticks_count": 3,
+    "x_ticks_count": 5,
+    "y_label": "",
+    "y_min": 0,
+    "y_max": 6800,
+    "current_unit": "gCO2/h",
+    "unit_scaling_magnitude": -3,
+    "figsize": [15, 6]
+}

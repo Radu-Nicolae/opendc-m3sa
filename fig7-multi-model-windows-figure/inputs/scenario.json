@@ -1,0 +1,24 @@
+{
+    "name": "outputs/",
+    "topologies": [
+        {
+            "pathToFile": "multi-model-windows-figure/inputs/topologies/topology_truth_sqrt_1.json"
+        }
+    ],
+    "workloads": [
+        {
+            "pathToFile": "multi-model-windows-figure/inputs/bitbrains",
+            "type": "ComputeWorkload"
+        }
+    ],
+    "carbonTracePaths": [
+        "demo/inputs/carbon_intensity.parquet"
+    ],
+    "allocationPolicies": [
+        {
+            "policyType": "Mem"
+        }
+    ],
+    "outputFolder": "multi-model-windows-figure/",
+    "runs": 1
+}
