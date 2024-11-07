@@ -1751,3 +1751,495 @@ Computing time 1.3s
 Workload time: 28.01 days
 Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
 ========================================
+
+
+========================================
+Simulation made at 2024-11-07 15:57:50
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 20169
+Computing time 2.8s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:00:35
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 20169
+Computing time 3.5s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:01:59
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 20169
+Computing time 3.2s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:03:27
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 20169
+Computing time 3.6s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:04:09
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 1
+Sample count in raw sim data: 20169
+Computing time 3.5s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:04:22
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 1
+Sample count in raw sim data: 20169
+Computing time 3.9s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:04:31
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 100
+Sample count in raw sim data: 20169
+Computing time 2.9s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=100.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:05:30
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 1
+Sample count in raw sim data: 20169
+Computing time 3.0s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:12:48
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 20169
+Computing time 3.4s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:15:20
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 20169
+Computing time 4.3s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:22:34
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 20169
+Computing time 2.3s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:23:25
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 20169
+Computing time 2.0s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:24:05
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 20169
+Computing time 1.9s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:24:39
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 20169
+Computing time 2.2s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:30:07
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 20169
+Computing time 4.2s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:37:56
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 100845
+Computing time 29.8s
+Workload time: 140.06 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:40:38
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 1009
+Computing time 0.3s
+Workload time: 1.4 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:41:14
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 1009
+Computing time 0.3s
+Workload time: 1.4 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:41:53
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 1009
+Computing time 0.4s
+Workload time: 1.4 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:42:02
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 1
+Sample count in raw sim data: 1009
+Computing time 0.3s
+Workload time: 1.4 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:43:13
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 1
+Sample count in raw sim data: 1009
+Computing time 0.3s
+Workload time: 1.4 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 16:54:48
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 100
+Sample count in raw sim data: 201690
+Computing time 57.8s
+Workload time: 280.12 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=100.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:14:34
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 100
+Sample count in raw sim data: 100845
+Computing time 27.5s
+Workload time: 140.06 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=100.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:21:59
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 100
+Sample count in raw sim data: 10085
+Computing time 1.6s
+Workload time: 14.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=100.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:23:16
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 100
+Sample count in raw sim data: 2017
+Computing time 0.4s
+Workload time: 2.8 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=100.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:23:30
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 1
+Sample count in raw sim data: 2017
+Computing time 0.5s
+Workload time: 2.8 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:23:39
+Metric: carbon_emission
+Unit: gCO2/h
+Window size: 1
+Sample count in raw sim data: 2017
+Computing time 0.4s
+Workload time: 2.8 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:25:03
+Metric: carbon_emission
+Unit: gCO2/h
+Window size: 1
+Sample count in raw sim data: 10085
+Computing time 1.7s
+Workload time: 14.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:26:03
+Metric: carbon_emission
+Unit: gCO2/h
+Window size: 1
+Sample count in raw sim data: 5043
+Computing time 0.9s
+Workload time: 7.0 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:27:00
+Metric: carbon_emission
+Unit: gCO2/h
+Window size: 1
+Sample count in raw sim data: 1009
+Computing time 0.3s
+Workload time: 1.4 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:27:41
+Metric: carbon_emission
+Unit: gCO2/h
+Window size: 1
+Sample count in raw sim data: 10085
+Computing time 1.8s
+Workload time: 14.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:27:53
+Metric: carbon_emission
+Unit: MgCO2/h
+Window size: 1
+Sample count in raw sim data: 10085
+Computing time 1.6s
+Workload time: 14.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:28:01
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 1
+Sample count in raw sim data: 10085
+Computing time 1.6s
+Workload time: 14.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:35:00
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 100
+Sample count in raw sim data: 100845
+Computing time 26.8s
+Workload time: 140.06 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=100.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:36:02
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 100
+Sample count in raw sim data: 100845
+Computing time 27.3s
+Workload time: 140.06 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=100.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:39:50
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 100
+Sample count in raw sim data: 100845
+Computing time 32.1s
+Workload time: 140.06 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=100.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:42:37
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 100
+Sample count in raw sim data: 100845
+Computing time 29.3s
+Workload time: 140.06 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=100.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:44:09
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 100
+Sample count in raw sim data: 100845
+Computing time 28.9s
+Workload time: 140.06 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=100.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:45:38
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 100
+Sample count in raw sim data: 100845
+Computing time 29.9s
+Workload time: 140.06 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=100.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:46:19
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 100
+Sample count in raw sim data: 100845
+Computing time 28.4s
+Workload time: 140.06 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=100.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-07 19:47:47
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 100
+Sample count in raw sim data: 100845
+Computing time 30.2s
+Workload time: 140.06 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=100.pdf
+========================================

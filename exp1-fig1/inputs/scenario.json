@@ -3,6 +3,18 @@
     "topologies": [
         {
             "pathToFile": "exp1-fig1/inputs/topologies/topology_linear.json"
+        },
+        {
+            "pathToFile": "exp1-fig1/inputs/topologies/topology_mse.json"
+        },
+        {
+            "pathToFile": "exp1-fig1/inputs/topologies/topology_sqrt.json"
+        },
+        {
+            "pathToFile": "exp1-fig1/inputs/topologies/topology_asymptotic1.json"
+        },
+        {
+            "pathToFile": "exp1-fig1/inputs/topologies/topology_asymptotic2.json"
         }
     ],
     "workloads": [
@@ -19,6 +31,7 @@
             "policyType": "Mem"
         }
     ],
+
     "outputFolder": "exp1-fig1/",
     "runs": 1
 }

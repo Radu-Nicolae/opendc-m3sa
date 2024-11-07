@@ -102,7 +102,7 @@ private fun ClusterSpec.toHostSpecs(random: RandomGenerator): List<HostSpec> {
                         random,
                     )
                 }
-            )
+                )
         }
     clusterId++
     return hostSpecs
@@ -127,7 +127,8 @@ private fun HostJSONSpec.toHostSpecs(
             )
         }
 
-    val unknownMemoryUnit = MemoryUnit(memory.vendor, memory.modelName, memory.memorySpeed.toMHz(), memory.memorySize.toMiB().toLong())
+    val unknownMemoryUnit =
+        MemoryUnit(memory.vendor, memory.modelName, memory.memorySpeed.toMHz(), memory.memorySize.toMiB().toLong())
     val machineModel =
         MachineModel(
             units,
@@ -135,7 +136,15 @@ private fun HostJSONSpec.toHostSpecs(
         )
 
     val powerModel =
-        getPowerModel(powerModel.modelType, powerModel.power.toWatts(), powerModel.maxPower.toWatts(), powerModel.idlePower.toWatts())
+        getPowerModel(
+            powerModel.modelType,
+            powerModel.power.toWatts(),
+            powerModel.maxPower.toWatts(),
+            powerModel.idlePower.toWatts(),
+            powerModel.calibrationFactor,
+            powerModel.asymUtil,
+            powerModel.dvfs,
+        )
 
     var hostName: String
     if (name == null) {

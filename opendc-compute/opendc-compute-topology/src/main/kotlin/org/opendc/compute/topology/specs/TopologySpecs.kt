@@ -114,6 +114,9 @@ public data class PowerModelSpec(
     val power: Power = Power.ofWatts(400),
     val maxPower: Power,
     val idlePower: Power,
+    val calibrationFactor: Double = 0.0,
+    val asymUtil: Double = 0.3,
+    val dvfs: Boolean = false,
 ) {
     init {
         require(maxPower >= idlePower) { "The max power of a power model can not be less than the idle power" }
@@ -126,6 +129,9 @@ public data class PowerModelSpec(
                 power = Power.ofWatts(350),
                 maxPower = Power.ofWatts(400.0),
                 idlePower = Power.ofWatts(200.0),
+                calibrationFactor = 0.0,
+                asymUtil = 0.3,
+                dvfs = false,
             )
     }
 }
