@@ -1739,3 +1739,15 @@ Computing time 1.2s
 Workload time: 28.01 days
 Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
 ========================================
+
+
+========================================
+Simulation made at 2024-11-07 15:48:46
+Metric: carbon_emission
+Unit: mgCO2/h
+Window size: 10
+Sample count in raw sim data: 20169
+Computing time 1.3s
+Workload time: 28.01 days
+Plot path/Users/raz/atlarge/opendc/exp1-fig1/outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=10.pdf
+========================================
