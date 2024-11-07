@@ -1,0 +1,72 @@
+[{
+    "name": "outputs/",
+    "outputFolder": "multi-model-windows-figure/",
+    "computeExportConfig": {
+        "hostExportColumns": [
+            "timestamp",
+            "timestamp_absolute",
+            "host_id",
+            "host_name",
+            "core_count",
+            "mem_capacity",
+            "guests_terminated",
+            "guests_running",
+            "guests_error",
+            "guests_invalid",
+            "cpu_limit",
+            "cpu_usage",
+            "cpu_demand",
+            "cpu_utilization",
+            "cpu_time_active",
+            "cpu_time_idle",
+            "cpu_time_steal",
+            "cpu_time_lost",
+            "power_draw",
+            "energy_usage",
+            "carbon_intensity",
+            "carbon_emission",
+            "uptime",
+            "downtime",
+            "boot_time",
+            "boot_time_absolute"
+        ],
+        "taskExportColumns": [
+            "timestamp",
+            "timestamp_absolute",
+            "task_id",
+            "host_id",
+            "task_name",
+            "cpu_count",
+            "mem_capacity",
+            "cpu_limit",
+            "cpu_time_active",
+            "cpu_time_idle",
+            "cpu_time_steal",
+            "cpu_time_lost",
+            "uptime",
+            "downtime",
+            "provision_time",
+            "boot_time",
+            "boot_time_absolute",
+            "task_state"
+        ],
+        "serviceExportColumns": [
+            "timestamp",
+            "timestamp_absolute",
+            "hosts_up",
+            "tasks_pending",
+            "tasks_active",
+            "attempts_success",
+            "attempts_failure",
+            "attempts_error"
+        ]
+    },
+    "topology": {
+        "pathToFile": "multi-model-windows-figure/inputs/topologies/topology_truth_sqrt_1.json"
+    },
+    "workload": {
+        "pathToFile": "multi-model-windows-figure/inputs/bitbrains",
+        "type": "ComputeWorkload"
+    },
+    "carbonTracePath": "demo/inputs/carbon_intensity.parquet"
+}]

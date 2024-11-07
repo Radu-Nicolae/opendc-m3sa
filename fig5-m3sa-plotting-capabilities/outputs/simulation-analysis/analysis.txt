@@ -1,0 +1,229 @@
+Analysis file created.
+
+
+========================================
+Simulation made at 2024-11-06 15:08:02
+Metric: power_draw
+Unit: kW
+Window size: 20
+Sample count in raw sim data: 3035
+Computing time 0.6s
+Workload time: 4.22 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=20.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:08:56
+Metric: power_draw
+Unit: kW
+Window size: 20
+Sample count in raw sim data: 3035
+Computing time 0.4s
+Workload time: 4.22 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=20.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:09:17
+Metric: power_draw
+Unit: kW
+Window size: 20
+Sample count in raw sim data: 2884
+Computing time 0.6s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=20.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:11:12
+Metric: power_draw
+Unit: kW
+Window size: 20
+Sample count in raw sim data: 2884
+Computing time 0.6s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=20.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:11:26
+Metric: power_draw
+Unit: kW
+Window size: 1
+Sample count in raw sim data: 2884
+Computing time 0.6s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:11:31
+Metric: power_draw
+Unit: kW
+Window size: 5
+Sample count in raw sim data: 2884
+Computing time 0.6s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=5.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:11:33
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 2884
+Computing time 0.5s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:13:04
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 2884
+Computing time 0.7s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:13:39
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 2884
+Computing time 0.7s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:14:09
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 2884
+Computing time 0.6s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:14:27
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 2884
+Computing time 0.7s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:15:09
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 2884
+Computing time 0.7s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:15:21
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 2964
+Computing time 0.6s
+Workload time: 4.22 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:16:02
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 2884
+Computing time 0.6s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:18:58
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 2884
+Computing time 0.6s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:20:02
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 2884
+Computing time 0.6s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/cumulative_time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:20:14
+Metric: power_draw
+Unit: kW
+Window size: 10
+Sample count in raw sim data: 2884
+Computing time 0.6s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/cumulative_time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:20:38
+Metric: power_draw
+Unit: MMW
+Window size: 10
+Sample count in raw sim data: 2884
+Computing time 0.6s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/cumulative_time_series_plot_multimodel_metric=power_draw_window=10.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-06 15:21:11
+Metric: power_draw
+Unit: MMW
+Window size: 100
+Sample count in raw sim data: 2884
+Computing time 0.7s
+Workload time: 4.11 days
+Plot path/Users/raz/atlarge/opendc/fig5-m3sa-plotting-capabilities/outputs/simulation-analysis/power_draw/cumulative_time_series_plot_multimodel_metric=power_draw_window=100.pdf
+========================================
