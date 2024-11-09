@@ -38,12 +38,15 @@ class MetaModel:
             'meta_equation1': self.meta_equation1,
         }
 
+        # skip the first 2 models, but keep them stored somewhere
+        self.copy = multimodel.models[:2]
         self.multi_model = multimodel
         self.meta_model = Model(
             raw_sim_data=[],
             id=self.META_MODEL_ID,
             path=self.multi_model.output_folder_path
         )
+        self.multi_model.models = self.multi_model.models[2:]
 
         if meta_function is not None:
             self.meta_function = meta_function
@@ -113,6 +116,7 @@ class MetaModel:
         :return: None
         :side effect: Displays a time series plot using the multi_model's plotting capabilities.
         """
+        self.multi_model.models = self.copy
         self.multi_model.models.append(self.meta_model)
         self.multi_model.generate_plot()
 
@@ -160,6 +164,7 @@ class MetaModel:
         :side effect: Displays a cumulative time series plot using the multi_model's plotting capabilities.
         """
         self.multi_model.models.append(self.meta_model)
+
         self.multi_model.generate_plot()
 
     def output_metamodel(self):

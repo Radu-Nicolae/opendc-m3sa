@@ -213,11 +213,7 @@ class MultiModel:
             if self.unit_scaling is None:
                 raise ValueError("Unit scaling factor is not set. Please ensure it is set correctly.")
 
-            raw = np.divide(raw, self.unit_scaling) / 7
-
-            if self.user_input["samples_per_minute"] > 0:
-                MINUTES_IN_DAY = 1440
-                self.workload_time = len(raw) * self.user_input["samples_per_minute"] / MINUTES_IN_DAY
+            raw = np.divide(raw, self.unit_scaling)
 
             model = Model(raw_sim_data=raw, id=model_id, path=self.output_folder_path)
             self.models.append(model)
@@ -255,6 +251,7 @@ class MultiModel:
             - Displays the plot on the matplotlib figure canvas.
         """
         plt.figure(figsize=self.figsize)
+
         plt.xticks(size=32)
         plt.yticks(size=32)
         plt.ylabel(self.y_label, size=26)
@@ -292,7 +289,7 @@ class MultiModel:
 
         plt.tight_layout()
         plt.subplots_adjust(right=0.85)
-        plt.legend(fontsize=12, bbox_to_anchor=(1, 1))
+        # plt.legend(fontsize=12, bbox_to_anchor=(1, 1))
         self.save_plot()
         self.output_stats()
 
@@ -304,24 +301,33 @@ class MultiModel:
         :return: None
         :side effect: Plots are displayed on the matplotlib figure canvas.
         """
+
+        colors = ["#0077bb", "#ee7733", "#808080"]
         for model in self.models:
             label = "Meta-Model" if is_meta_model(model) else "Model " + str(model.id)
             if is_meta_model(model):
+                means = self.mean_of_chunks(model.processed_sim_data, self.window_size)
                 repeated_means = np.repeat(means, self.window_size)[:len(model.processed_sim_data) * self.window_size]
                 plt.plot(
                     repeated_means,
                     drawstyle='steps-mid',
                     label=label,
-                    color="red",
+                    color="#228B22",
                     linestyle="--",
-                    marker="o",
-                    markevery=max(1, len(repeated_means) // 50),
                     linewidth=2
                 )
             else:
+                if model.id < 2:
+                    line_color = colors[model.id]
+                elif is_meta_model(model):
+                    line_color = "#228B22"
+                else:
+                    continue
+                # line_style = "solid" if model.id < 2 else "dotted"
+                line_width = 2 if model.id < 2 else 1.2
                 means = self.mean_of_chunks(model.raw_sim_data, self.window_size)
                 repeated_means = np.repeat(means, self.window_size)[:len(model.raw_sim_data)]
-                plt.plot(repeated_means, drawstyle='steps-mid', label=label)
+                plt.plot(repeated_means, color=line_color, drawstyle='steps-mid', label=label, linewidth=line_width)
 
     def generate_cumulative_plot(self):
         """
@@ -466,8 +472,6 @@ class MultiModel:
             f.write("Window size: " + str(self.window_size) + "\n")
             f.write("Sample count in raw sim data: " + str(self.max_model_len) + "\n")
             f.write("Computing time " + str(round(self.end_time - self.starting_time, 1)) + "s\n")
-            if (self.user_input["samples_per_minute"] > 0):
-                f.write("Workload time: " + str(round(self.workload_time, 2)) + " days\n")
             f.write("Plot path" + self.plot_path + "\n")
             f.write("========================================\n")
 
