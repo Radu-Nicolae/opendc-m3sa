@@ -5,13 +5,13 @@
             "hosts": [
                 {
                     "name": "A01",
-                    "count": 277,
+                    "count": 100,
                     "cpu": {
-                        "coreCount": 16,
+                        "coreCount": 48,
                         "coreSpeed": 2100
                     },
                     "memory": {
-                         "memorySize": 128000000
+                        "memorySize": 196000000
                     },
                     "powerModel": {
                         "modelType": "asymptotic",
