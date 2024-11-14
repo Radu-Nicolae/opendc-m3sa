@@ -1,0 +1,19 @@
+{
+    "multimodel": true,
+    "metamodel": true,
+    "metric": "power_draw",
+    "window_size": 1,
+    "window_function": "mean",
+    "meta_function": "median",
+    "samples_per_minute": 2,
+    "plot_type": "time_series",
+    "y_ticks_count": 4,
+    "x_ticks_count": 5,
+    "y_min": 0,
+    "y_max": 33,
+    "y_label": "Power Draw [kw]",
+    "x_label": "Time [day/month]",
+    "current_unit": "",
+    "unit_scaling_magnitude": 1,
+    "figsize": [150, 50]
+}
