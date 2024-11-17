@@ -1,0 +1,26 @@
+{
+    "clusters": [
+        {
+            "name": "A04",
+            "hosts": [
+                {
+                    "name": "A04",
+                    "count": 150,
+                    "cpu": {
+                        "coreCount": 96,
+                        "coreSpeed": 2100
+                    },
+                    "memory": {
+                        "memorySize": 196000000
+                    },
+                    "powerModel": {
+                        "modelType": "cubic",
+                        "power": 400.0,
+                        "idlePower": 32.0,
+                        "maxPower": 180.0
+                    }
+                }
+            ]
+        }
+    ]
+}

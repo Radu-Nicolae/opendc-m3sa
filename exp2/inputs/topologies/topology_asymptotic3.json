@@ -1,0 +1,28 @@
+{
+    "clusters": [
+        {
+            "name": "A08",
+            "hosts": [
+                {
+                    "name": "A08",
+                    "count": 150,
+                    "cpu": {
+                        "coreCount": 96,
+                        "coreSpeed": 2100
+                    },
+                    "memory": {
+                        "memorySize": 196000000
+                    },
+                    "powerModel": {
+                        "modelType": "asymptotic",
+                        "power": 400.0,
+                        "idlePower": 32.0,
+                        "maxPower": 180.0,
+                        "asymUtil": 1.9,
+                        "dvfs": true
+                    }
+                }
+            ]
+        }
+    ]
+}

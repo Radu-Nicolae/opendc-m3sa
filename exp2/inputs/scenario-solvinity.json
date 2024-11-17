@@ -1,13 +1,31 @@
 {
-    "name": "outputs/",
+    "name": "outputs-solvinity/",
     "topologies": [
+        {
+            "pathToFile": "exp2/inputs/topologies/topology_sqrt.json"
+        },
+        {
+            "pathToFile": "exp2/inputs/topologies/topology_linear.json"
+        },
+        {
+            "pathToFile": "exp2/inputs/topologies/topology_square.json"
+        },
+        {
+            "pathToFile": "exp2/inputs/topologies/topology_cubic.json"
+        },
+        {
+            "pathToFile": "exp2/inputs/topologies/topology_asymptotic1.json"
+        },
+        {
+            "pathToFile": "exp2/inputs/topologies/topology_asymptotic2.json"
+        },
         {
             "pathToFile": "exp2/inputs/topologies/topology_mse.json"
         }
     ],
     "workloads": [
         {
-            "pathToFile": "exp2/inputs/solvinity-13",
+            "pathToFile": "exp2/inputs/marconi",
             "type": "ComputeWorkload"
         }
     ],
@@ -19,7 +37,24 @@
             "policyType": "Mem"
         }
     ],
-
-    "outputFolder": "exp1-fig1/",
+    "failureModels": [
+        {
+            "type": "custom",
+            "iatSampler": {
+                "type": "exponential",
+                "mean": 150.5
+            },
+            "durationSampler": {
+                "type": "constant",
+                "alpha": 0.5,
+                "beta": 100.2
+            },
+            "nohSampler": {
+                "type": "constant",
+                "value": 50.5
+            }
+        }
+    ],
+    "outputFolder": "exp2/",
     "runs": 1
 }

@@ -1,13 +1,13 @@
 {
     "clusters": [
         {
-            "name": "A01",
+            "name": "A07",
             "hosts": [
                 {
-                    "name": "A01",
-                    "count": 100,
+                    "name": "A07",
+                    "count": 150,
                     "cpu": {
-                        "coreCount": 48,
+                        "coreCount": 96,
                         "coreSpeed": 2100
                     },
                     "memory": {
@@ -18,8 +18,8 @@
                         "power": 400.0,
                         "idlePower": 32.0,
                         "maxPower": 180.0,
-                        "asymUtil": 0.3,
-                        "dvfs": true
+                        "asymUtil": 0.85,
+                        "dvfs": false
                     }
                 }
             ]

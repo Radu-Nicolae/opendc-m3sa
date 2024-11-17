@@ -5,9 +5,9 @@
             "hosts": [
                 {
                     "name": "A01",
-                    "count": 100,
+                    "count": 150,
                     "cpu": {
-                        "coreCount": 48,
+                        "coreCount": 96,
                         "coreSpeed": 2100
                     },
                     "memory": {

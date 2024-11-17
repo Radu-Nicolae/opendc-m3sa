@@ -1,24 +1,24 @@
 {
     "clusters": [
         {
-            "name": "A01",
+            "name": "A05",
             "hosts": [
                 {
-                    "name": "A01",
-                    "count": 100,
+                    "name": "A05",
+                    "count": 150,
                     "cpu": {
-                        "coreCount": 48,
+                        "coreCount": 96,
                         "coreSpeed": 2100
                     },
                     "memory": {
-                        "memorySize": 196000000000
+                        "memorySize": 19600000
                     },
                     "powerModel": {
-                        "modelType": "linear",
+                        "modelType": "mse",
                         "power": 400.0,
                         "idlePower": 32.0,
                         "maxPower": 180.0,
-                        "calibrationFactor": 10.0
+                        "calibrationFactor": 0.7
                     }
                 }
             ]
