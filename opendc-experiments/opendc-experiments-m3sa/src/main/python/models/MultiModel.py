@@ -304,7 +304,7 @@ class MultiModel:
         :return: None
         :side effect: Plots are displayed on the matplotlib figure canvas.
         """
-        for model, i  in self.models, range(len(self.models)):
+        for (i, model) in enumerate(self.models):
             label = "Meta-Model" if is_meta_model(model) else "Model " + str(model.id)
             if is_meta_model(model):
                 repeated_means = np.repeat(model.processed_sim_data, self.window_size)
@@ -331,7 +331,7 @@ class MultiModel:
         plt.grid(False)
 
         cumulated_energies = self.sum_models_entries()
-        for i, model in enumerate(self.models):
+        for (i, model) in (enumerate(self.models)):
             label = "Meta-Model" if is_meta_model(model) else "Model " + str(model.id)
             if is_meta_model(model):
                 plt.barh(label=label, y=i, width=cumulated_energies[i], color="red")
