@@ -1,0 +1,192 @@
+====================
+Export rate: 5 minutes
+Dataset size: 2,016
+====================
+9. OpenDC time: 6.939 s
+9. M3SA time: 1.646 s
+9. Total operation time: 8.585 s
+
+8. OpenDC time: 5.055 s
+8. M3SA time: 1.201 s
+8. Total operation time: 6.256 s
+
+7. OpenDC time: 5.028 s
+7. M3SA time: 1.139 s
+7. Total operation time: 6.167 s
+
+6. OpenDC time: 5.033 s
+6. M3SA time: 1.111 s
+6. Total operation time: 6.144 s
+
+5. OpenDC time: 5.039 s
+5. M3SA time: 1.157 s
+5. Total operation time: 6.196 s
+
+4. OpenDC time: 5.051 s
+4. M3SA time: 1.176 s
+4. Total operation time: 6.227 s
+
+3. OpenDC time: 5.109 s
+3. M3SA time: 1.219 s
+3. Total operation time: 6.328 s
+
+2. OpenDC time: 5.176 s
+2. M3SA time: 1.192 s
+2. Total operation time: 6.368 s
+
+1. OpenDC time: 5.181 s
+1. M3SA time: 1.192 s
+1. Total operation time: 6.373 s
+
+0. OpenDC time: 5.048 s
+0. M3SA time: 1.031 s
+0. Total operation time: 6.079 s
+
+-1. OpenDC time: 5.085 s
+-1. M3SA time: 1.147 s
+-1. Total operation time: 6.232 s
+
+===================================================
+
+
+
+====================
+Export rate: 1 minutes
+Dataset size: 10,080
+====================
+9. OpenDC time: 18.664 s
+9. M3SA time: 2.679 s
+9. Total operation time: 21.343 s
+
+8. OpenDC time: 16.75 s
+8. M3SA time: 2.03 s
+8. Total operation time: 18.78 s
+
+7. OpenDC time: 16.523 s
+7. M3SA time: 2.006 s
+7. Total operation time: 18.529 s
+
+6. OpenDC time: 16.425 s
+6. M3SA time: 1.949 s
+6. Total operation time: 18.374 s
+
+5. OpenDC time: 16.419 s
+5. M3SA time: 2.028 s
+5. Total operation time: 18.447 s
+
+4. OpenDC time: 16.349 s
+4. M3SA time: 2.056 s
+4. Total operation time: 18.405 s
+
+3. OpenDC time: 16.361 s
+3. M3SA time: 2.052 s
+3. Total operation time: 18.413 s
+
+2. OpenDC time: 16.01 s
+2. M3SA time: 1.962 s
+2. Total operation time: 17.972 s
+
+1. OpenDC time: 16.171 s
+1. M3SA time: 1.934 s
+1. Total operation time: 18.105 s
+
+0. OpenDC time: 16.274 s
+0. M3SA time: 1.885 s
+0. Total operation time: 18.159 s
+
+===================================================
+
+
+
+====================
+Export rate: 30 seconds
+Dataset size: 20,160
+====================
+9. OpenDC time: 33.011 s
+9. M3SA time: 4.211 s
+9. Total operation time: 37.222 s
+
+8. OpenDC time: 30.335 s
+8. M3SA time: 3.537 s
+8. Total operation time: 33.872 s
+
+7. OpenDC time: 30.16 s
+7. M3SA time: 3.552 s
+7. Total operation time: 33.712 s
+
+6. OpenDC time: 30.893 s
+6. M3SA time: 3.856 s
+6. Total operation time: 34.749 s
+
+5. OpenDC time: 31.522 s
+5. M3SA time: 3.693 s
+5. Total operation time: 35.215 s
+
+4. OpenDC time: 30.581 s
+4. M3SA time: 3.572 s
+4. Total operation time: 34.153 s
+
+3. OpenDC time: 30.658 s
+3. M3SA time: 3.628 s
+3. Total operation time: 34.286 s
+
+2. OpenDC time: 30.305 s
+2. M3SA time: 3.509 s
+2. Total operation time: 33.814 s
+
+1. OpenDC time: 30.689 s
+1. M3SA time: 3.894 s
+1. Total operation time: 34.583 s
+
+0. OpenDC time: 30.171 s
+0. M3SA time: 3.417 s
+0. Total operation time: 33.588 s
+
+===================================================
+
+
+====================
+Export rate: 6 seconds
+Dataset size: 100,800
+====================
+9. OpenDC time: 149.664 s
+9. M3SA time: 24.126 s
+9. Total operation time: 173.79 s
+
+8. OpenDC time: 145.244 s
+8. M3SA time: 26.616 s
+8. Total operation time: 171.86 s
+
+7. OpenDC time: 147.449 s
+7. M3SA time: 25.339 s
+7. Total operation time: 172.788 s
+
+6. OpenDC time: 149.816 s
+6. M3SA time: 25.01 s
+6. Total operation time: 174.826 s
+
+5. OpenDC time: 149.129 s
+5. M3SA time: 23.833 s
+5. Total operation time: 172.962 s
+
+4. OpenDC time: 146.019 s
+4. M3SA time: 20.839 s
+4. Total operation time: 166.858 s
+
+3. OpenDC time: 146.796 s
+3. M3SA time: 21.003 s
+3. Total operation time: 167.799 s
+
+2. OpenDC time: 144.511 s
+2. M3SA time: 21.798 s
+2. Total operation time: 166.309 s
+
+1. OpenDC time: 146.493 s
+1. M3SA time: 21.072 s
+1. Total operation time: 167.565 s
+
+0. OpenDC time: 146.032 s
+0. M3SA time: 22.126 s
+0. Total operation time: 168.158 s
+
+===================================================
