@@ -63,6 +63,11 @@ class MultiModel:
         Call the `generate_plot` method to process the data and generate plots as configured by the user.
     """
 
+    colorblind_palette = [
+        "#0072B2", "#E69F00", "#009E73", "#D55E00", "#CC79A7", "#F0E442", "#8B4513", "#999999",
+        "#56B4E9", "#F0A3FF", "#FFB400", "#00BFFF", "#90EE90", "#FF6347", "#8A2BE2", "#CD5C5C",
+        "#4682B4", "#FFDEAD", "#32CD32", "#D3D3D3"
+    ]
     def __init__(self, user_input, path, window_size=-1):
         """
         Initializes the MultiModel with provided user settings and prepares the environment.
@@ -262,7 +267,6 @@ class MultiModel:
         formatter = FuncFormatter(lambda x, _: '{:,}'.format(int(x)) if x >= 1000 else int(x))
         ax = plt.gca()
         ax.xaxis.set_major_formatter(formatter)
-        # ax.yaxis.set_major_formatter(formatter) yaxis has formatting issues - to solve in a future iteration
 
         if self.user_input['x_ticks_count'] is not None:
             ax = plt.gca()
@@ -289,7 +293,6 @@ class MultiModel:
 
         plt.tight_layout()
         plt.subplots_adjust(right=0.85)
-        # plt.legend(fontsize=12, bbox_to_anchor=(1, 1))
         self.save_plot()
         self.output_stats()
 
@@ -301,33 +304,16 @@ class MultiModel:
         :return: None
         :side effect: Plots are displayed on the matplotlib figure canvas.
         """
-
-        colors = ["#0077bb", "#ee7733", "#808080"]
-        for model in self.models:
+        for model, i  in self.models, range(len(self.models)):
             label = "Meta-Model" if is_meta_model(model) else "Model " + str(model.id)
             if is_meta_model(model):
-                means = self.mean_of_chunks(model.processed_sim_data, self.window_size)
-                repeated_means = np.repeat(means, self.window_size)[:len(model.processed_sim_data) * self.window_size]
-                plt.plot(
-                    repeated_means,
-                    drawstyle='steps-mid',
-                    label=label,
-                    color="#228B22",
-                    linestyle="--",
-                    linewidth=2
-                )
+                repeated_means = np.repeat(model.processed_sim_data, self.window_size)
+                plt.plot(repeated_means, drawstyle='steps-mid', label=label, color="#228B22", linestyle="solid",
+                         linewidth=2)
             else:
-                if model.id < 2:
-                    line_color = colors[model.id]
-                elif is_meta_model(model):
-                    line_color = "#228B22"
-                else:
-                    continue
-                # line_style = "solid" if model.id < 2 else "dotted"
-                line_width = 2 if model.id < 2 else 1.2
                 means = self.mean_of_chunks(model.raw_sim_data, self.window_size)
                 repeated_means = np.repeat(means, self.window_size)[:len(model.raw_sim_data)]
-                plt.plot(repeated_means, color=line_color, drawstyle='steps-mid', label=label, linewidth=line_width)
+                plt.plot(repeated_means, drawstyle='steps-mid', label=label, color=self.colorblind_palette[i])
 
     def generate_cumulative_plot(self):
         """
@@ -339,8 +325,8 @@ class MultiModel:
         :side effect: Plots are displayed on the matplotlib figure canvas.
         """
         plt.xlim(self.get_cumulative_limits(model_sums=self.sum_models_entries()))
-        plt.ylabel("Model ID", size=20)
-        plt.xlabel("Total " + self.metric + " [" + self.measure_unit + "]")
+        plt.ylabel("Model ID", size=30)
+        plt.xlabel(self.x_label, size=30)
         plt.yticks(range(len(self.models)), [model.id for model in self.models])
         plt.grid(False)
 
@@ -350,8 +336,10 @@ class MultiModel:
             if is_meta_model(model):
                 plt.barh(label=label, y=i, width=cumulated_energies[i], color="red")
             else:
-                plt.barh(label=label, y=i, width=cumulated_energies[i])
-            plt.text(cumulated_energies[i], i, str(cumulated_energies[i]), ha='left', va='center', size=26)
+                round_decimals = 0 if cumulated_energies[i] > 500 else 1
+                plt.barh(label=label, y=i, width=cumulated_energies[i], color=self.colorblind_palette[i])
+                plt.text(cumulated_energies[i], i, str(int(round(cumulated_energies[i], round_decimals))), ha='left', va='center', size=26)
+
 
     def generate_cumulative_time_series_plot(self):
         """
@@ -363,7 +351,7 @@ class MultiModel:
         """
         self.compute_cumulative_time_series()
 
-        for model in self.models:
+        for model, i in self.models, range(len(self.models)):
             if is_meta_model(model):
                 cumulative_repeated = np.repeat(model.cumulative_time_series_values, self.window_size)[
                                       :len(model.processed_sim_data) * self.window_size]
@@ -380,7 +368,7 @@ class MultiModel:
             else:
                 cumulative_repeated = np.repeat(model.cumulative_time_series_values, self.window_size)[
                                       :len(model.raw_sim_data)]
-                plt.plot(cumulative_repeated, drawstyle='steps-mid', label=("Model " + str(model.id)))
+                plt.plot(cumulative_repeated, drawstyle='steps-mid', label=("Model " + str(model.id)), color=self.colorblind_palette[i])
 
     def compute_cumulative_time_series(self):
         """
