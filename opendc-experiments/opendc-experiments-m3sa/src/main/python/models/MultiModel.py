@@ -4,6 +4,7 @@ import os
 import pyarrow.parquet as pq
 import time
 from matplotlib.ticker import MaxNLocator, FuncFormatter
+from matplotlib.ticker import AutoMinorLocator
 
 from simulator_specifics import *
 from .MetaModel import MetaModel
@@ -327,14 +328,23 @@ class MultiModel:
         plt.xlim(self.get_cumulative_limits(model_sums=self.sum_models_entries()))
         plt.ylabel("Model ID", size=30)
         plt.xlabel(self.x_label, size=30)
+
+        ax = plt.gca()
+        ax.tick_params(axis='x', which='major', length=12)  # Set length of the ticks
+        ax.set_xticklabels([])  # Hide x-axis numbers
+        ax.xaxis.set_minor_locator(AutoMinorLocator(5))  # Set two minor ticks between majors
+        ax.tick_params(axis='x', which='minor', length=7, color='black')
         plt.yticks(range(len(self.models)), [model.id for model in self.models])
+
+
         plt.grid(False)
 
         cumulated_energies = self.sum_models_entries()
         for (i, model) in (enumerate(self.models)):
             label = "Meta-Model" if is_meta_model(model) else "Model " + str(model.id)
             if is_meta_model(model):
-                plt.barh(label=label, y=i, width=cumulated_energies[i], color="red")
+                plt.barh(i, cumulated_energies[i], label=label, color='#009E73', hatch='//')
+                plt.text(cumulated_energies[i], i, str(int(round(cumulated_energies[i], 0))), ha='left', va='center', size=26)
             else:
                 round_decimals = 0 if cumulated_energies[i] > 500 else 1
                 plt.barh(label=label, y=i, width=cumulated_energies[i], color=self.colorblind_palette[i])
