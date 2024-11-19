@@ -25,7 +25,7 @@
     ],
     "workloads": [
         {
-            "pathToFile": "exp2/inputs/marconi",
+            "pathToFile": "exp2/inputs/solvinity-13",
             "type": "ComputeWorkload"
         }
     ],
@@ -39,20 +39,8 @@
     ],
     "failureModels": [
         {
-            "type": "custom",
-            "iatSampler": {
-                "type": "exponential",
-                "mean": 150.5
-            },
-            "durationSampler": {
-                "type": "constant",
-                "alpha": 0.5,
-                "beta": 100.2
-            },
-            "nohSampler": {
-                "type": "constant",
-                "value": 50.5
-            }
+            "type": "prefab",
+            "prefabName": "Ldns04Exp"
         }
     ],
     "outputFolder": "exp2/",

@@ -7,11 +7,11 @@
                     "name": "A07",
                     "count": 150,
                     "cpu": {
-                        "coreCount": 96,
+                        "coreCount": 48,
                         "coreSpeed": 2100
                     },
                     "memory": {
-                        "memorySize": 196000000
+                        "memorySize": 196000000000
                     },
                     "powerModel": {
                         "modelType": "asymptotic",

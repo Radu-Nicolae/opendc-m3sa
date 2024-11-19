@@ -28,7 +28,7 @@
     ],
     "workloads": [
         {
-            "pathToFile": "exp2/inputs/marconi",
+            "pathToFile": "exp2/inputs/marconi-22",
             "type": "ComputeWorkload"
         }
     ],
@@ -40,12 +40,6 @@
             "policyType": "Mem"
         }
     ],
-    "failureModels": [
-        {
-            "type": "prefab",
-            "prefabName": "Ldns04Exp"
-        }
-    ],
-    "outputFolder": "exp2/",
+    "outputFolder": "exp2/marconi-with-failures",
     "runs": 1
 }
