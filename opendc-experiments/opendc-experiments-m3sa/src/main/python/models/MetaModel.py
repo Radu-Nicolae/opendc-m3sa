@@ -20,7 +20,7 @@ class MetaModel:
         function_map (dict): Mapping of aggregation function names to function implementations.
     """
 
-    META_MODEL_ID = -101
+    META_MODEL_ID = 'M'
 
     def __init__(self, multimodel, meta_function=None):
         """
