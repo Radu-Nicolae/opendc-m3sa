@@ -21,12 +21,53 @@ MINUTE_5 = MS_GRANULARITY
 # Apr    43     43       25     7
 # May    17     17       6      0
 # Jun    112    112      69     11
-# Jul    105    105      46     105
-# Aug    112    112      58     112
-# Sep    30     30       21     30
+# Jul    105    105      46     7
+# Aug    112    112      58     8
+# Sep    30     30       21     0
 # Oct    112    111      53     8
 # Nov    62     62       28     6
 # Dec    53     53       16     3
+
+# Granularity 15 leads to total emissions of 59.43 kg with 112 migrations
+# Granularity 60 leads to total emissions of 59.43 kg with 112 migrations
+# Granularity 240 leads to total emissions of 137.3 kg with 69 migrations
+# Granularity 1440 leads to total emissions of 124.22 kg with 11 migrations
+
+# experiment results
+# FR ----- 189.01
+# CH ----- 67.35
+# RO ----- 6654.41
+# ES ----- 3075.23
+# PT ----- 679.89
+# AT ----- 537.28
+# DE ----- 11419.32
+# IT ----- 1274.66
+# DK ----- 1407.52
+# BA ----- 6026.98
+# LU ----- 3365.57
+# MK ----- 7242.4
+# SK ----- 615.13
+# HU ----- 5404.42
+# BE ----- 608.74py
+# HR ----- 1316.96
+# SE ----- 81.73
+# LV ----- 453.57
+# GR ----- 1634.75
+# CZ ----- 2980.95
+# NO ----- 85.8
+# SI ----- 2474.47
+# FI ----- 617.16
+# BG ----- 2049.83
+# NL ----- 3504.91
+# PL ----- 6124.35
+# LT ----- 851.8
+# RS ----- 5144.83
+# EE ----- 2666.25
+# Granularity 15 leads to total emissions of 59.43 kg with 112 migrations
+# Granularity 60 leads to total emissions of 59.43 kg with 112 migrations
+# Granularity 240 leads to total emissions of 137.3 kg with 69 migrations
+# Granularity 1440 leads to total emissions of 124.22 kg with 11 migrations
+
 
 colorblind_friendly_colors = [
     "#E69F00",  # orange
@@ -92,11 +133,19 @@ markers = ['o', 'v', '^', '<', '>', 's', 'p', '*', 'h', 'H', 'D', 'd', 'P', 'X']
 
 
 class MetaModel:
-    def __init__(self, country_code, timestamps, co2_emissions, start=None, end=None):
+    def __init__(self, country_code, timestamps=[], co2_emissions=[], start=None, end=None):
         self.country_code = country_code
-        self.timestamps = timestamps.tolist()
+        try:
+            self.timestamps = timestamps.tolist()
+        except:
+            self.timestamps = timestamps
         self.timestamps_minutes = []
-        self.co2_emissions = co2_emissions.tolist()
+
+        try:
+            self.co2_emissions = co2_emissions.tolist()
+        except:
+            self.co2_emissions = co2_emissions
+
         if (start is not None) and (end is not None):
             self.trim_metamodels_by_time(start, end)
 
@@ -173,33 +222,6 @@ def select_model_by_location(metamodels, location):
             return metamodel
 
     raise Exception(f"Location {location} not found in metamodels")
-
-
-def simulate_with_migration(metamodels, migration_granularity, starting_location):
-    model_length = len(metamodels[0].timestamps)
-    migration_count = 0
-    migration_model = []
-    location_of_running = select_model_by_location(metamodels, starting_location)
-
-    i = 0
-    migration_tracker = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-    while i < model_length:
-        # calculate the migration cost
-        if i % (migration_granularity / MS_GRANULARITY) == 0:
-            if location_of_running != select_model_by_location(metamodels, starting_location):  # if we need to migrate
-                location_of_running = select_model_by_location(metamodels, starting_location)
-                migration_count += 1
-                migration_tracker[i // (model_length // 12)] += 1
-
-        migration_model.append(location_of_running.co2_emissions[i])
-        i += 1
-
-    migration_model_total = round(sum(migration_model) * SCALE_TO_MARCONI / 1e6, 2)
-
-    print(migration_tracker)
-    return migration_count, migration_model_total, migration_model
-
 
 def minimum_at_timestamp(metamodels, timestamp):
     """
@@ -284,31 +306,40 @@ def get_lowest_emission_location_at_timestamp(metamodels, timestamp_index):
     raise Exception(f"Location {location} not found in metamodels")
 
 
-def migrate_at_granularity(metamodel, granularity):
+def migrate_at_granularity(metamodels, granularity):
     """
     Granularity is in multiples of 15 minutes. for instance, if the granularity is 15, then choose 15. If it is 1h, then 4.
-    :param metamodel:
+    :param metamodels:
     :param granularity:
     :param starting_location:
     :return:
     """
     granularity /= 15
-    model_len = len(metamodel[0].timestamps)
+    model_len = len(metamodels[0].timestamps)
     migration_count = 0
 
-    starting_metamodel = get_lowest_emission_location_at_timestamp(metamodel, 0)
+    current_model = get_lowest_emission_location_at_timestamp(metamodels, 0)
+    co2_emissions = []
 
     i = 0
     while i < model_len:
         if i % granularity == 0:
-            lowest_model = get_lowest_emission_location_at_timestamp(metamodel, i)
-            if starting_metamodel.country_code.lower() != lowest_model.country_code.lower():
+            lowest_model = get_lowest_emission_location_at_timestamp(metamodels, i)
+            if current_model.country_code.lower() != lowest_model.country_code.lower():
                 migration_count += 1
-                starting_metamodel = lowest_model
+                current_model = lowest_model
+
+        co2_emissions.append(current_model.co2_emissions[i])
 
         i += 1
 
-    return migration_count
+    metamodel = MetaModel(
+        timestamps =metamodels[0].timestamps,
+        co2_emissions = co2_emissions,
+        country_code="EU"
+    )
+
+    return migration_count, metamodel
 
 
 def align_metamodels_by_size(metamodels):
@@ -327,19 +358,6 @@ def align_metamodels_by_size(metamodels):
 
 
 if __name__ == '__main__':
-    metamodels = get_metamodels(
-        path="./inputs/co2/",
-        start=pd.Timestamp('2023-01-01 00:00:00'),
-        end=pd.Timestamp('2023-01-31 23:59:59')
-    )
-    metamodels = align_metamodels_by_size(metamodels)
-
-    # plot_total_emissions(metamodels)
-    print("Country, Tons CO2")
-    for metamodel in metamodels:
-        # print all the relevant details on one line with new line at the end
-        print(f"{metamodel.country_code} ----- {metamodel.total_emissions}")
-
     starts = [pd.Timestamp('2023-01-01 00:00:00'), pd.Timestamp('2023-02-01 00:00:00'),
               pd.Timestamp('2023-03-01 00:00:00'), pd.Timestamp('2023-04-01 00:00:00'),
               pd.Timestamp('2023-05-01 00:00:00'), pd.Timestamp('2023-06-01 00:00:00'),
@@ -371,8 +389,40 @@ if __name__ == '__main__':
         )
         metamodels = align_metamodels_by_size(metamodels)
         for j in range(0, 1):
-            granularity = granularities[j]
-            print(f"Month {i}. Migration count at granularity", granularity, "is", migrate_at_granularity(metamodels, granularity=granularity))
+            granularity = granularities[3]
+            print(f"Month {i}. Migration count at granularity", granularity, "is", migrate_at_granularity(metamodels, granularity=granularity)[0])
 
 
 
+    # selected period: Jun 2023
+    start = starts[5]
+    end = ends[5]
+
+    metamodels = get_metamodels(
+        path="./inputs/co2/",
+        start=start,
+        end=end
+    )
+    metamodels = align_metamodels_by_size(metamodels)
+    # plot_all_emissions(metamodels, start, end, plot_names[5])
+
+    for metamodel in metamodels:
+        # print all the relevant details on one line with new line at the end
+        print(f"{metamodel.country_code} ----- {metamodel.total_emissions}")
+
+
+    # migrations, metamodel = migrate_at_granularity(metamodels, granularity=15)
+    # print(f"Granularity 15 leads to total emissions of {metamodel.total_emissions} kg with {migrations} migrations")
+    #
+    # migrations, metamodel = migrate_at_granularity(metamodels, granularity=60)
+    # print(f"Granularity 60 leads to total emissions of {metamodel.total_emissions} kg with {migrations} migrations")
+    #
+    # migrations, metamodel = migrate_at_granularity(metamodels, granularity=240)
+    # print(f"Granularity 240 leads to total emissions of {metamodel.total_emissions} kg with {migrations} migrations")
+    #
+    # migrations, metamodel = migrate_at_granularity(metamodels, granularity=1440)
+    # print(f"Granularity 1440 leads to total emissions of {metamodel.total_emissions} kg with {migrations} migrations")
+
+    migrate_at_granularity(metamodels, granularity=60)
+    migrate_at_granularity(metamodels, granularity=240)
+    migrate_at_granularity(metamodels, granularity=1440)
