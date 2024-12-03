@@ -82,6 +82,7 @@ class MultiModel:
         self.starting_time = time.time()
         self.end_time = None
         self.workload_time = None
+        self.timestamps = None
 
         self.user_input = user_input
 
@@ -207,22 +208,28 @@ class MultiModel:
         :raise ValueError: If the unit scaling has not been set prior to model initialization.
         """
         model_id = 0
+        if self.unit_scaling is None:
+            raise ValueError("Unit scaling factor is not set. Please ensure it is set correctly.")
 
         for simulation_folder in os.listdir(self.raw_output_path):
             if simulation_folder == "metamodel":
                 continue
             path_of_parquet_file = f"{self.raw_output_path}/{simulation_folder}/seed={self.seed}/{SIMULATION_DATA_FILE}.parquet"
-            parquet_file = pq.read_table(path_of_parquet_file).to_pandas()
-            raw = parquet_file.select_dtypes(include=[np.number]).groupby("timestamp")
-            raw = raw[self.metric].sum().values
+            columns_to_read = ['timestamp', self.metric]
+            parquet_file = pq.read_table(path_of_parquet_file, columns=columns_to_read).to_pandas()
 
-            if self.unit_scaling is None:
-                raise ValueError("Unit scaling factor is not set. Please ensure it is set correctly.")
-
-            raw = np.divide(raw, self.unit_scaling)
+            grouped_data = parquet_file.groupby('timestamp')[self.metric].sum()
+            raw = np.divide(grouped_data.values, self.unit_scaling)  # Apply unit scaling
+            timestamps = parquet_file['timestamp'].unique()
 
             model = Model(raw_sim_data=raw, id=model_id, path=self.output_folder_path)
             self.models.append(model)
+            if self.timestamps is None:
+                self.timestamps = timestamps
+
+            if self.timestamps is not None and (len(self.timestamps) > len(timestamps)):
+                self.timestamps = timestamps
+
             model_id += 1
 
         self.max_model_len = min([len(model.raw_sim_data) for model in self.models])
@@ -241,7 +248,8 @@ class MultiModel:
                 numeric_values = model.raw_sim_data
                 model.processed_sim_data = self.mean_of_chunks(numeric_values, self.window_size)
 
-    def generate_plot(self):
+
+    def generate_plot(self, metamodel=False):
         """
         Creates and saves plots based on the processed data from multiple models. This method determines
         the type of plot to generate based on user input and invokes the appropriate plotting function.
@@ -281,11 +289,11 @@ class MultiModel:
         self.set_y_axis_lim()
 
         if self.plot_type == "time_series":
-            self.generate_time_series_plot()
+            self.generate_time_series_plot(metamodel=metamodel)
         elif self.plot_type == "cumulative":
             self.generate_cumulative_plot()
         elif self.plot_type == "cumulative_time_series":
-            self.generate_cumulative_time_series_plot()
+            self.generate_cumulative_time_series_plot(metamodel=metamodel)
         else:
             raise ValueError(
                 "Plot type not recognized. Please enter a valid plot type. The plot can be either "
@@ -297,7 +305,7 @@ class MultiModel:
         self.save_plot()
         self.output_stats()
 
-    def generate_time_series_plot(self):
+    def generate_time_series_plot(self, metamodel):
         """
         Plots time series data for each model. This function iterates over each model, applies the defined
         windowing function to smooth the data, and plots the resulting series.
@@ -305,6 +313,8 @@ class MultiModel:
         :return: None
         :side effect: Plots are displayed on the matplotlib figure canvas.
         """
+        if metamodel:
+            self.colorblind_palette = ["#b3b3b3" for _ in range(len(self.models))]
         for (i, model) in enumerate(self.models):
             label = "Meta-Model" if is_meta_model(model) else "Model " + str(model.id)
             if is_meta_model(model):
@@ -340,6 +350,7 @@ class MultiModel:
         plt.grid(False)
 
         cumulated_energies = self.sum_models_entries()
+        self.colorblind_palette = ["#b3b3b3" for _ in range(len(self.models))]
         for (i, model) in (enumerate(self.models)):
             label = "Meta-Model" if is_meta_model(model) else "Model " + str(model.id)
             if is_meta_model(model):
@@ -351,7 +362,7 @@ class MultiModel:
                 plt.text(cumulated_energies[i], i, str(int(round(cumulated_energies[i], round_decimals))), ha='left', va='center', size=26)
 
 
-    def generate_cumulative_time_series_plot(self):
+    def generate_cumulative_time_series_plot(self, metamodel):
         """
         Generates a plot showing the cumulative data over time for each model. This visual representation is
         useful for analyzing trends and the accumulation of values over time.
@@ -361,20 +372,16 @@ class MultiModel:
         """
         self.compute_cumulative_time_series()
 
-        for model, i in self.models, range(len(self.models)):
+        if metamodel:
+            self.colorblind_palette = ["#b3b3b3" for _ in range(len(self.models))]
+
+        for (i, model) in enumerate(self.models):
+            label = "Meta-Model" if is_meta_model(model) else "Model " + str(model.id)
             if is_meta_model(model):
                 cumulative_repeated = np.repeat(model.cumulative_time_series_values, self.window_size)[
                                       :len(model.processed_sim_data) * self.window_size]
-                plt.plot(
-                    cumulative_repeated,
-                    drawstyle='steps-mid',
-                    label=("Meta-Model"),
-                    color="red",
-                    linestyle="--",
-                    marker="o",
-                    markevery=max(1, len(cumulative_repeated) // 10),
-                    linewidth=3
-                )
+                plt.plot(cumulative_repeated, label=label, drawstyle='steps-mid', color="#228B22", linestyle="solid",
+                         linewidth=2)
             else:
                 cumulative_repeated = np.repeat(model.cumulative_time_series_values, self.window_size)[
                                       :len(model.raw_sim_data)]

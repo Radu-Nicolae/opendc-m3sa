@@ -42,7 +42,7 @@ class MetaModel:
         self.meta_model = Model(
             raw_sim_data=[],
             id=self.META_MODEL_ID,
-            path=self.multi_model.output_folder_path
+            path=self.multi_model.output_folder_path,
         )
 
         if meta_function is not None:
@@ -114,7 +114,7 @@ class MetaModel:
         :side effect: Displays a time series plot using the multi_model's plotting capabilities.
         """
         self.multi_model.models.append(self.meta_model)
-        self.multi_model.generate_plot()
+        self.multi_model.generate_plot(metamodel=True)
 
     def compute_cumulative(self):
         """
@@ -160,7 +160,7 @@ class MetaModel:
         :side effect: Displays a cumulative time series plot using the multi_model's plotting capabilities.
         """
         self.multi_model.models.append(self.meta_model)
-        self.multi_model.generate_plot()
+        self.multi_model.generate_plot(metamodel=True)
 
     def output_metamodel(self):
         """
@@ -171,7 +171,11 @@ class MetaModel:
         directory_path = os.path.join(self.multi_model.output_folder_path, "raw-output/metamodel/seed=0")
         os.makedirs(directory_path, exist_ok=True)
         current_path = os.path.join(directory_path, f"{self.multi_model.metric}.parquet")
-        df = pd.DataFrame({'processed_sim_data': self.meta_model.processed_sim_data})
+        minimum = min(len(self.multi_model.timestamps), len(self.meta_model.processed_sim_data))
+        df = pd.DataFrame({
+            "timestamp": self.multi_model.timestamps[:minimum],
+            self.multi_model.metric: self.meta_model.processed_sim_data[:minimum]
+        })
         df.to_parquet(current_path, index=False)
 
     def mean(self, chunks):

@@ -138,7 +138,7 @@ public fun addExportModel(
                 bufferSize = 4096,
                 computeExportConfig = scenario.computeExportConfig,
             ),
-            Duration.ofSeconds(scenario.exportModelSpec.exportInterval),
+            Duration.ofMillis(scenario.exportModelSpec.exportInterval),
             startTime,
             carbonTrace,
         ),

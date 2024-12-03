@@ -2,68 +2,68 @@
     "name": "outputs/",
     "topologies": [
         {
-            "pathToFile": "exp4/inputs/topologies/topology_sqrt.json"
+            "pathToFile": "exp3/inputs/topologies/topology_sqrt.json"
         },
         {
-            "pathToFile": "exp4/inputs/topologies/topology_linear.json"
+            "pathToFile": "exp3/inputs/topologies/topology_linear.json"
         },
         {
-            "pathToFile": "exp4/inputs/topologies/topology_square.json"
+            "pathToFile": "exp3/inputs/topologies/topology_square.json"
         },
         {
-            "pathToFile": "exp4/inputs/topologies/topology_cubic.json"
+            "pathToFile": "exp3/inputs/topologies/topology_cubic.json"
         },
         {
-            "pathToFile": "exp4/inputs/topologies/topology_mse.json"
+            "pathToFile": "exp3/inputs/topologies/topology_mse.json"
         },
         {
-            "pathToFile": "exp4/inputs/topologies/topology_asymptotic1.json"
+            "pathToFile": "exp3/inputs/topologies/topology_asymptotic1.json"
         },
         {
-            "pathToFile": "exp4/inputs/topologies/topology_asymptotic2.json"
+            "pathToFile": "exp3/inputs/topologies/topology_asymptotic2.json"
         },
         {
-            "pathToFile": "exp4/inputs/topologies/topology_asymptotic3.json"
+            "pathToFile": "exp3/inputs/topologies/topology_asymptotic3.json"
         },
         {
-            "pathToFile": "exp4/inputs/topologies/topology_sqrt_off.json"
+            "pathToFile": "exp3/inputs/topologies/topology_sqrt_off.json"
         },
         {
-            "pathToFile": "exp4/inputs/topologies/topology_linear_off.json"
+            "pathToFile": "exp3/inputs/topologies/topology_linear_off.json"
         },
         {
-            "pathToFile": "exp4/inputs/topologies/topology_square_off.json"
+            "pathToFile": "exp3/inputs/topologies/topology_square_off.json"
         },
         {
-            "pathToFile": "exp4/inputs/topologies/topology_cubic_off.json"
+            "pathToFile": "exp3/inputs/topologies/topology_cubic_off.json"
         },
         {
-            "pathToFile": "exp4/inputs/topologies/topology_mse_off.json"
+            "pathToFile": "exp3/inputs/topologies/topology_mse_off.json"
         },
         {
-            "pathToFile": "exp4/inputs/topologies/topology_asymptotic1_off.json"
+            "pathToFile": "exp3/inputs/topologies/topology_asymptotic1_off.json"
         },
         {
-            "pathToFile": "exp4/inputs/topologies/topology_asymptotic2_off.json"
+            "pathToFile": "exp3/inputs/topologies/topology_asymptotic2_off.json"
         },
         {
-            "pathToFile": "exp4/inputs/topologies/topology_asymptotic3_off.json"
+            "pathToFile": "exp3/inputs/topologies/topology_asymptotic3_off.json"
         }
     ],
     "workloads": [
         {
-            "pathToFile": "exp4/inputs/marconi-22",
+            "pathToFile": "exp3/inputs/marconi-22",
             "type": "ComputeWorkload"
         }
     ],
     "carbonTracePaths": [
-        "exp4/inputs/co2/entso-e-hu-2023_1-2023_12.parquet"
+        "exp3/inputs/co2/hu-2023_1-2023_12.parquet"
     ],
     "allocationPolicies": [
         {
             "policyType": "Mem"
         }
     ],
-    "outputFolder": "exp4/",
+    "outputFolder": "exp3/",
     "runs": 1
 }

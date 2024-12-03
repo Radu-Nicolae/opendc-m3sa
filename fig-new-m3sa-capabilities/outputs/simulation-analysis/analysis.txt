@@ -1,0 +1,672 @@
+Analysis file created.
+
+
+========================================
+Simulation made at 2024-11-27 10:58:54
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 10:58:54
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.6s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:05:25
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:05:25
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:07:10
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:07:10
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:11:05
+Metric: carbon_emission
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:11:05
+Metric: carbon_emission
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:16:07
+Metric: carbon_emission
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:17:15
+Metric: carbon_emission
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:17:15
+Metric: carbon_emission
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:19:38
+Metric: carbon_emission
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:19:38
+Metric: carbon_emission
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.6s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:20:47
+Metric: carbon_emission
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:20:47
+Metric: carbon_emission
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:22:07
+Metric: carbon_emission
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:22:07
+Metric: carbon_emission
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:36:34
+Metric: carbon_emission
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:36:34
+Metric: carbon_emission
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:38:21
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:38:21
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:39:17
+Metric: carbon_emission
+Unit: G
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:39:18
+Metric: carbon_emission
+Unit: G
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:40:48
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:40:48
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:42:04
+Metric: carbon_emission
+Unit: G
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:42:04
+Metric: carbon_emission
+Unit: G
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:45:04
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:45:04
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:45:59
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 11:46:00
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 12:12:39
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 12:12:39
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:44:29
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:44:30
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:46:18
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:46:18
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:49:08
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:49:08
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:50:34
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:50:34
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:51:18
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:51:18
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:55:04
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:55:04
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:55:42
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:55:42
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:56:34
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:56:34
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:58:14
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:58:14
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:59:56
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 13:59:56
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 14:01:30
+Metric: carbon_emission
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 14:01:30
+Metric: carbon_emission
+Unit: 
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.6s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 14:03:08
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 14:03:09
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 14:05:14
+Metric: carbon_emission
+Unit: G
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.4s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 14:05:14
+Metric: carbon_emission
+Unit: G
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_time_series_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 14:43:00
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================
+
+
+========================================
+Simulation made at 2024-11-27 14:43:00
+Metric: carbon_emission
+Unit: M
+Window size: 1
+Sample count in raw sim data: 2758
+Computing time 0.5s
+Plot path/Users/raz/atlarge/opendc/fig-new-m3sa-capabilities//outputs/simulation-analysis/carbon_emission/cumulative_plot_multimodel_metric=carbon_emission_window=1.pdf
+========================================

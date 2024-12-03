@@ -1,0 +1,45 @@
+{
+    "name": "outputs/",
+    "topologies": [
+        {
+            "pathToFile": "fig-new-m3sa-capabilities/inputs/topologies/topology_sqrt.json"
+        },
+        {
+            "pathToFile": "fig-new-m3sa-capabilities/inputs/topologies/topology_linear.json"
+        },
+        {
+            "pathToFile": "fig-new-m3sa-capabilities/inputs/topologies/topology_square.json"
+        },
+        {
+            "pathToFile": "fig-new-m3sa-capabilities/inputs/topologies/topology_cubic.json"
+        },
+        {
+            "pathToFile": "fig-new-m3sa-capabilities/inputs/topologies/topology_mse.json"
+        },
+        {
+            "pathToFile": "fig-new-m3sa-capabilities/inputs/topologies/topology_asymptotic1.json"
+        },
+        {
+            "pathToFile": "fig-new-m3sa-capabilities/inputs/topologies/topology_asymptotic2.json"
+        },
+        {
+            "pathToFile": "fig-new-m3sa-capabilities/inputs/topologies/topology_asymptotic3.json"
+        }
+    ],
+    "workloads": [
+        {
+            "pathToFile": "fig-new-m3sa-capabilities/inputs/marconi-22",
+            "type": "ComputeWorkload"
+        }
+    ],
+    "carbonTracePaths": [
+        "fig-new-m3sa-capabilities/inputs/carbon_2022.parquet"
+    ],
+    "allocationPolicies": [
+        {
+            "policyType": "Mem"
+        }
+    ],
+    "outputFolder": "fig-new-m3sa-capabilities/",
+    "runs": 1
+}

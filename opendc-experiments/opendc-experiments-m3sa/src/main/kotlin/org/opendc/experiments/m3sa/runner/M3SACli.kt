@@ -62,11 +62,31 @@ internal class M3SACommand : CliktCommand(name = "experiment") {
         .file(canBeDir = false, canBeFile = true)
         .defaultLazy { File("") }
 
+    var n = 1
     override fun run() {
+        // read the file analysis and create one if doesn't exist
+        val file = File("analysis.txt")
+        if (!file.exists()) {
+            file.createNewFile()
+        }
+
+        if (this.n > 0) {
+            this.n -= 1
+        }
+        else {
+            file.appendText("===================================================\n")
+            println("Finished for country ${scenarioPath}")
+            return
+        };
+
+        val startTime = System.currentTimeMillis()
         println("The provided m3saPath is $m3saPath")
 
-        val experiment = getExperiment(scenarioPath).subList(0,6)
+        val experiment = getExperiment(scenarioPath).subList(0,8)
         runExperiment(experiment, parallelism)
+
+        val simulationEnd = System.currentTimeMillis()
+        println("Simulation time: ${(simulationEnd-startTime) / 1000} ms")
 
         if (m3saPath.toString().isNotEmpty()) {
             m3saAnalyze(
@@ -81,5 +101,17 @@ internal class M3SACommand : CliktCommand(name = "experiment") {
                     "===================================================",
             )
         }
+        val endTime = System.currentTimeMillis()
+        println("OpenDC time: ${(simulationEnd - startTime) / 1000.0} s")
+        println("M3SA time: ${(endTime - simulationEnd) / 1000.0} s")
+        println("Total operation time: ${(endTime - startTime) / 1000.0} s")
+
+        // append everything printed above to the file created
+        file.appendText("${n}. OpenDC time: ${(simulationEnd - startTime) / 1000.0} s\n")
+        file.appendText("${n}. M3SA time: ${(endTime - simulationEnd) / 1000.0} s\n")
+        file.appendText("${n}. Total operation time: ${(endTime - startTime) / 1000.0} s\n\n")
+
+
+        run()
     }
 }
