@@ -57,7 +57,7 @@
         }
     ],
     "carbonTracePaths": [
-        "exp3/inputs/co2/ch-2023_1-2023_12.parquet"
+        "exp3/inputs/co2/ch-2023-06.parquet"
     ],
     "allocationPolicies": [
         {
