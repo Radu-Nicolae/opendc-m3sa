@@ -4,7 +4,7 @@
     "metric": "carbon_emission",
     "window_size": 1,
     "window_function": "mean",
-    "meta_function": "median",
+    "meta_function": "mean",
     "plot_type": "time_series",
     "current_unit": "",
     "unit_scaling_magnitude": 1,

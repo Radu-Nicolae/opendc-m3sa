@@ -4,13 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 
-MS_GRANULARITY = 300000
-SCALE_TO_MARCONI = 2982 / 150  # we simulate just 150 nodes, but we have 3812 nodes in the real network
-
-DAY = MS_GRANULARITY * 12 * 24
-HOUR = MS_GRANULARITY * 12
-MINUTE_5 = MS_GRANULARITY
-
+from exp3.co2_migrator import SCALE_TO_MARCONI
 
 # recorded data
 #       | MIGRATION COUNT PER INTERVAL|
@@ -124,11 +118,9 @@ colorblind_friendly_colors = [
     "#E55B3C",  # terra cotta
     "#C6DC67",  # pistachio
 ]
+SCALE_TO_MARCONI = 2982 / 150
 
-# make an array with all existent line styles in python
 linestyles = ['-', '--', '-.', ':']
-
-# make an array with all existent markers in python
 markers = ['o', 'v', '^', '<', '>', 's', 'p', '*', 'h', 'H', 'D', 'd', 'P', 'X']
 
 
@@ -149,19 +141,10 @@ class MetaModel:
         if (start is not None) and (end is not None):
             self.trim_metamodels_by_time(start, end)
 
-
         self.total_emissions = sum(self.co2_emissions)
-        self.total_emissions = self.total_emissions * SCALE_TO_MARCONI / 1e3  # emissions in kg, at marconi scale
+        self.total_emissions = self.total_emissions# emissions in tons   , at marconi scale
         self.total_emissions = round(self.total_emissions, 2)
-        self.timestamps_to_minutes()
 
-
-
-    def timestamps_to_minutes(self):
-        for timestamp in self.timestamps:
-            local = time.mktime(timestamp.timetuple()) - 1672527600
-            local = local / 60
-            self.timestamps_minutes.append(int(local))
 
     def trim_metamodels_by_time(self, start, end):
         """
@@ -190,26 +173,20 @@ class MetaModel:
         self.co2_emissions = self.co2_emissions[index_of_start:index_of_termination]
 
 
-# class Migrator:
-#     def migrate(self):
 
-def get_metamodels(path, start=None, end=None):
-    # for every file at the path, read the file
+
+def get_metamodels(path):
     metamodels = []
     for filename in os.listdir(path):
-        # if filename[:2] == "at" or filename[:2] == "fr":
-        #     continue
         if filename.endswith(".parquet"):
-            file = pd.read_parquet(path + filename).groupby('timestamp').sum()
+            file = pd.read_parquet(path + filename)
             timestamps = file.index
-            co2_emissions = file["carbon_intensity"]
+            co2 = file["carbon_emission"]
             metamodels.append(
                 MetaModel(
                     country_code=filename[:2],  # country code is (must be) the first 2 characters of the file name
                     timestamps=timestamps,
-                    co2_emissions=co2_emissions,
-                    start=start,
-                    end=end
+                    co2_emissions=co2
                 )
             )
 
@@ -222,6 +199,7 @@ def select_model_by_location(metamodels, location):
             return metamodel
 
     raise Exception(f"Location {location} not found in metamodels")
+
 
 def minimum_at_timestamp(metamodels, timestamp):
     """
@@ -334,8 +312,8 @@ def migrate_at_granularity(metamodels, granularity):
         i += 1
 
     metamodel = MetaModel(
-        timestamps =metamodels[0].timestamps,
-        co2_emissions = co2_emissions,
+        timestamps=metamodels[0].timestamps,
+        co2_emissions=co2_emissions,
         country_code="EU"
     )
 
@@ -357,72 +335,28 @@ def align_metamodels_by_size(metamodels):
     return metamodels
 
 
-if __name__ == '__main__':
-    starts = [pd.Timestamp('2023-01-01 00:00:00'), pd.Timestamp('2023-02-01 00:00:00'),
-              pd.Timestamp('2023-03-01 00:00:00'), pd.Timestamp('2023-04-01 00:00:00'),
-              pd.Timestamp('2023-05-01 00:00:00'), pd.Timestamp('2023-06-01 00:00:00'),
-              pd.Timestamp('2023-07-01 00:00:00'), pd.Timestamp('2023-08-01 00:00:00'),
-              pd.Timestamp('2023-09-01 00:00:00'), pd.Timestamp('2023-10-01 00:00:00'),
-              pd.Timestamp('2023-11-01 00:00:00'), pd.Timestamp('2023-12-01 00:00:00')]
-
-    ends = [pd.Timestamp('2023-01-31 00:00:00'), pd.Timestamp('2023-02-28 00:00:00'),
-            pd.Timestamp('2023-03-31 00:00:00'), pd.Timestamp('2023-04-30 00:00:00'),
-            pd.Timestamp('2023-05-31 00:00:00'), pd.Timestamp('2023-06-30 00:00:00'),
-            pd.Timestamp('2023-07-31 00:00:00'), pd.Timestamp('2023-08-31 00:00:00'),
-            pd.Timestamp('2023-09-30 00:00:00'), pd.Timestamp('2023-10-31 00:00:00'),
-            pd.Timestamp('2023-11-30 00:00:00'), pd.Timestamp('2023-12-30 00:00:00')]
-
-    plot_names = ["jan2023.pdf", "feb2023.pdf", "mar2023.pdf", "apr2023.pdf", "may2023.pdf", "jun2023.pdf",
-                  "jul2023.pdf", "aug2023.pdf", "sep2023.pdf", "oct2023.pdf", "nov2023.pdf", "dec2023.pdf"]
-
-    granularities = [15, 60, 240, 1440]
-
-    i = 0
-    j = 0
-    for i in range(0, 12):
-        start = starts[i]
-        end = ends[i]
-        metamodels = get_metamodels(
-            path="./inputs/co2/",
-            start=start,
-            end=end
-        )
-        metamodels = align_metamodels_by_size(metamodels)
-        for j in range(0, 1):
-            granularity = granularities[3]
-            print(f"Month {i}. Migration count at granularity", granularity, "is", migrate_at_granularity(metamodels, granularity=granularity)[0])
-
-
-
-    # selected period: Jun 2023
-    start = starts[5]
-    end = ends[5]
-
-    metamodels = get_metamodels(
-        path="./inputs/co2/",
-        start=start,
-        end=end
-    )
-    metamodels = align_metamodels_by_size(metamodels)
-    # plot_all_emissions(metamodels, start, end, plot_names[5])
-
+def output_analysis():
     for metamodel in metamodels:
         # print all the relevant details on one line with new line at the end
         print(f"{metamodel.country_code} ----- {metamodel.total_emissions}")
 
 
-    # migrations, metamodel = migrate_at_granularity(metamodels, granularity=15)
-    # print(f"Granularity 15 leads to total emissions of {metamodel.total_emissions} kg with {migrations} migrations")
-    #
-    # migrations, metamodel = migrate_at_granularity(metamodels, granularity=60)
-    # print(f"Granularity 60 leads to total emissions of {metamodel.total_emissions} kg with {migrations} migrations")
-    #
-    # migrations, metamodel = migrate_at_granularity(metamodels, granularity=240)
-    # print(f"Granularity 240 leads to total emissions of {metamodel.total_emissions} kg with {migrations} migrations")
-    #
-    # migrations, metamodel = migrate_at_granularity(metamodels, granularity=1440)
-    # print(f"Granularity 1440 leads to total emissions of {metamodel.total_emissions} kg with {migrations} migrations")
+    print("Granularity 15 leads to total emissions of ", migrate_at_granularity(metamodels, granularity=15)[1].total_emissions, "kg with", migrate_at_granularity(metamodels, granularity=15)[0], "migrations")
+    print("Granularity 60 leads to total emissions of ", migrate_at_granularity(metamodels, granularity=60)[1].total_emissions, "kg with", migrate_at_granularity(metamodels, granularity=60)[0], "migrations")
+    print("Granularity 240 leads to total emissions of ", migrate_at_granularity(metamodels, granularity=240)[1].total_emissions, "kg with", migrate_at_granularity(metamodels, granularity=240)[0], "migrations")
+    print("Granularity 1440 leads to total emissions of ", migrate_at_granularity(metamodels, granularity=1440)[1].total_emissions, "kg with", migrate_at_granularity(metamodels, granularity=1440)[0], "migrations")
 
-    migrate_at_granularity(metamodels, granularity=60)
-    migrate_at_granularity(metamodels, granularity=240)
-    migrate_at_granularity(metamodels, granularity=1440)
+    plt.figure(figsize=(500, 10))
+    for metamodel in metamodels:
+        plt.plot(metamodel.timestamps, metamodel.co2_emissions, label=metamodel.country_code)
+
+    plt.legend()
+    plt.show()
+
+
+if __name__ == '__main__':
+    metamodels = get_metamodels(
+        path="metamodels/"
+    )
+    metamodels = align_metamodels_by_size(metamodels)
+    output_analysis()
