@@ -68,7 +68,7 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 },
 {
     "name": "outputs/",
@@ -140,7 +140,7 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 },
 {
     "name": "outputs/",
@@ -212,7 +212,7 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 },
 {
     "name": "outputs/",
@@ -284,7 +284,7 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 },
 {
     "name": "outputs/",
@@ -356,7 +356,7 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 },
 {
     "name": "outputs/",
@@ -428,7 +428,7 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 },
 {
     "name": "outputs/",
@@ -500,7 +500,7 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 },
 {
     "name": "outputs/",
@@ -572,7 +572,7 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 },
 {
     "name": "outputs/",
@@ -644,7 +644,7 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 },
 {
     "name": "outputs/",
@@ -716,7 +716,7 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 },
 {
     "name": "outputs/",
@@ -788,7 +788,7 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 },
 {
     "name": "outputs/",
@@ -860,7 +860,7 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 },
 {
     "name": "outputs/",
@@ -932,7 +932,7 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 },
 {
     "name": "outputs/",
@@ -1004,7 +1004,7 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 },
 {
     "name": "outputs/",
@@ -1076,7 +1076,7 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 },
 {
     "name": "outputs/",
@@ -1148,5 +1148,5 @@
         "pathToFile": "exp3/inputs/marconi-22",
         "type": "ComputeWorkload"
     },
-    "carbonTracePath": "exp3/inputs/co2/EU-migration=1h-2023-06.parquet"
+    "carbonTracePath": "exp3/inputs/co2/sk-2023-06.parquet"
 }]
