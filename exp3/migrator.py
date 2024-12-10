@@ -24,8 +24,8 @@ class MetaModel:
             self.trim_metamodels_by_time(start, end)
 
         self.total_emissions = sum(self.co2_emissions)
-        self.total_emissions = self.total_emissions / 1e6 # emissions in tons   , at marconi scale
-        self.total_emissions = round(self.total_emissions, 4)
+        self.total_emissions = self.total_emissions / 1e3 # emissions in tons   , at marconi scale
+        self.total_emissions = round(self.total_emissions, 2)
 
     def trim_metamodels_by_time(self, start, end):
         """
