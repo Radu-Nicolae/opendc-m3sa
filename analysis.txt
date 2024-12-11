@@ -1043,3 +1043,483 @@ Dataset size: 50,160
 0. Total operation time: 34.493 s
 
 ===================================================
+0. OpenDC time: 34.849 s
+0. M3SA time: 1.861 s
+0. Total operation time: 36.71 s
+
+===================================================
+0. OpenDC time: 32.84 s
+0. M3SA time: 1.346 s
+0. Total operation time: 34.186 s
+
+===================================================
+0. OpenDC time: 35.264 s
+0. M3SA time: 1.283 s
+0. Total operation time: 36.547 s
+
+===================================================
+0. OpenDC time: 34.839 s
+0. M3SA time: 1.33 s
+0. Total operation time: 36.169 s
+
+===================================================
+0. OpenDC time: 34.516 s
+0. M3SA time: 1.327 s
+0. Total operation time: 35.843 s
+
+===================================================
+0. OpenDC time: 34.685 s
+0. M3SA time: 1.26 s
+0. Total operation time: 35.945 s
+
+===================================================
+0. OpenDC time: 67.105 s
+0. M3SA time: 1.471 s
+0. Total operation time: 68.576 s
+
+===================================================
+0. OpenDC time: 69.609 s
+0. M3SA time: 1.459 s
+0. Total operation time: 71.068 s
+
+===================================================
+0. OpenDC time: 69.801 s
+0. M3SA time: 1.647 s
+0. Total operation time: 71.448 s
+
+===================================================
+0. OpenDC time: 62.628 s
+0. M3SA time: 1.429 s
+0. Total operation time: 64.057 s
+
+===================================================
+0. OpenDC time: 62.678 s
+0. M3SA time: 1.441 s
+0. Total operation time: 64.119 s
+
+===================================================
+0. OpenDC time: 62.546 s
+0. M3SA time: 1.44 s
+0. Total operation time: 63.986 s
+
+===================================================
+0. OpenDC time: 63.02 s
+0. M3SA time: 1.435 s
+0. Total operation time: 64.455 s
+
+===================================================
+0. OpenDC time: 62.859 s
+0. M3SA time: 1.443 s
+0. Total operation time: 64.302 s
+
+===================================================
+0. OpenDC time: 63.366 s
+0. M3SA time: 1.424 s
+0. Total operation time: 64.79 s
+
+===================================================
+0. OpenDC time: 63.167 s
+0. M3SA time: 1.46 s
+0. Total operation time: 64.627 s
+
+===================================================
+0. OpenDC time: 63.663 s
+0. M3SA time: 1.439 s
+0. Total operation time: 65.102 s
+
+===================================================
+0. OpenDC time: 63.224 s
+0. M3SA time: 1.424 s
+0. Total operation time: 64.648 s
+
+===================================================
+0. OpenDC time: 62.321 s
+0. M3SA time: 1.485 s
+0. Total operation time: 63.806 s
+
+===================================================
+0. OpenDC time: 62.085 s
+0. M3SA time: 1.417 s
+0. Total operation time: 63.502 s
+
+===================================================
+0. OpenDC time: 62.446 s
+0. M3SA time: 1.414 s
+0. Total operation time: 63.86 s
+
+===================================================
+0. OpenDC time: 64.001 s
+0. M3SA time: 1.44 s
+0. Total operation time: 65.441 s
+
+===================================================
+0. OpenDC time: 62.824 s
+0. M3SA time: 1.418 s
+0. Total operation time: 64.242 s
+
+===================================================
+0. OpenDC time: 62.583 s
+0. M3SA time: 1.424 s
+0. Total operation time: 64.007 s
+
+===================================================
+0. OpenDC time: 63.655 s
+0. M3SA time: 1.629 s
+0. Total operation time: 65.284 s
+
+===================================================
+0. OpenDC time: 63.623 s
+0. M3SA time: 1.43 s
+0. Total operation time: 65.053 s
+
+===================================================
+0. OpenDC time: 63.282 s
+0. M3SA time: 1.44 s
+0. Total operation time: 64.722 s
+
+===================================================
+0. OpenDC time: 62.07 s
+0. M3SA time: 1.445 s
+0. Total operation time: 63.515 s
+
+===================================================
+0. OpenDC time: 63.17 s
+0. M3SA time: 1.471 s
+0. Total operation time: 64.641 s
+
+===================================================
+0. OpenDC time: 63.026 s
+0. M3SA time: 1.426 s
+0. Total operation time: 64.452 s
+
+===================================================
+0. OpenDC time: 62.683 s
+0. M3SA time: 1.436 s
+0. Total operation time: 64.119 s
+
+===================================================
+0. OpenDC time: 62.274 s
+0. M3SA time: 1.479 s
+0. Total operation time: 63.753 s
+
+===================================================
+0. OpenDC time: 62.577 s
+0. M3SA time: 1.488 s
+0. Total operation time: 64.065 s
+
+===================================================
+0. OpenDC time: 62.952 s
+0. M3SA time: 1.434 s
+0. Total operation time: 64.386 s
+
+===================================================
+0. OpenDC time: 62.929 s
+0. M3SA time: 1.47 s
+0. Total operation time: 64.399 s
+
+===================================================
+0. OpenDC time: 62.579 s
+0. M3SA time: 1.455 s
+0. Total operation time: 64.034 s
+
+===================================================
+0. OpenDC time: 63.823 s
+0. M3SA time: 1.449 s
+0. Total operation time: 65.272 s
+
+===================================================
+0. OpenDC time: 62.243 s
+0. M3SA time: 1.453 s
+0. Total operation time: 63.696 s
+
+===================================================
+0. OpenDC time: 62.718 s
+0. M3SA time: 1.469 s
+0. Total operation time: 64.187 s
+
+===================================================
+0. OpenDC time: 62.039 s
+0. M3SA time: 2.002 s
+0. Total operation time: 64.041 s
+
+===================================================
+0. OpenDC time: 62.911 s
+0. M3SA time: 0.75 s
+0. Total operation time: 63.661 s
+
+===================================================
+0. OpenDC time: 64.056 s
+0. M3SA time: 0.748 s
+0. Total operation time: 64.804 s
+
+===================================================
+0. OpenDC time: 63.086 s
+0. M3SA time: 1.445 s
+0. Total operation time: 64.531 s
+
+===================================================
+0. OpenDC time: 62.225 s
+0. M3SA time: 1.448 s
+0. Total operation time: 63.673 s
+
+===================================================
+0. OpenDC time: 62.657 s
+0. M3SA time: 0.746 s
+0. Total operation time: 63.403 s
+
+===================================================
+0. OpenDC time: 67.223 s
+0. M3SA time: 1.434 s
+0. Total operation time: 68.657 s
+
+===================================================
+0. OpenDC time: 62.49 s
+0. M3SA time: 1.463 s
+0. Total operation time: 63.953 s
+
+===================================================
+0. OpenDC time: 63.579 s
+0. M3SA time: 1.415 s
+0. Total operation time: 64.994 s
+
+===================================================
+0. OpenDC time: 65.398 s
+0. M3SA time: 2.168 s
+0. Total operation time: 67.566 s
+
+===================================================
+0. OpenDC time: 65.01 s
+0. M3SA time: 1.542 s
+0. Total operation time: 66.552 s
+
+===================================================
+0. OpenDC time: 62.86 s
+0. M3SA time: 1.489 s
+0. Total operation time: 64.349 s
+
+===================================================
+0. OpenDC time: 63.839 s
+0. M3SA time: 1.463 s
+0. Total operation time: 65.302 s
+
+===================================================
+0. OpenDC time: 63.349 s
+0. M3SA time: 1.455 s
+0. Total operation time: 64.804 s
+
+===================================================
+0. OpenDC time: 61.806 s
+0. M3SA time: 1.478 s
+0. Total operation time: 63.284 s
+
+===================================================
+0. OpenDC time: 62.916 s
+0. M3SA time: 1.478 s
+0. Total operation time: 64.394 s
+
+===================================================
+0. OpenDC time: 62.188 s
+0. M3SA time: 1.444 s
+0. Total operation time: 63.632 s
+
+===================================================
+0. OpenDC time: 63.057 s
+0. M3SA time: 1.417 s
+0. Total operation time: 64.474 s
+
+===================================================
+0. OpenDC time: 61.986 s
+0. M3SA time: 1.138 s
+0. Total operation time: 63.124 s
+
+===================================================
+0. OpenDC time: 63.994 s
+0. M3SA time: 1.471 s
+0. Total operation time: 65.465 s
+
+===================================================
+0. OpenDC time: 62.657 s
+0. M3SA time: 1.473 s
+0. Total operation time: 64.13 s
+
+===================================================
+0. OpenDC time: 62.509 s
+0. M3SA time: 1.449 s
+0. Total operation time: 63.958 s
+
+===================================================
+0. OpenDC time: 75.069 s
+0. M3SA time: 2.367 s
+0. Total operation time: 77.436 s
+
+===================================================
+0. OpenDC time: 74.529 s
+0. M3SA time: 1.847 s
+0. Total operation time: 76.376 s
+
+===================================================
+0. OpenDC time: 75.891 s
+0. M3SA time: 1.673 s
+0. Total operation time: 77.564 s
+
+===================================================
+0. OpenDC time: 76.072 s
+0. M3SA time: 1.694 s
+0. Total operation time: 77.766 s
+
+===================================================
+0. OpenDC time: 74.656 s
+0. M3SA time: 1.689 s
+0. Total operation time: 76.345 s
+
+===================================================
+0. OpenDC time: 73.362 s
+0. M3SA time: 1.759 s
+0. Total operation time: 75.121 s
+
+===================================================
+0. OpenDC time: 73.959 s
+0. M3SA time: 1.702 s
+0. Total operation time: 75.661 s
+
+===================================================
+0. OpenDC time: 72.036 s
+0. M3SA time: 1.716 s
+0. Total operation time: 73.752 s
+
+===================================================
+0. OpenDC time: 72.136 s
+0. M3SA time: 1.678 s
+0. Total operation time: 73.814 s
+
+===================================================
+0. OpenDC time: 73.146 s
+0. M3SA time: 1.712 s
+0. Total operation time: 74.858 s
+
+===================================================
+0. OpenDC time: 72.71 s
+0. M3SA time: 1.717 s
+0. Total operation time: 74.427 s
+
+===================================================
+0. OpenDC time: 73.229 s
+0. M3SA time: 1.717 s
+0. Total operation time: 74.946 s
+
+===================================================
+0. OpenDC time: 74.698 s
+0. M3SA time: 1.657 s
+0. Total operation time: 76.355 s
+
+===================================================
+0. OpenDC time: 72.516 s
+0. M3SA time: 1.662 s
+0. Total operation time: 74.178 s
+
+===================================================
+0. OpenDC time: 73.583 s
+0. M3SA time: 1.672 s
+0. Total operation time: 75.255 s
+
+===================================================
+0. OpenDC time: 72.949 s
+0. M3SA time: 1.74 s
+0. Total operation time: 74.689 s
+
+===================================================
+0. OpenDC time: 74.303 s
+0. M3SA time: 1.677 s
+0. Total operation time: 75.98 s
+
+===================================================
+0. OpenDC time: 74.804 s
+0. M3SA time: 1.676 s
+0. Total operation time: 76.48 s
+
+===================================================
+0. OpenDC time: 73.623 s
+0. M3SA time: 1.712 s
+0. Total operation time: 75.335 s
+
+===================================================
+0. OpenDC time: 74.037 s
+0. M3SA time: 1.694 s
+0. Total operation time: 75.731 s
+
+===================================================
+0. OpenDC time: 71.8 s
+0. M3SA time: 1.684 s
+0. Total operation time: 73.484 s
+
+===================================================
+0. OpenDC time: 73.307 s
+0. M3SA time: 1.707 s
+0. Total operation time: 75.014 s
+
+===================================================
+0. OpenDC time: 72.603 s
+0. M3SA time: 1.72 s
+0. Total operation time: 74.323 s
+
+===================================================
+0. OpenDC time: 72.262 s
+0. M3SA time: 1.68 s
+0. Total operation time: 73.942 s
+
+===================================================
+0. OpenDC time: 75.297 s
+0. M3SA time: 1.672 s
+0. Total operation time: 76.969 s
+
+===================================================
+0. OpenDC time: 72.831 s
+0. M3SA time: 1.685 s
+0. Total operation time: 74.516 s
+
+===================================================
+0. OpenDC time: 75.851 s
+0. M3SA time: 1.799 s
+0. Total operation time: 77.65 s
+
+===================================================
+0. OpenDC time: 72.588 s
+0. M3SA time: 1.703 s
+0. Total operation time: 74.291 s
+
+===================================================
+0. OpenDC time: 72.221 s
+0. M3SA time: 1.7 s
+0. Total operation time: 73.921 s
+
+===================================================
+0. OpenDC time: 71.521 s
+0. M3SA time: 1.706 s
+0. Total operation time: 73.227 s
+
+===================================================
+0. OpenDC time: 72.468 s
+0. M3SA time: 1.689 s
+0. Total operation time: 74.157 s
+
+===================================================
+0. OpenDC time: 71.706 s
+0. M3SA time: 1.699 s
+0. Total operation time: 73.405 s
+
+===================================================
+0. OpenDC time: 72.418 s
+0. M3SA time: 1.729 s
+0. Total operation time: 74.147 s
+
+===================================================
+0. OpenDC time: 79.089 s
+0. M3SA time: 1.697 s
+0. Total operation time: 80.786 s
+
+===================================================
+0. OpenDC time: 78.62 s
+0. M3SA time: 1.748 s
+0. Total operation time: 80.368 s
+
+===================================================

@@ -35,7 +35,6 @@ colorblind_friendly_colors = [
     "#FFFF80",  # light yellow
     "#FF5005",  # bright orange
     "#FFFF00",  # yellow
-    "#FFFFFF",  # white
     "#000000",  # black
     "#FFB200",  # vivid orange
     "#ABCDEF",  # pale blue
