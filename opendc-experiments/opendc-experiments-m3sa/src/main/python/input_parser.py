@@ -55,7 +55,7 @@ def parse_input(input_json):
     :type input_json: dict
     :raises ValueError: If required fields are missing or invalid values are provided.
     :return: Validated and processed JSON content with defaults applied.
-    :rtype: dict
+    :rtype: dictc
     """
 
     DEFAULTS = {

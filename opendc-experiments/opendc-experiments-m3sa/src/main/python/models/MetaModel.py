@@ -2,8 +2,16 @@ import numpy as np
 import os
 import pandas as pd
 
-from .Model import Model
-from .MultiModel import MultiModel
+from Model import Model
+from MultiModel import MultiModel
+
+# TODO: Change any to lambda type
+from typing import Any
+
+FUNCTION_MAP: dict[str, Any] = {
+    "mean": np.mean,
+    "median": np.median
+}
 
 
 class MetaModel:
@@ -21,7 +29,7 @@ class MetaModel:
         function_map (dict): Mapping of aggregation function names to function implementations.
     """
 
-    META_MODEL_ID = 'M'
+    META_MODEL_ID: str = 'M'
 
     def __init__(self, multimodel: MultiModel, meta_function=None):
         """
@@ -30,14 +38,10 @@ class MetaModel:
         :param multimodel: MultiModel instance containing the models to aggregate.
         :raise ValueError: If metamodel functionality is not enabled in the configuration.
         """
+        global FUNCTION_MAP
+
         if not multimodel.user_input.get('metamodel', False):
             raise ValueError("Metamodel is not enabled in the config file")
-
-        self.function_map = {
-            'mean': self.mean,
-            'median': self.median,
-            'meta_equation1': self.meta_equation1,
-        }
 
         self.multi_model = multimodel
         self.meta_model = Model(
@@ -45,17 +49,14 @@ class MetaModel:
             id=self.META_MODEL_ID,
             path=self.multi_model.output_folder_path,
         )
+        self.meta_function = meta_function
 
-        if meta_function is not None:
-            self.meta_function = meta_function
-        else:
-            self.meta_function = self.function_map.get(multimodel.user_input['meta_function'], self.mean)
+        if meta_function is None:
+            self.meta_function = FUNCTION_MAP.get(multimodel.user_input['meta_function'], np.mean)
 
         self.min_raw_model_len = min([len(model.raw_sim_data) for model in self.multi_model.models])
         self.min_processed_model_len = min([len(model.processed_sim_data) for model in self.multi_model.models])
-        self.number_of_models = len(self.multi_model.models)
         self.compute()
-
 
     def output(self):
         """
@@ -71,14 +72,15 @@ class MetaModel:
         Computes aggregated data based on the specified plot type from the configuration.
         :raise ValueError: If an unsupported plot type is specified in the configuration.
         """
-        if self.multi_model.plot_type == 'time_series':
-            self.compute_time_series()
-        elif self.multi_model.plot_type == 'cumulative':
-            self.compute_cumulative()
-        elif self.multi_model.plot_type == 'cumulative_time_series':
-            self.compute_cumulative_time_series()
-        else:
-            raise ValueError("Invalid plot type in config file")
+        match self.multi_model.plot_type:
+            case 'time_series':
+                self.compute_time_series()
+            case 'cumulative':
+                self.compute_cumulative()
+            case 'cumulative_time_series':
+                self.compute_cumulative_time_series()
+            case _:
+                raise ValueError('Invalid plot type in config file')
 
     def plot(self):
         """
@@ -91,7 +93,6 @@ class MetaModel:
             self.plot_cumulative()
         elif self.multi_model.plot_type == 'cumulative_time_series':
             self.plot_cumulative_time_series()
-
         else:
             raise ValueError("Invalid plot type in config file")
 
@@ -103,9 +104,10 @@ class MetaModel:
         """
         for i in range(0, self.min_processed_model_len):
             data_entries = []
-            for j in range(self.number_of_models):
-                data_entries.append(self.multi_model.models[j].processed_sim_data[i])
+            for model in self.multi_model.models:
+                data_entries.append(model.processed_sim_data[i])
             self.meta_model.processed_sim_data.append(self.meta_function(data_entries))
+
         self.meta_model.raw_sim_data = self.meta_model.processed_sim_data
 
     def plot_time_series(self):
@@ -178,22 +180,3 @@ class MetaModel:
             self.multi_model.metric: self.meta_model.processed_sim_data[:minimum]
         })
         df.to_parquet(current_path, index=False)
-
-    def mean(self, chunks):
-        """
-        Calculates the mean of a list of numerical data.
-
-        :param chunks (list): The data over which to calculate the mean.
-        :return: float: The mean of the provided data.
-        """
-        return np.mean(chunks)
-
-    def median(self, chunks):
-        """
-        Calculates the median of a list of numerical data.
-
-        :param chunks (list): The data over which to calculate the median.
-        :return: float: The median of the provided data.
-        """
-        return np.median(chunks)
-

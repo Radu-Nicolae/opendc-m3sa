@@ -246,7 +246,7 @@ class MultiModel:
         if self.plot_type != "cumulative":
             for model in self.models:
                 numeric_values = model.raw_sim_data
-                model.processed_sim_data = self.mean_of_chunks(numeric_values, self.window_size)
+                model.processed_sim_data = self.window_aggregation(numeric_values, self.window_size)
 
 
     def generate_plot(self, metamodel=False):
@@ -322,7 +322,7 @@ class MultiModel:
                 plt.plot(repeated_means, drawstyle='steps-mid', label=label, color="#228B22", linestyle="solid",
                          linewidth=2)
             else:
-                means = self.mean_of_chunks(model.raw_sim_data, self.window_size)
+                means = self.window_aggregation(model.raw_sim_data, self.window_size)
                 repeated_means = np.repeat(means, self.window_size)[:len(model.raw_sim_data)]
                 plt.plot(repeated_means, drawstyle='steps-mid', label=label, color=self.colorblind_palette[i])
 
@@ -480,7 +480,7 @@ class MultiModel:
             f.write("Plot path" + self.plot_path + "\n")
             f.write("========================================\n")
 
-    def mean_of_chunks(self, np_array, window_size):
+    def window_aggregation(self, np_array, window_size):
         """
         Calculates the mean of data within each chunk for a given array. This method helps in smoothing the data by
         averaging over specified 'window_size' segments.

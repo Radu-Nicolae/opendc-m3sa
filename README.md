@@ -2,9 +2,9 @@
     <img src="https://opendc.org/img/logo.png" alt="OpenDC logo" title="OpenDC" align="right" height="100" />
 </a>
 
-# OpenDC
+# M3SA
 
-Collaborative Datacenter Simulation and Exploration for Everybody
+Multi- and Meta-Model Simulation Analysis for Everybody
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](/LICENSE.txt)
 [![Documentation](https://img.shields.io/badge/docs-master-green.svg)](https://atlarge-research.github.io/opendc)
@@ -13,7 +13,7 @@ Collaborative Datacenter Simulation and Exploration for Everybody
 
 -----
 
-This repository is the home of the OpenDC project, a free and open-source platform for cloud datacenter simulation.
+This repository is the home of the M3SA project, a free and open-source tool for datacenter simulation leveraging multiple models, towards better prediction accuracy and explainability.
 
 ## Latest Release
 
@@ -40,4 +40,4 @@ Please refer to the [contributing guidelines](CONTRIBUTING.md) for more details.
 
 ## License
 
-OpenDC is distributed under the MIT license. See [LICENSE.txt](/LICENSE.txt).
+M3SA is distributed under the MIT license. See [LICENSE.txt](/LICENSE.txt).
