@@ -3,6 +3,7 @@ import os
 import pandas as pd
 
 from .Model import Model
+from .MultiModel import MultiModel
 
 
 class MetaModel:
@@ -22,7 +23,7 @@ class MetaModel:
 
     META_MODEL_ID = 'M'
 
-    def __init__(self, multimodel, meta_function=None):
+    def __init__(self, multimodel: MultiModel, meta_function=None):
         """
         Initializes the Metamodel with a MultiModel instance and prepares aggregation functions based on configuration.
 
@@ -54,7 +55,7 @@ class MetaModel:
         self.min_processed_model_len = min([len(model.processed_sim_data) for model in self.multi_model.models])
         self.number_of_models = len(self.multi_model.models)
         self.compute()
-        self.output()
+
 
     def output(self):
         """
@@ -196,23 +197,3 @@ class MetaModel:
         """
         return np.median(chunks)
 
-    def meta_equation1(self, chunks):
-        """
-        Calculates a weighted mean where the weights are inversely proportional to the absolute difference from the median value.
-        :param chunks (list): Data chunks from which to calculate the weighted mean.
-        :return: float: The calculated weighted mean.
-        """
-
-        """Attempt 1"""
-        # median_val = np.median(chunks)
-        # proximity_weights = 1 / (1 + np.abs(chunks - median_val))  # Avoid division by zero
-        # weighted_mean = np.sum(proximity_weights * chunks) / np.sum(proximity_weights)
-        # return weighted_mean
-
-        """Attempt 2 Inter-Quartile Mean (same accuracy as mean)"""
-        # sorted_preds = np.sort(chunks, axis=0)
-        # Q1 = int(np.floor(0.25 * len(sorted_preds)))
-        # Q3 = int(np.floor(0.75 * len(sorted_preds)))
-        #
-        # iqm = np.mean(sorted_preds[Q1:Q3], axis=0)
-        # return iqm

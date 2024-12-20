@@ -9,14 +9,11 @@ import pandas as pd
 
 
 def main():
-    # print working directory
-    multimodel = MultiModel(
-        user_input=read_input(sys.argv[2]),
-        path=sys.argv[1],
-    )
-
+    multimodel = MultiModel(user_input=read_input(sys.argv[2]),path=sys.argv[1])
     multimodel.generate_plot()
-    MetaModel(multimodel)
+
+    metamodel = MetaModel(multimodel)
+    metamodel.output()
 
 
 if __name__ == "__main__":
