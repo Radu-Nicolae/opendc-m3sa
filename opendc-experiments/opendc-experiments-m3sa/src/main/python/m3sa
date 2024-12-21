@@ -1,7 +1,7 @@
 #!/bin/sh
 
 my_path() {
-    cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P
+    cd -P -- "$(dirname -- "$(realpath "$(command -v -- "$0")")")" && pwd -P
 }
 
 SRC_PATH="$(my_path)"
