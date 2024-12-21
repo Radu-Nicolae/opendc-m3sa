@@ -2,11 +2,32 @@ from json import JSONDecodeError, load
 from warnings import warn
 from numpy import mean, median
 from typing import Callable
+from enum import Enum
 
 FUNCTIONS = {
     "mean": mean,
     "median": median,
 }
+
+
+class PlotType(Enum):
+    TIME_SERIES = "time_series"
+    CUMULATIVE = "cumulative"
+    CUMULATIVE_TIME_SERIES = "cumulative_time_series"
+
+    def __str__(self) -> str:
+        return self.value
+
+
+def get_plot_type(plot_type: str) -> PlotType:
+    """
+    Returns the PlotType enum value for the given string
+    Args:
+        plot_type: the string representation of the plot type
+    Returns:
+        the PlotType enum value
+    """
+    return next((pt for pt in PlotType if pt.value == plot_type), PlotType.TIME_SERIES)
 
 
 class PlotAxis:
@@ -63,7 +84,7 @@ class SimulationConfig:
         fig_size (tuple[int, int]): the figure size
     """
 
-    def __init__(self, input_json: dict[str, any]):
+    def __init__(self, input_json: dict[str, any], output_path: str, simulation_path: str):
         """
         Initializes the SimulationConfig object with the given input JSON
         Args:
@@ -87,6 +108,8 @@ class SimulationConfig:
         if "multimodel" not in input_json and input_json["metamodel"]:
             warn("Warning: Missing 'multimodel' field. Defaulting to 'True'.")
 
+        self.output_path: str = output_path
+        self.simulation_path: str = simulation_path
         self.is_multimodel: bool = input_json.get("multimodel", True)
         self.is_metamodel: bool = input_json.get("metamodel", False)
         self.metric: str = input_json["metric"]
@@ -96,7 +119,8 @@ class SimulationConfig:
         self.samples_per_minute: int = input_json.get("samples_per_minute", 0)
         self.current_unit: str = input_json.get("current_unit", "")
         self.unit_scaling_magnitude: int = input_json.get("unit_scaling_magnitude", 1)
-        self.plot_type: str = input_json.get("plot_type", "time_series")
+        self.plot_type: PlotType = next(
+            (pt for pt in PlotType if pt.value == input_json.get("plot_type", "time_series")), PlotType.TIME_SERIES)
         self.plot_title: str = input_json.get("plot_title", "")
         self.x_axis: PlotAxis = PlotAxis(
             input_json.get("x_label", ""),
@@ -129,28 +153,28 @@ def parse_range(user_input: dict[str, any], key: str) -> tuple[float, float] | N
     return user_input[f"{key}_min"], user_input[f"{key}_max"]
 
 
-def read_input(path: str) -> SimulationConfig:
+def parse_configuration(config_path: str, output_path: str, simulation_path: str) -> SimulationConfig:
     """
     Reads the input JSON file and returns a SimulationConfig object
     Args:
-        path: the path to the input JSON file
+        config_path: the path to the input JSON file
 
     Returns:
         a SimulationConfig object
     """
 
     try:
-        with (open(path, 'r') as raw_json):
+        with (open(config_path, 'r') as raw_json):
             input_json: dict[str, any] = load(raw_json)
     except JSONDecodeError:
-        print(f"Error decoding JSON in file: {path}")
+        print(f"Error decoding JSON in file: {config_path}")
         exit(1)
     except IOError:
-        print(f"Error reading file: {path}")
+        print(f"Error reading file: {config_path}")
         exit(1)
 
     try:
-        return SimulationConfig(input_json)
+        return SimulationConfig(input_json, output_path, simulation_path)
     except ValueError as err:
         print(f"Error parsing input JSON: {err}")
         exit(1)

@@ -2,17 +2,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import pyarrow.parquet as pq
-import time
+from time import time, strftime
 from matplotlib.ticker import MaxNLocator, FuncFormatter
 from matplotlib.ticker import AutoMinorLocator
-
-from simulator_specifics import *
+from typing import IO
+from textwrap import dedent
 from models import Model
-from util import SimulationConfig, adjust_unit
-
-
-def is_meta_model(model: Model) -> bool:
-    return model.id == 'M'
+from util import SimulationConfig, adjust_unit, PlotType, SIMULATION_DATA_FILE
 
 
 class MultiModel:
@@ -21,19 +17,14 @@ class MultiModel:
     and generates plots and statistics.
 
     Attributes:
-        user_input (dict): Configuration dictionary containing user settings for model processing.
-        path (str): The base directory path where output files and analysis results are stored.
         window_size (int): The size of the window for data aggregation, which affects how data smoothing and granularity are handled.
         models (list of Model): A list of Model instances that store the simulation data.
-        metric (str): The specific metric to be analyzed and plotted, as defined by the user.
         measure_unit (str): The unit of measurement for the simulation data, adjusted according to the user's specifications.
-        output_folder_path (str): Path to the folder where output files are saved.
-        raw_output_path (str): Directory path where raw simulation data is stored.
-        analysis_file_path (str): Path to the file where detailed analysis results are recorded.
-        plot_type (str): The type of plot to generate, which can be 'time_series', 'cumulative', or 'cumulative_time_series'.
-        plot_title (str): The title of the plot.
-        x_label (str), y_label (str): Labels for the x and y axes of the plot.
-        x_min (float), x_max (float), y_min (float), y_max (float): Optional parameters to define axis limits for the plots.
+        unit_scaling (int): The scaling factor applied to the unit of measurement.
+        max_model_len (int): The length of the shortest model's raw data, used for consistency in processing.
+        plot_path (str): The path where the generated plot will be saved.
+        analysis_file (IO): The file object for writing detailed analysis statistics.
+        COLOR_PALETTE (list of str): A list of color codes for plotting multiple models.
 
     Methods:
         parse_user_input(window_size): Parses and sets the class attributes based on the provided user input.
@@ -62,7 +53,7 @@ class MultiModel:
         "#4682B4", "#FFDEAD", "#32CD32", "#D3D3D3", "#999999"
     ]
 
-    def __init__(self, config: SimulationConfig, path: str, window_size: int = -1):
+    def __init__(self, config: SimulationConfig, window_size: int = -1):
         """
         Initializes the MultiModel with provided user settings and prepares the environment.
 
@@ -73,51 +64,40 @@ class MultiModel:
         """
 
         self.config: SimulationConfig = config
-        self.starting_time: float = time.time()
-        self.end_time: float = -1.0
+        self.starting_time: float = time()
         self.workload_time = None
         self.timestamps = None
+        self.plot_path: str | None = None
 
         self.window_size = config.window_size if window_size == -1 else window_size
         self.measure_unit: str
         self.unit_scaling: int
         self.measure_unit, self.unit_scaling = adjust_unit(config.current_unit, config.unit_scaling_magnitude)
 
-        self.path: str = path
         self.models: list[Model] = []
-
-        self.folder_path: str = ""
-        self.output_folder_path: str = ""
-        self.raw_output_path: str = ""
-        self.analysis_file_path: str = ""
-        self.plot_path: str = ""
         self.max_model_len = 0
 
-        self.set_paths()
-        self.init_models()
+        try:
+            os.makedirs(self.config.output_path, exist_ok=True)
+            self.analysis_file: IO = open(config.output_path + "/analysis.txt", "w")
+        except Exception as e:
+            print(f"Error handling output directory: {e}")
+            exit(1)
 
+        self.analysis_file.write("Analysis file create\n")
+
+        self.init_models()
         if self.config.is_metamodel:
             self.COLOR_PALETTE = ["#b3b3b3" for _ in range(len(self.models))]
-
         self.compute_windowed_aggregation()
 
-    def set_paths(self):
-        """
-        Configures and initializes the directory paths for output and analysis based on the base directory provided.
-        This method sets paths for the raw output and detailed analysis results, ensuring directories are created if
-        they do not already exist, and prepares a base file for capturing analytical summaries.
-
-        :return: None
-        :side effect: Creates necessary directories and files for output and analysis.
-        """
-        self.output_folder_path = os.getcwd() + "/" + self.path
-        self.raw_output_path = os.getcwd() + "/" + self.path + "/raw-output"
-        self.analysis_file_path = os.getcwd() + "/" + self.path + "/simulation-analysis/"
-        os.makedirs(self.analysis_file_path, exist_ok=True)
-        self.analysis_file_path = os.path.join(self.analysis_file_path, "analysis.txt")
-        if not os.path.exists(self.analysis_file_path):
-            with open(self.analysis_file_path, "w") as f:
-                f.write("Analysis file created.\n")
+    def get_model_path(self, dir: str) -> str:
+        return (
+            f"{self.config.simulation_path}/"
+            f"{dir}/"
+            f"seed={self.config.seed}/"
+            f"{SIMULATION_DATA_FILE}.parquet"
+        )
 
     def init_models(self):
         """
@@ -127,34 +107,35 @@ class MultiModel:
         :return: None
         :raise ValueError: If the unit scaling has not been set prior to model initialization.
         """
-        model_id = 0
         if self.unit_scaling is None:
             raise ValueError("Unit scaling factor is not set. Please ensure it is set correctly.")
 
-        for simulation_folder in os.listdir(self.raw_output_path):
-            if simulation_folder == "metamodel":
+        simulation_directories = os.listdir(self.config.simulation_path)
+        simulation_directories.sort()
+
+        for sim_dir in simulation_directories:
+            print("Processing simulation: ", sim_dir)
+            if sim_dir == "metamodel":
                 continue
-            path_of_parquet_file = f"{self.raw_output_path}/{simulation_folder}/seed={self.config.seed}/{SIMULATION_DATA_FILE}.parquet"
+
+            simulation_id: str = os.path.basename(sim_dir)
             columns_to_read = ['timestamp', self.config.metric]
-            parquet_file = pq.read_table(path_of_parquet_file, columns=columns_to_read).to_pandas()
+            parquet_file = pq.read_table(self.get_model_path(sim_dir), columns=columns_to_read).to_pandas()
 
             grouped_data = parquet_file.groupby('timestamp')[self.config.metric].sum()
-            raw = np.divide(grouped_data.values, self.unit_scaling)  # Apply unit scaling
+            # Apply unit scaling to the raw data
+            raw = np.divide(grouped_data.values, self.unit_scaling)
             timestamps = parquet_file['timestamp'].unique()
 
-            model = Model(raw_sim_data=raw, id=model_id, path=self.output_folder_path)
+            model = Model(raw_sim_data=raw, identifier=simulation_id)
             self.models.append(model)
-            if self.timestamps is None:
-                self.timestamps = timestamps
 
-            if self.timestamps is not None and (len(self.timestamps) > len(timestamps)):
+            if self.timestamps is None or len(self.timestamps) > len(timestamps):
                 self.timestamps = timestamps
-
-            model_id += 1
 
         self.max_model_len = min([len(model.raw_sim_data) for model in self.models])
 
-    def compute_windowed_aggregation(self):
+    def compute_windowed_aggregation(self) -> None:
         """
         Applies a windowed aggregation function to each model's dataset. This method is typically used for smoothing
         or reducing data granularity. It involves segmenting the dataset into windows of specified size and applying
@@ -163,10 +144,12 @@ class MultiModel:
         :return: None
         :side effect: Modifies each model's processed_sim_data attribute to contain aggregated data.
         """
-        if self.config.plot_type != "cumulative":
-            for model in self.models:
-                numeric_values = model.raw_sim_data
-                model.processed_sim_data = self.mean_of_chunks(numeric_values, self.config.window_size)
+        if self.config.plot_type == PlotType.CUMULATIVE:
+            return
+
+        for model in self.models:
+            numeric_values = model.raw_sim_data
+            model.processed_sim_data = self.mean_of_chunks(numeric_values, self.config.window_size)
 
     def generate_plot(self):
         """
@@ -207,17 +190,12 @@ class MultiModel:
         self.set_axis_limits()
 
         match self.config.plot_type:
-            case "time_series":
+            case PlotType.TIME_SERIES:
                 self.generate_time_series_plot()
-            case "cumulative":
+            case PlotType.CUMULATIVE:
                 self.generate_cumulative_plot()
-            case "cumulative_time_series":
+            case PlotType.CUMULATIVE_TIME_SERIES:
                 self.generate_cumulative_time_series_plot()
-            case _:
-                raise ValueError(
-                    "Plot type not recognized. Please enter a valid plot type. The plot can be either "
-                    "'time_series', 'cumulative', or 'cumulative_time_series'."
-                )
 
         plt.tight_layout()
         plt.subplots_adjust(right=0.85)
@@ -233,9 +211,10 @@ class MultiModel:
         :side effect: Plots are displayed on the matplotlib figure canvas.
         """
 
-        for (i, model) in enumerate(self.models):
-            label = "Meta-Model" if is_meta_model(model) else "Model " + str(model.id)
-            if is_meta_model(model):
+        for i, model in enumerate(self.models):
+            label = "Meta-Model" if model.is_meta_model() else "Model " + str(model.id)
+
+            if model.is_meta_model():
                 repeated_means = np.repeat(model.processed_sim_data, self.window_size)
                 plt.plot(repeated_means, drawstyle='steps-mid', label=label, color="#228B22", linestyle="solid",
                          linewidth=2)
@@ -268,9 +247,9 @@ class MultiModel:
 
         cumulated_energies = self.sum_models_entries()
 
-        for (i, model) in (enumerate(self.models)):
-            label = "Meta-Model" if is_meta_model(model) else "Model " + str(model.id)
-            if is_meta_model(model):
+        for i, model in (enumerate(self.models)):
+            label = "Meta-Model" if model.is_meta_model() else "Model " + str(model.id)
+            if model.is_meta_model():
                 plt.barh(i, cumulated_energies[i], label=label, color='#009E73', hatch='//')
                 plt.text(cumulated_energies[i], i, str(int(round(cumulated_energies[i], 0))), ha='left', va='center',
                          size=26)
@@ -290,9 +269,9 @@ class MultiModel:
         """
         self.compute_cumulative_time_series()
 
-        for (i, model) in enumerate(self.models):
-            label = "Meta-Model" if is_meta_model(model) else "Model " + str(model.id)
-            if is_meta_model(model):
+        for i, model in enumerate(self.models):
+            label = "Meta-Model" if model.is_meta_model() else "Model " + str(model.id)
+            if model.is_meta_model():
                 cumulative_repeated = np.repeat(model.cumulative_time_series_values, self.window_size)[
                                       :len(model.processed_sim_data) * self.window_size]
                 plt.plot(cumulative_repeated, label=label, drawstyle='steps-mid', color="#228B22", linestyle="solid",
@@ -326,9 +305,21 @@ class MultiModel:
         :return: None
         :side effect: Creates or overwrites a PDF file containing the plot in the designated folder.
         """
-        folder_prefix = self.output_folder_path + "/simulation-analysis/" + self.config.metric + "/"
-        self.plot_path = folder_prefix + self.config.plot_type + "_plot_multimodel_metric=" + self.config.metric + "_window=" + str(
-            self.window_size) + ".pdf"
+        output_dir = f"{self.config.output_path}/simulation-analysis/{self.config.metric}"
+        try:
+            os.makedirs(output_dir, exist_ok=True)
+        except OSError as e:
+            print(f"Error handling output directory: {e}")
+            exit(1)
+
+        self.plot_path: str = (
+            f"{output_dir}/"
+            f"{self.config.plot_type}"
+            f"_plot_multimodel_metric={self.config.metric}"
+            f"_window={self.window_size}"
+            f".pdf"
+        )
+
         plt.savefig(self.plot_path)
 
     def set_axis_limits(self) -> None:
@@ -350,17 +341,16 @@ class MultiModel:
         :return: List of summed values for each model, useful for plotting and analysis.
         """
         models_sums = []
-        for (i, model) in enumerate(self.models):
-            if is_meta_model(model):
+        for i, model in enumerate(self.models):
+            if model.is_meta_model():
                 models_sums.append(model.cumulated)
             else:
-                cumulated_energy = model.raw_sim_data.sum()
-                cumulated_energy = round(cumulated_energy, 2)
+                cumulated_energy = round(sum(model.raw_sim_data), 2)
                 models_sums.append(cumulated_energy)
 
         return models_sums
 
-    def output_stats(self):
+    def output_stats(self) -> None:
         """
         Records and writes detailed simulation statistics to an analysis file. This includes time stamps,
         performance metrics, and other relevant details.
@@ -368,41 +358,43 @@ class MultiModel:
         :return: None
         :side effect: Appends detailed simulation statistics to an existing file for record-keeping and analysis.
         """
-        self.end_time = time.time()
-        with open(self.analysis_file_path, "a") as f:
-            f.write("\n\n========================================\n")
-            f.write("Simulation made at " + time.strftime("%Y-%m-%d %H:%M:%S") + "\n")
-            f.write("Metric: " + self.config.metric + "\n")
-            f.write("Unit: " + self.measure_unit + "\n")
-            f.write("Window size: " + str(self.window_size) + "\n")
-            f.write("Sample count in raw sim data: " + str(self.max_model_len) + "\n")
-            f.write("Computing time " + str(round(self.end_time - self.starting_time, 1)) + "s\n")
-            f.write("Plot path" + self.plot_path + "\n")
-            f.write("========================================\n")
+        end_time: float = time()
+        self.analysis_file.write(dedent(
+            f"""
+            =========================================================
+            Simulation made at {strftime("%Y-%m-%d %H:%M:%S")}
+            Metric: {self.config.metric}
+            Unit: {self.measure_unit}
+            Window size: {self.window_size}
+            Sample count in raw sim data: {self.max_model_len}
+            Computing time {round(end_time - self.starting_time, 1)}s
+            Plot path: {self.plot_path}
+            =========================================================
+            """
+        ))
 
-    def mean_of_chunks(self, np_array, window_size):
+    def mean_of_chunks(self, np_array: np.array, window_size: int) -> np.array:
         """
         Calculates the mean of data within each chunk for a given array. This method helps in smoothing the data by
         averaging over specified 'window_size' segments.
 
-        :param np_array (np.array): Array of numerical data to be chunked and averaged.
-        :param window_size (int): The size of each segment to average over.
+        :param np_array: Array of numerical data to be chunked and averaged.
+        :param window_size: The size of each segment to average over.
         :return: np.array: An array of mean values for each chunk.
-        :side effect: None
         """
         if window_size == 1:
             return np_array
 
-        chunks = [np_array[i:i + window_size] for i in range(0, len(np_array), window_size)]
-        means = [np.mean(chunk) for chunk in chunks]
+        chunks: list[np.array] = [np_array[i:i + window_size] for i in range(0, len(np_array), window_size)]
+        means: list[float] = [np.mean(chunk) for chunk in chunks]
         return np.array(means)
 
-    def get_cumulative_limits(self, model_sums):
+    def get_cumulative_limits(self, model_sums: list[float]) -> list[float]:
         """
         Calculates the appropriate x-axis limits for cumulative plots based on the summarized data from each model.
 
-        :param model_sums (list of float): The total values for each model.
-        :return: tuple: A tuple containing the minimum and maximum x-axis limits.
+        :param model_sums: List of summed values for each model.
+        :return: list[float]: A list containing the minimum and maximum values for the x-axis limits.
         """
         axis_min = min(model_sums) * 0.9
         axis_max = max(model_sums) * 1.1
