@@ -7,21 +7,12 @@ from matplotlib.ticker import MaxNLocator, FuncFormatter
 from matplotlib.ticker import AutoMinorLocator
 
 from simulator_specifics import *
-from .MetaModel import MetaModel
-from .Model import Model
+from models import Model
+from util import SimulationConfig, adjust_unit
 
 
-def is_meta_model(model):
-    """
-    Check if the given model is a MetaModel based on its ID. A metamodel will always have an id of -101.
-
-    Args:
-        model (Model): The model to check.
-
-    Returns:
-        bool: True if model is MetaModel, False otherwise.
-    """
-    return model.id == MetaModel.META_MODEL_ID
+def is_meta_model(model: Model) -> bool:
+    return model.id == 'M'
 
 
 class MultiModel:
@@ -64,12 +55,14 @@ class MultiModel:
         Call the `generate_plot` method to process the data and generate plots as configured by the user.
     """
 
-    colorblind_palette = [
-        "#0072B2", "#E69F00", "#009E73", "#D55E00", "#CC79A7", "#F0E442", "#8B4513", "#999999",
+    COLOR_PALETTE: list[str] = [
+        # Colorblind-friendly palette
+        "#0072B2", "#E69F00", "#009E73", "#D55E00", "#CC79A7", "#F0E442", "#8B4513",
         "#56B4E9", "#F0A3FF", "#FFB400", "#00BFFF", "#90EE90", "#FF6347", "#8A2BE2", "#CD5C5C",
-        "#4682B4", "#FFDEAD", "#32CD32", "#D3D3D3"
+        "#4682B4", "#FFDEAD", "#32CD32", "#D3D3D3", "#999999"
     ]
-    def __init__(self, user_input, path, window_size=-1):
+
+    def __init__(self, config: SimulationConfig, path: str, window_size: int = -1):
         """
         Initializes the MultiModel with provided user settings and prepares the environment.
 
@@ -79,107 +72,34 @@ class MultiModel:
         :return: None
         """
 
-        self.starting_time = time.time()
-        self.end_time = None
+        self.config: SimulationConfig = config
+        self.starting_time: float = time.time()
+        self.end_time: float = -1.0
         self.workload_time = None
         self.timestamps = None
 
-        self.user_input = user_input
+        self.window_size = config.window_size if window_size == -1 else window_size
+        self.measure_unit: str
+        self.unit_scaling: int
+        self.measure_unit, self.unit_scaling = adjust_unit(config.current_unit, config.unit_scaling_magnitude)
 
-        self.metric = None
-        self.measure_unit = None
-        self.path = path
-        self.models = []
+        self.path: str = path
+        self.models: list[Model] = []
 
-        self.folder_path = None
-        self.output_folder_path = None
-        self.raw_output_path = None
-        self.analysis_file_path = None
-        self.unit_scaling = 1
-        self.window_size = -1
-        self.window_function = "median"
+        self.folder_path: str = ""
+        self.output_folder_path: str = ""
+        self.raw_output_path: str = ""
+        self.analysis_file_path: str = ""
+        self.plot_path: str = ""
         self.max_model_len = 0
-        self.seed = 0
 
-        self.plot_type = None
-        self.plot_title = None
-        self.x_label = None
-        self.y_label = None
-        self.x_min = None
-        self.x_max = None
-        self.y_min = None
-        self.y_max = None
-        self.plot_path = None
-        self.figsize = None
-
-        self.parse_user_input(window_size)
         self.set_paths()
         self.init_models()
 
+        if self.config.is_metamodel:
+            self.COLOR_PALETTE = ["#b3b3b3" for _ in range(len(self.models))]
+
         self.compute_windowed_aggregation()
-
-    def parse_user_input(self, window_size):
-        """
-        Parses and sets attributes based on user input.
-
-        :param window_size (int): Specified window size for data aggregation, defaults to user_input if -1.
-        :return: None
-        """
-        if window_size == -1:
-            self.window_size = self.user_input["window_size"]
-        else:
-            self.window_size = window_size
-        self.metric = self.user_input["metric"]
-        self.measure_unit = self.adjust_unit()
-        self.window_function = self.user_input["window_function"]
-        self.seed = self.user_input["seed"]
-
-        self.plot_type = self.user_input["plot_type"]
-        self.plot_title = self.user_input["plot_title"]
-        if self.user_input["x_label"] == "":
-            self.x_label = "Samples"
-        else:
-            self.x_label = self.user_input["x_label"]
-
-        if self.user_input["y_label"] == "":
-            self.y_label = self.metric + " [" + self.measure_unit + "]"
-        else:
-            self.y_label = self.user_input["y_label"]
-
-        if self.user_input["figsize"] is not None:
-            self.figsize = self.user_input["figsize"]
-        else:
-            self.figsize = (10, 10)
-
-        self.y_min = self.user_input["y_min"]
-        self.y_max = self.user_input["y_max"]
-        self.x_min = self.user_input["x_min"]
-        self.x_max = self.user_input["x_max"]
-
-    def adjust_unit(self):
-        """
-        Adjusts the unit of measurement according to the scaling magnitude specified by the user.
-        This method translates the given measurement scale into a scientifically accepted metric prefix.
-
-        :return str: The metric prefixed by the appropriate scale (e.g., 'kWh' for kilo-watt-hour if the scale is 3).
-        :raise ValueError: If the unit scaling magnitude provided by the user is not within the accepted range of scaling factors.
-        """
-        prefixes = ['n', 'μ', 'm', '', 'k', 'M', 'G', 'T']
-        scaling_factors = [-9, -6, -3, -2, 1, 3, 6, 9]
-        given_metric = self.user_input["current_unit"]
-        self.unit_scaling = self.user_input["unit_scaling_magnitude"]
-
-        if self.unit_scaling not in scaling_factors:
-            return given_metric
-
-        if self.unit_scaling == 1:
-            return given_metric
-
-        for i in range(len(scaling_factors)):
-            if self.unit_scaling == scaling_factors[i]:
-                self.unit_scaling = 10 ** self.unit_scaling
-                result = prefixes[i] + given_metric
-                return result
 
     def set_paths(self):
         """
@@ -214,11 +134,11 @@ class MultiModel:
         for simulation_folder in os.listdir(self.raw_output_path):
             if simulation_folder == "metamodel":
                 continue
-            path_of_parquet_file = f"{self.raw_output_path}/{simulation_folder}/seed={self.seed}/{SIMULATION_DATA_FILE}.parquet"
-            columns_to_read = ['timestamp', self.metric]
+            path_of_parquet_file = f"{self.raw_output_path}/{simulation_folder}/seed={self.config.seed}/{SIMULATION_DATA_FILE}.parquet"
+            columns_to_read = ['timestamp', self.config.metric]
             parquet_file = pq.read_table(path_of_parquet_file, columns=columns_to_read).to_pandas()
 
-            grouped_data = parquet_file.groupby('timestamp')[self.metric].sum()
+            grouped_data = parquet_file.groupby('timestamp')[self.config.metric].sum()
             raw = np.divide(grouped_data.values, self.unit_scaling)  # Apply unit scaling
             timestamps = parquet_file['timestamp'].unique()
 
@@ -243,13 +163,12 @@ class MultiModel:
         :return: None
         :side effect: Modifies each model's processed_sim_data attribute to contain aggregated data.
         """
-        if self.plot_type != "cumulative":
+        if self.config.plot_type != "cumulative":
             for model in self.models:
                 numeric_values = model.raw_sim_data
-                model.processed_sim_data = self.mean_of_chunks(numeric_values, self.window_size)
+                model.processed_sim_data = self.mean_of_chunks(numeric_values, self.config.window_size)
 
-
-    def generate_plot(self, metamodel=False):
+    def generate_plot(self):
         """
         Creates and saves plots based on the processed data from multiple models. This method determines
         the type of plot to generate based on user input and invokes the appropriate plotting function.
@@ -264,48 +183,48 @@ class MultiModel:
             - Updates the plot attributes based on the generated plot.
             - Displays the plot on the matplotlib figure canvas.
         """
-        plt.figure(figsize=self.figsize)
+        plt.figure(figsize=self.config.fig_size)
 
         plt.xticks(size=32)
         plt.yticks(size=32)
-        plt.ylabel(self.y_label, size=26)
-        plt.xlabel(self.x_label, size=26)
-        plt.title(self.plot_title, size=26)
+        plt.ylabel(self.config.y_axis.label, size=26)
+        plt.xlabel(self.config.x_axis.label, size=26)
+        plt.title(self.config.plot_title, size=26)
         plt.grid()
 
         formatter = FuncFormatter(lambda x, _: '{:,}'.format(int(x)) if x >= 1000 else int(x))
         ax = plt.gca()
         ax.xaxis.set_major_formatter(formatter)
 
-        if self.user_input['x_ticks_count'] is not None:
+        if self.config.x_axis.has_ticks():
             ax = plt.gca()
-            ax.xaxis.set_major_locator(MaxNLocator(self.user_input['x_ticks_count']))
+            ax.xaxis.set_major_locator(MaxNLocator(self.config.x_axis.ticks))
 
-        if self.user_input['y_ticks_count'] is not None:
+        if self.config.y_axis.has_ticks():
             ax = plt.gca()
-            ax.yaxis.set_major_locator(MaxNLocator(self.user_input['y_ticks_count']))
+            ax.yaxis.set_major_locator(MaxNLocator(self.config.y_axis.ticks))
 
-        self.set_x_axis_lim()
-        self.set_y_axis_lim()
+        self.set_axis_limits()
 
-        if self.plot_type == "time_series":
-            self.generate_time_series_plot(metamodel=metamodel)
-        elif self.plot_type == "cumulative":
-            self.generate_cumulative_plot()
-        elif self.plot_type == "cumulative_time_series":
-            self.generate_cumulative_time_series_plot(metamodel=metamodel)
-        else:
-            raise ValueError(
-                "Plot type not recognized. Please enter a valid plot type. The plot can be either "
-                "'time_series', 'cumulative', or 'cumulative_time_series'."
-            )
+        match self.config.plot_type:
+            case "time_series":
+                self.generate_time_series_plot()
+            case "cumulative":
+                self.generate_cumulative_plot()
+            case "cumulative_time_series":
+                self.generate_cumulative_time_series_plot()
+            case _:
+                raise ValueError(
+                    "Plot type not recognized. Please enter a valid plot type. The plot can be either "
+                    "'time_series', 'cumulative', or 'cumulative_time_series'."
+                )
 
         plt.tight_layout()
         plt.subplots_adjust(right=0.85)
         self.save_plot()
         self.output_stats()
 
-    def generate_time_series_plot(self, metamodel):
+    def generate_time_series_plot(self):
         """
         Plots time series data for each model. This function iterates over each model, applies the defined
         windowing function to smooth the data, and plots the resulting series.
@@ -313,8 +232,7 @@ class MultiModel:
         :return: None
         :side effect: Plots are displayed on the matplotlib figure canvas.
         """
-        if metamodel:
-            self.colorblind_palette = ["#b3b3b3" for _ in range(len(self.models))]
+
         for (i, model) in enumerate(self.models):
             label = "Meta-Model" if is_meta_model(model) else "Model " + str(model.id)
             if is_meta_model(model):
@@ -324,7 +242,7 @@ class MultiModel:
             else:
                 means = self.mean_of_chunks(model.raw_sim_data, self.window_size)
                 repeated_means = np.repeat(means, self.window_size)[:len(model.raw_sim_data)]
-                plt.plot(repeated_means, drawstyle='steps-mid', label=label, color=self.colorblind_palette[i])
+                plt.plot(repeated_means, drawstyle='steps-mid', label=label, color=self.COLOR_PALETTE[i])
 
     def generate_cumulative_plot(self):
         """
@@ -337,7 +255,7 @@ class MultiModel:
         """
         plt.xlim(self.get_cumulative_limits(model_sums=self.sum_models_entries()))
         plt.ylabel("Model ID", size=30)
-        plt.xlabel(self.x_label, size=30)
+        plt.xlabel(self.config.x_axis.label, size=30)
 
         ax = plt.gca()
         ax.tick_params(axis='x', which='major', length=12)  # Set length of the ticks
@@ -346,23 +264,23 @@ class MultiModel:
         ax.tick_params(axis='x', which='minor', length=7, color='black')
         plt.yticks(range(len(self.models)), [model.id for model in self.models])
 
-
         plt.grid(False)
 
         cumulated_energies = self.sum_models_entries()
-        self.colorblind_palette = ["#b3b3b3" for _ in range(len(self.models))]
+
         for (i, model) in (enumerate(self.models)):
             label = "Meta-Model" if is_meta_model(model) else "Model " + str(model.id)
             if is_meta_model(model):
                 plt.barh(i, cumulated_energies[i], label=label, color='#009E73', hatch='//')
-                plt.text(cumulated_energies[i], i, str(int(round(cumulated_energies[i], 0))), ha='left', va='center', size=26)
+                plt.text(cumulated_energies[i], i, str(int(round(cumulated_energies[i], 0))), ha='left', va='center',
+                         size=26)
             else:
                 round_decimals = 0 if cumulated_energies[i] > 500 else 1
-                plt.barh(label=label, y=i, width=cumulated_energies[i], color=self.colorblind_palette[i])
-                plt.text(cumulated_energies[i], i, str(int(round(cumulated_energies[i], round_decimals))), ha='left', va='center', size=26)
+                plt.barh(label=label, y=i, width=cumulated_energies[i], color=self.COLOR_PALETTE[i])
+                plt.text(cumulated_energies[i], i, str(int(round(cumulated_energies[i], round_decimals))), ha='left',
+                         va='center', size=26)
 
-
-    def generate_cumulative_time_series_plot(self, metamodel):
+    def generate_cumulative_time_series_plot(self):
         """
         Generates a plot showing the cumulative data over time for each model. This visual representation is
         useful for analyzing trends and the accumulation of values over time.
@@ -371,9 +289,6 @@ class MultiModel:
         :side effect: Displays the cumulative data over time on the matplotlib figure canvas.
         """
         self.compute_cumulative_time_series()
-
-        if metamodel:
-            self.colorblind_palette = ["#b3b3b3" for _ in range(len(self.models))]
 
         for (i, model) in enumerate(self.models):
             label = "Meta-Model" if is_meta_model(model) else "Model " + str(model.id)
@@ -385,7 +300,8 @@ class MultiModel:
             else:
                 cumulative_repeated = np.repeat(model.cumulative_time_series_values, self.window_size)[
                                       :len(model.raw_sim_data)]
-                plt.plot(cumulative_repeated, drawstyle='steps-mid', label=("Model " + str(model.id)), color=self.colorblind_palette[i])
+                plt.plot(cumulative_repeated, drawstyle='steps-mid', label=("Model " + str(model.id)),
+                         color=self.COLOR_PALETTE[i])
 
     def compute_cumulative_time_series(self):
         """
@@ -410,37 +326,21 @@ class MultiModel:
         :return: None
         :side effect: Creates or overwrites a PDF file containing the plot in the designated folder.
         """
-        folder_prefix = self.output_folder_path + "/simulation-analysis/" + self.metric + "/"
-        self.plot_path = folder_prefix + self.plot_type + "_plot_multimodel_metric=" + self.metric + "_window=" + str(
+        folder_prefix = self.output_folder_path + "/simulation-analysis/" + self.config.metric + "/"
+        self.plot_path = folder_prefix + self.config.plot_type + "_plot_multimodel_metric=" + self.config.metric + "_window=" + str(
             self.window_size) + ".pdf"
         plt.savefig(self.plot_path)
 
-    def set_x_axis_lim(self):
+    def set_axis_limits(self) -> None:
         """
-        Sets the x-axis limits for the plot based on user-defined minimum and maximum values. If values
-        are not specified, the axis limits will default to encompassing all data points.
-
-        :return: None
-        :side effect: Adjusts the x-axis limits of the current matplotlib plot.
+        Sets the x-axis and y-axis limits for the current plot based on the user-defined configuration.
+        This method ensures that the plot displays the data within the specified range, enhancing readability.
         """
-        if self.x_min is not None:
-            plt.xlim(left=self.x_min)
+        if self.config.x_axis.has_range():
+            plt.xlim(left=self.config.x_axis.value_range[0], right=self.config.x_axis.value_range[1])
 
-        if self.x_max is not None:
-            plt.xlim(right=self.x_max)
-
-    def set_y_axis_lim(self):
-        """
-        Dynamically sets the y-axis limits to be slightly larger than the range of the data, enhancing
-        the readability of the plot by ensuring all data points are comfortably within the view.
-
-        :return: None
-        :side effect: Adjusts the y-axis limits of the current matplotlib plot.
-        """
-        if self.y_min is not None:
-            plt.ylim(bottom=self.y_min)
-        if self.y_max is not None:
-            plt.ylim(top=self.y_max)
+        if self.config.y_axis.has_range():
+            plt.ylim(bottom=self.config.y_axis.value_range[0], top=self.config.y_axis.value_range[1])
 
     def sum_models_entries(self):
         """
@@ -472,7 +372,7 @@ class MultiModel:
         with open(self.analysis_file_path, "a") as f:
             f.write("\n\n========================================\n")
             f.write("Simulation made at " + time.strftime("%Y-%m-%d %H:%M:%S") + "\n")
-            f.write("Metric: " + self.metric + "\n")
+            f.write("Metric: " + self.config.metric + "\n")
             f.write("Unit: " + self.measure_unit + "\n")
             f.write("Window size: " + str(self.window_size) + "\n")
             f.write("Sample count in raw sim data: " + str(self.max_model_len) + "\n")
@@ -507,9 +407,8 @@ class MultiModel:
         axis_min = min(model_sums) * 0.9
         axis_max = max(model_sums) * 1.1
 
-        if self.user_input["x_min"] is not None:
-            axis_min = self.user_input["x_min"]
-        if self.user_input["x_max"] is not None:
-            axis_max = self.user_input["x_max"]
+        if self.config.x_axis.value_range is not None:
+            axis_min = self.config.x_axis.value_range[0]
+            axis_max = self.config.x_axis.value_range[1]
 
         return [axis_min * 0.9, axis_max * 1.1]

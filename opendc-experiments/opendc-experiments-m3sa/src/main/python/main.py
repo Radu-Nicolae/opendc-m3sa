@@ -1,22 +1,27 @@
-import os
-from os import sys
-
-from input_parser import read_input
-from models.MetaModel import MetaModel
-from models.MultiModel import MultiModel
-from accuracy_evaluator import accuracy_evaluator
-import pandas as pd
+from sys import argv
+from models import MultiModel, MetaModel
+from util import SimulationConfig, read_input
 
 
-def main():
-    # print working directory
-    multimodel = MultiModel(
-        user_input=read_input(sys.argv[2]),
-        path=sys.argv[1],
-    )
+def parse_input() -> tuple[SimulationConfig, str]:
+    if len(argv) != 3:
+        print(
+            f"Invalid input.\n"
+            f"Usage: {argv[0]} <config.json> <path/>"
+        )
+        exit(1)
 
-    multimodel.generate_plot()
-    MetaModel(multimodel)
+    return read_input(argv[2]), argv[1]
+
+
+def main() -> None:
+    simulation_config, path = parse_input()
+
+    multi_model: MultiModel = MultiModel(*parse_input())
+    multi_model.generate_plot()
+
+    if simulation_config.is_metamodel:
+        meta_model: MetaModel = MetaModel(multi_model)
 
 
 if __name__ == "__main__":

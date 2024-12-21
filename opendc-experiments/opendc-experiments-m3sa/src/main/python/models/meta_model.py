@@ -1,8 +1,8 @@
 import numpy as np
 import os
 import pandas as pd
-
-from .Model import Model
+from models import Model, MultiModel
+from typing import Callable
 
 
 class MetaModel:
@@ -22,33 +22,25 @@ class MetaModel:
 
     META_MODEL_ID = 'M'
 
-    def __init__(self, multimodel, meta_function=None):
+    def __init__(self, multi_model: MultiModel, meta_function: Callable[[any], float] = None):
         """
         Initializes the Metamodel with a MultiModel instance and prepares aggregation functions based on configuration.
 
-        :param multimodel: MultiModel instance containing the models to aggregate.
+        :param multi_model: MultiModel instance containing the models to aggregate.
         :raise ValueError: If metamodel functionality is not enabled in the configuration.
         """
-        if not multimodel.user_input.get('metamodel', False):
+        if not multi_model.config.is_metamodel:
             raise ValueError("Metamodel is not enabled in the config file")
 
-        self.function_map = {
-            'mean': self.mean,
-            'median': self.median,
-            'meta_equation1': self.meta_equation1,
-        }
-
-        self.multi_model = multimodel
-        self.meta_model = Model(
+        self.multi_model = multi_model
+        self.meta_model: Model = Model(
             raw_sim_data=[],
             id=self.META_MODEL_ID,
             path=self.multi_model.output_folder_path,
         )
 
-        if meta_function is not None:
-            self.meta_function = meta_function
-        else:
-            self.meta_function = self.function_map.get(multimodel.user_input['meta_function'], self.mean)
+        self.meta_function: Callable[
+            [any], float] = self.multi_model.config.meta_function if meta_function is None else meta_function
 
         self.min_raw_model_len = min([len(model.raw_sim_data) for model in self.multi_model.models])
         self.min_processed_model_len = min([len(model.processed_sim_data) for model in self.multi_model.models])
@@ -70,29 +62,31 @@ class MetaModel:
         Computes aggregated data based on the specified plot type from the configuration.
         :raise ValueError: If an unsupported plot type is specified in the configuration.
         """
-        if self.multi_model.plot_type == 'time_series':
-            self.compute_time_series()
-        elif self.multi_model.plot_type == 'cumulative':
-            self.compute_cumulative()
-        elif self.multi_model.plot_type == 'cumulative_time_series':
-            self.compute_cumulative_time_series()
-        else:
-            raise ValueError("Invalid plot type in config file")
+        match self.multi_model.config.plot_type:
+            case 'time_series':
+                self.compute_time_series()
+            case 'cumulative':
+                self.compute_cumulative()
+            case 'cumulative_time_series':
+                self.compute_cumulative_time_series()
+            case _:
+                raise ValueError("Invalid plot type in config file")
 
     def plot(self):
         """
         Plots the aggregated data according to the specified plot type from the configuration.
         :raise ValueError: If an unsupported plot type is specified.
         """
-        if self.multi_model.plot_type == 'time_series':
-            self.plot_time_series()
-        elif self.multi_model.plot_type == 'cumulative':
-            self.plot_cumulative()
-        elif self.multi_model.plot_type == 'cumulative_time_series':
-            self.plot_cumulative_time_series()
 
-        else:
-            raise ValueError("Invalid plot type in config file")
+        match self.multi_model.config.plot_type:
+            case 'time_series':
+                self.plot_time_series()
+            case 'cumulative':
+                self.plot_cumulative()
+            case 'cumulative_time_series':
+                self.plot_cumulative_time_series()
+            case _:
+                raise ValueError("Invalid plot type in config file")
 
     def compute_time_series(self):
         """
@@ -114,7 +108,7 @@ class MetaModel:
         :side effect: Displays a time series plot using the multi_model's plotting capabilities.
         """
         self.multi_model.models.append(self.meta_model)
-        self.multi_model.generate_plot(metamodel=True)
+        self.multi_model.generate_plot()
 
     def compute_cumulative(self):
         """
@@ -160,7 +154,7 @@ class MetaModel:
         :side effect: Displays a cumulative time series plot using the multi_model's plotting capabilities.
         """
         self.multi_model.models.append(self.meta_model)
-        self.multi_model.generate_plot(metamodel=True)
+        self.multi_model.generate_plot()
 
     def output_metamodel(self):
         """
@@ -170,11 +164,11 @@ class MetaModel:
         """
         directory_path = os.path.join(self.multi_model.output_folder_path, "raw-output/metamodel/seed=0")
         os.makedirs(directory_path, exist_ok=True)
-        current_path = os.path.join(directory_path, f"{self.multi_model.metric}.parquet")
+        current_path = os.path.join(directory_path, f"{self.multi_model.config.metric}.parquet")
         minimum = min(len(self.multi_model.timestamps), len(self.meta_model.processed_sim_data))
         df = pd.DataFrame({
             "timestamp": self.multi_model.timestamps[:minimum],
-            self.multi_model.metric: self.meta_model.processed_sim_data[:minimum]
+            self.multi_model.config.metric: self.meta_model.processed_sim_data[:minimum]
         })
         df.to_parquet(current_path, index=False)
 

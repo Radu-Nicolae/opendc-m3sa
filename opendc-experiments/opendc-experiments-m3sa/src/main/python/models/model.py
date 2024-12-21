@@ -6,7 +6,7 @@ and further in the MetaModel class.
 :param sim: the simulation data of the model
 """
 import json
-from dataclasses import dataclass, field
+
 
 class Model:
     """
@@ -18,7 +18,7 @@ class Model:
     def __init__(self, path, raw_sim_data, id):
         self.path = path
         self.raw_sim_data = raw_sim_data
-        self.id = id
+        self.id: str = str(id)
         self.processed_sim_data = []
         self.cumulative_time_series_values = []
         self.cumulated = 0.0
@@ -48,6 +48,3 @@ class Model:
             print(f"File not found: {trackr_path}")
         except json.JSONDecodeError:
             print(f"Error decoding JSON in file: {trackr_path}")
-
-
-
